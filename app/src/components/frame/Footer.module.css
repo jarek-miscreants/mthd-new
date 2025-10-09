@@ -1,0 +1,9 @@
+.nav_group_label {
+  margin-bottom: var(--element-space--4);
+}
+
+@media (max-width: 767px) {
+  .nav_group_label {
+    margin-bottom: var(--element-space--1);
+  }
+}

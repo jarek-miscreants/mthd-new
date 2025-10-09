@@ -1,0 +1,25 @@
+.wrap {
+  opacity: 0;
+}
+
+.text {
+  --height: 100%;
+}
+
+.text::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: calc(var(--spacing-xxs) * -1);
+  width: 0.0625rem;
+  height: var(--height);
+  background-color: var(--color-theme-text);
+}
+
+@media (max-width: 767px) {
+  .text::before {
+    content: "";
+    left: calc(var(--spacing-xxs) * -0.5);
+  }
+}

@@ -1,0 +1,28 @@
+.item_1 {
+  --height: 0%;
+}
+.item_1::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--site--margin);
+  width: 0.0625rem;
+  height: var(--height);
+  background-color: var(--swatch--dark);
+}
+
+.item_2 {
+  --height: 100%;
+}
+
+.item_2::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -1.4589em;
+  width: 0.0625rem;
+  height: var(--height);
+  background-color: var(--swatch--dark);
+}

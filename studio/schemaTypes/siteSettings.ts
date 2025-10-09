@@ -1,0 +1,166 @@
+import {defineType, defineField} from 'sanity'
+
+export const siteSettings = defineType({
+  name: 'siteSettings',
+  title: 'Site Settings',
+  type: 'document',
+  fields: [
+    // Header Navigation
+    defineField({
+      name: 'headerNavItems',
+      title: 'Header Navigation Items',
+      description: 'Non-product nav items (Products dropdown is auto-generated)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'label', title: 'Label', type: 'string'},
+            {name: 'href', title: 'Link', type: 'string'},
+            {name: 'btnStyle', title: 'Button Style', type: 'boolean'},
+            {
+              name: 'target',
+              title: 'Target',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Same Window', value: '_self'},
+                  {title: 'New Window', value: '_blank'},
+                ],
+              },
+            },
+            {
+              name: 'dropdown',
+              title: 'Dropdown Items',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    {name: 'label', title: 'Label', type: 'string'},
+                    {name: 'href', title: 'Link', type: 'string'},
+                    {
+                      name: 'target',
+                      title: 'Target',
+                      type: 'string',
+                      options: {
+                        list: [
+                          {title: 'Same Window', value: '_self'},
+                          {title: 'New Window', value: '_blank'},
+                        ],
+                      },
+                    },
+                    {name: 'arrowIndicator', title: 'Show Arrow Indicator', type: 'boolean'},
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }),
+
+    // Footer Branding
+    defineField({
+      name: 'footerName',
+      title: 'Footer Name',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'footerTagline',
+      title: 'Footer Tagline',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'copyrightTag',
+      title: 'Copyright Tag',
+      type: 'string',
+    }),
+
+    // Footer CTAs
+    defineField({
+      name: 'footerCtas',
+      title: 'Footer CTAs',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'label', title: 'Label', type: 'string'},
+            {name: 'href', title: 'Link', type: 'string'},
+            {
+              name: 'target',
+              title: 'Target',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Same Window', value: '_self'},
+                  {title: 'New Window', value: '_blank'},
+                ],
+              },
+            },
+          ],
+        },
+      ],
+    }),
+
+    // Footer Navigation Groups
+    defineField({
+      name: 'footerNavGroups',
+      title: 'Footer Navigation Groups',
+      description: 'Product and legal sections are auto-generated',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {name: 'groupLabel', title: 'Group Label', type: 'string'},
+            {
+              name: 'links',
+              title: 'Links',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    {name: 'label', title: 'Label', type: 'string'},
+                    {name: 'href', title: 'Link', type: 'string'},
+                    {
+                      name: 'target',
+                      title: 'Target',
+                      type: 'string',
+                      options: {
+                        list: [
+                          {title: 'Same Window', value: '_self'},
+                          {title: 'New Window', value: '_blank'},
+                        ],
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }),
+
+    // Mobile Menu Cards
+    defineField({
+      name: 'mobileMenuCards',
+      title: 'Mobile Menu Cards',
+      type: 'array',
+      of: [{type: 'card'}],
+    }),
+  ],
+
+  preview: {
+    prepare() {
+      return {
+        title: 'Site Settings',
+      }
+    },
+  },
+})

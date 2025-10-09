@@ -1,0 +1,46 @@
+.item_h {
+  --height: 100%;
+}
+
+.item_h::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 0.0625rem;
+  height: var(--height);
+}
+
+.item_p {
+  --height: 100%;
+}
+
+.item_p::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 0.0625rem;
+  height: var(--height);
+}
+
+@media (max-width: 767px) {
+  .item_h {
+    --height: 5rem;
+  }
+
+  .item_h::after {
+    content: "";
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .item_p::before {
+    content: "";
+    display: none;
+  }
+}

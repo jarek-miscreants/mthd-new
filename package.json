@@ -1,0 +1,23 @@
+{
+  "name": "method-security",
+  "private": true,
+  "workspaces": [
+    "app",
+    "studio"
+  ],
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "dev": "npm-run-all -p dev:app dev:studio",
+    "dev:app": "npm --workspace app run dev",
+    "dev:studio": "npm --workspace studio run dev",
+    "build": "npm-run-all build:app",
+    "build:app": "npm --workspace app run build",
+    "build:studio": "npm --workspace studio run build",
+    "start": "npm --workspace app run start"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
