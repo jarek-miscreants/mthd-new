@@ -51,6 +51,7 @@ export default async function Home() {
       eyebrow: product.highlight?.eyebrow || product.name,
       productSymbol: product.productSymbolUrl || "",
       title: product.highlight?.title || "",
+      href: product.slug || "",
       leadParagraph: product.highlight?.leadParagraph || "",
       showcaseSrc: product.highlight?.showcaseSrc || "",
     }),
@@ -70,20 +71,23 @@ export default async function Home() {
         leadParagraph={homeData?.mission?.leadParagraph || ""}
       />
 
-      {productHighlightItems.length > 0 && (
-        <ProductHighlightSection items={productHighlightItems} />
-      )}
+      <div>
+        {productHighlightItems.length > 0 && (
+          <ProductHighlightSection items={productHighlightItems} />
+        )}
 
-      <Architecture
-        eyebrow={homeData?.architecture?.eyebrow}
-        title={homeData?.architecture?.title || ""}
-        items={homeData?.architecture?.items || []}
-      />
+        <Architecture
+          eyebrow={homeData?.architecture?.eyebrow}
+          title={homeData?.architecture?.title || ""}
+          items={homeData?.architecture?.items || []}
+        />
+      </div>
 
       <DeploySection
         eyebrow={homeData?.deploy?.eyebrow}
         title={homeData?.deploy?.title || ""}
         leadParagraph={homeData?.deploy?.leadParagraph || ""}
+        videoSrc={homeData?.deploy?.videoSrc || ""}
         items={homeData?.deploy?.items || []}
       />
 

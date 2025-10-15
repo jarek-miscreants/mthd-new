@@ -45,59 +45,54 @@ export default function MissionInteraction({
       );
 
       ctx = gsap.context(() => {
-        const mm = gsap.matchMedia();
-
-        //desktop
-        mm.add("(min-width: 768px)", () => {
-          const splitParagraph = new SplitText(paragraph, {
-            type: "words,lines",
-            linesClass: "line",
-            mask: "lines",
-            reduceWhiteSpace: false,
-          });
-
-          const tl1 = gsap.timeline({
-            scrollTrigger: {
-              trigger: wrapper,
-              start: "top bottom",
-              scrub: 2,
-              markers: false,
-            },
-          });
-          const tl2 = gsap.timeline({
-            scrollTrigger: {
-              trigger: paragraph,
-              start: "top 100%",
-              toggleActions: "restart none none none",
-              markers: false,
-            },
-          });
-
-          tl1.to(
-            container,
-            {
-              ...lineAnimationDefaults,
-              "--height": "100%",
-            },
-            "<",
-          );
-
-          tl1.from(
-            paragraph,
-            {
-              ...lineAnimationDefaults,
-            },
-            "<",
-          );
-
-          tl2.from(
-            splitParagraph.lines,
-            {
-              ...splitAnimationDefaults,
-            },
-            "<",
-          );
+        const splitParagraph = new SplitText(paragraph, {
+          type: "words,lines",
+          linesClass: "line",
+          mask: "lines",
+          reduceWhiteSpace: false,
         });
+
+        const tl1 = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top bottom",
+            scrub: 2,
+            markers: false,
+          },
+        });
+        const tl2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: paragraph,
+            start: "top 100%",
+            toggleActions: "restart none none none",
+            markers: false,
+          },
+        });
+
+        tl1.to(
+          container,
+          {
+            ...lineAnimationDefaults,
+            "--height": "100%",
+          },
+          "<",
+        );
+
+        tl1.from(
+          paragraph,
+          {
+            ...lineAnimationDefaults,
+          },
+          "<",
+        );
+
+        tl2.from(
+          splitParagraph.lines,
+          {
+            ...splitAnimationDefaults,
+          },
+          "<",
+        );
       }, wrapper);
     }, 100);
 

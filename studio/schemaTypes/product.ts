@@ -4,12 +4,39 @@ export const product = defineType({
   name: 'product',
   title: 'Product',
   type: 'document',
+  groups: [
+    {
+      name: 'seo',
+      title: 'Page SEO Settings',
+    },
+    {
+      name: 'hero',
+      title: 'Hero',
+    },
+    {
+      name: 'tagline',
+      title: 'Tagline',
+    },
+    {
+      name: 'solutions',
+      title: 'Solutions',
+    },
+    {
+      name: 'productHighlight',
+      title: 'Product Highlight (Used for products homepage section)',
+    },
+    {
+      name: 'cards',
+      title: 'Page Cards',
+    },
+  ],
   fields: [
     defineField({
       name: 'name',
       title: 'Product Name',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      group: 'hero',
     }),
 
     defineField({
@@ -17,6 +44,7 @@ export const product = defineType({
       title: 'Product Name Addition',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      group: 'hero',
     }),
 
     defineField({
@@ -28,6 +56,7 @@ export const product = defineType({
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
+      group: 'hero',
     }),
 
     //SEO
@@ -36,6 +65,7 @@ export const product = defineType({
       title: 'SEO Settings',
       type: 'seo',
       options: {collapsible: true, collapsed: false},
+      group: 'seo',
     }),
 
     defineField({
@@ -45,7 +75,8 @@ export const product = defineType({
       options: {
         accept: 'image/svg+xml',
       },
-      validation: (Rule) => Rule.required(),
+      //validation: (Rule) => Rule.required(),
+      group: 'hero',
     }),
 
     // Product Highlight (for homepage)
@@ -59,6 +90,7 @@ export const product = defineType({
         {name: 'leadParagraph', title: 'Lead Paragraph', type: 'text'},
         {name: 'showcaseSrc', title: 'Showcase Video URL', type: 'string'},
       ],
+      group: 'productHighlight',
     }),
 
     // Product Hero
@@ -66,7 +98,11 @@ export const product = defineType({
       name: 'hero',
       title: 'Product Hero',
       type: 'object',
-      fields: [{name: 'videoSrc', title: 'Video URL', type: 'string'}],
+      fields: [
+        {name: 'videoSrc', title: 'Video URL', type: 'string'},
+        {name: 'videoSrcMobile', title: 'Mobile Video URL', type: 'string'},
+      ],
+      group: 'hero',
     }),
 
     // Product Tagline
@@ -78,6 +114,7 @@ export const product = defineType({
         {name: 'eyebrow', title: 'Eyebrow', type: 'string'},
         {name: 'text', title: 'Text', type: 'text'},
       ],
+      group: 'tagline',
     }),
 
     // Product Solutions
@@ -104,6 +141,7 @@ export const product = defineType({
           ],
         },
       ],
+      group: 'solutions',
     }),
 
     // Bottom Cards
@@ -116,6 +154,7 @@ export const product = defineType({
           type: 'card',
         },
       ],
+      group: 'cards',
     }),
   ],
 

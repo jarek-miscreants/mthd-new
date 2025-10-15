@@ -108,6 +108,11 @@
   --theme--selection-background: var(--swatch--dark);
   --theme--selection-text: var(--swatch--light);
 
+  --theme--invert-default: 100%;
+  --theme--invert-hover: 0%;
+
+  --logo--invert: 0%;
+
   /* button primary */
   --theme--button-primary--background: var(--swatch--dark);
   --theme--button-primary--text: var(--swatch--light);
@@ -133,6 +138,11 @@
 
   --theme--selection-background: var(--swatch--light);
   --theme--selection-text: var(--swatch--dark);
+
+  --theme--invert-default: 0%;
+  --theme--invert-hover: 100%;
+
+  --logo--invert: 100%;
 
   /* button primary */
   --theme--button-primary--background: var(--swatch--light);
@@ -399,10 +409,19 @@
   }
 
   .nav-cursor {
+    img {
+      filter: invert(var(--theme--invert-default));
+    }
+
     &:hover {
       animation: blink-nav-cursor 0.16s none 2;
       background-color: var(--theme--text);
       color: var(--theme--background);
+
+      img {
+        filter: invert(var(--theme--invert-hover));
+        animation: image-type-invert 0.16s none 2;
+      }
     }
   }
   @keyframes blink-nav-cursor {
@@ -414,6 +433,15 @@
     50% {
       background-color: var(--theme--background);
       color: var(--theme--text);
+    }
+  }
+  @keyframes image-type-invert {
+    0%,
+    100% {
+      filter: invert(var(--theme--invert-hover));
+    }
+    50% {
+      filter: invert(var(--theme--invert-default));
     }
   }
 

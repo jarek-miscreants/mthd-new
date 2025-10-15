@@ -8,36 +8,73 @@ export default function HeaderInteraction() {
   const lastScrollY = useRef(0);
   useEffect(() => {
     const header = document.getElementById("header");
+    const headerBar = document.getElementById("header-bar");
     const mobileOverlay = document.getElementById("mobile-overlay");
     const toggleButton = document.getElementById("mobile-menu-toggle");
     const mobileLinks = document.querySelectorAll("[data-mobile-link]");
+    const menuOverlayItemLinks = document.querySelectorAll(
+      "#mobile-overlay-item-list > li",
+    );
 
-    if (!header || !mobileOverlay || !toggleButton) return;
+    if (!header || !headerBar || !mobileOverlay || !toggleButton) return;
 
     let isOpen = false;
+
+    const iconOpen = toggleButton.querySelector(
+      ".menu-icon-open",
+    ) as HTMLElement;
+    const iconClosed = toggleButton.querySelector(
+      ".menu-icon-closed",
+    ) as HTMLElement;
 
     const toggleMenu = () => {
       isOpen = !isOpen;
 
+      if (iconOpen && iconClosed) {
+        if (isOpen) {
+          iconOpen.style.display = "block";
+          iconClosed.style.display = "none";
+        } else {
+          iconOpen.style.display = "none";
+          iconClosed.style.display = "block";
+        }
+      }
+
       if (isOpen) {
         header.setAttribute("data-theme", "dark");
         header.setAttribute("data-lenis-prevent", "");
+        headerBar.classList.add("pt-xs");
         document.body.style.overflow = "hidden";
         mobileOverlay.classList.remove("h-[0]");
         mobileOverlay.classList.add("h-screen");
+
+        gsap.from(menuOverlayItemLinks, {
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
       } else {
         header.removeAttribute("data-theme");
         header.removeAttribute("data-lenis-prevent");
+        headerBar.classList.remove("pt-xs");
         document.body.style.overflow = "";
-        mobileOverlay.classList.remove("h-screen");
         mobileOverlay.classList.add("h-[0]");
+        mobileOverlay.classList.remove("h-screen");
       }
     };
 
     const closeMenu = () => {
       if (isOpen) {
         isOpen = false;
+
+        if (iconOpen && iconClosed) {
+          iconOpen.style.display = "none";
+          iconClosed.style.display = "block";
+        }
+
         header.removeAttribute("data-theme");
+        headerBar.classList.remove("pt-xs");
         document.body.style.overflow = "";
         mobileOverlay.classList.remove("h-screen");
         mobileOverlay.classList.add("h-[0]");

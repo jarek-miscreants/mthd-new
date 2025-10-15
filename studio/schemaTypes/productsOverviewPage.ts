@@ -4,6 +4,16 @@ export const productsOverviewPage = defineType({
   name: 'productsOverviewPage',
   title: 'Products Overview Page',
   type: 'document',
+  groups: [
+    {
+      name: 'seo',
+      title: 'Page SEO Settings',
+    },
+    {
+      name: 'cards',
+      title: 'Page Cards',
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -18,6 +28,7 @@ export const productsOverviewPage = defineType({
       title: 'SEO Settings',
       type: 'seo',
       options: {collapsible: true, collapsed: false},
+      group: 'seo',
     }),
 
     defineField({
@@ -25,6 +36,7 @@ export const productsOverviewPage = defineType({
       title: 'Bottom Cards',
       type: 'array',
       of: [{type: 'card'}],
+      group: 'cards',
     }),
   ],
 

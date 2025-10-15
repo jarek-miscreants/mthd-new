@@ -1,6 +1,7 @@
 import LinkIndicator from "../elements/LinkIndicator";
 import Image from "next/image";
 import LinkIndicatorInteraction from "../elements/LinkIndicatorInteraction";
+import BackdropVariation from "../elements/BackdropVariation";
 
 export interface ProductsOverviewItemProps {
   productSymbol: string;
@@ -8,6 +9,7 @@ export interface ProductsOverviewItemProps {
   nameAddition: string;
   leadParagraph: string;
   href: string;
+  variation?: "variation1" | "variation2";
 }
 
 export default function ProductsOverviewItem({
@@ -16,6 +18,7 @@ export default function ProductsOverviewItem({
   nameAddition,
   leadParagraph,
   href,
+  variation = "variation1",
 }: ProductsOverviewItemProps) {
   return (
     <LinkIndicatorInteraction triggerOnHover>
@@ -23,6 +26,10 @@ export default function ProductsOverviewItem({
         href={href}
         className="bg-theme-bg-secondary text-theme-text p-xs t:p-small sticky top-main flex flex-col gap-small t:gap-main rounded-main"
       >
+        <BackdropVariation
+          variation={variation}
+          className="absolute z-[-2] opacity-[50%]"
+        />
         <Image
           src={productSymbol}
           alt=""
@@ -36,10 +43,10 @@ export default function ProductsOverviewItem({
           <span className="block text-neutral">{nameAddition}</span>
         </h2>
         <div className="flex flex-col t:flex-row justify-between t:items-end gap-small">
-          <p className="max-w-[25ch] text-main">
-            {leadParagraph ||
-              "Magna excepteur cillum sunt aliqua aute reprehenderit aliqua sint amet excepteur sunt."}
-          </p>
+          {leadParagraph && (
+            <p className="max-w-[25ch] text-main">{leadParagraph}</p>
+          )}
+
           <LinkIndicator className="w-small" />
         </div>
       </a>

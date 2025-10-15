@@ -46,7 +46,7 @@ export default async function Products() {
     productSymbol: product.productSymbolUrl || "",
     name: product.name,
     nameAddition: product.nameAddition,
-    leadParagraph: product.highlight.leadParagraph,
+    leadParagraph: product.highlight?.leadParagraph,
     href: `/products/${product.slug}`,
   }));
 

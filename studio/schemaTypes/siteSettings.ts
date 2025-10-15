@@ -4,6 +4,16 @@ export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
+  groups: [
+    {
+      name: 'headerNavigation',
+      title: 'Header Navigation',
+    },
+    {
+      name: 'footerNavigation',
+      title: 'Footer Navigation',
+    },
+  ],
   fields: [
     // Header Navigation
     defineField({
@@ -17,7 +27,12 @@ export const siteSettings = defineType({
           fields: [
             {name: 'label', title: 'Label', type: 'string'},
             {name: 'href', title: 'Link', type: 'string'},
-            {name: 'btnStyle', title: 'Button Style', type: 'boolean'},
+            {
+              name: 'btnStyle',
+              title: 'Button Style',
+              description: 'Show the link as button style if required.',
+              type: 'boolean',
+            },
             {
               name: 'target',
               title: 'Target',
@@ -50,7 +65,13 @@ export const siteSettings = defineType({
                         ],
                       },
                     },
-                    {name: 'arrowIndicator', title: 'Show Arrow Indicator', type: 'boolean'},
+                    {
+                      name: 'arrowIndicator',
+                      title: 'Arrow Indicator',
+                      description:
+                        'Show arrow indicator. Used for links moving away from the site.',
+                      type: 'boolean',
+                    },
                   ],
                 },
               ],
@@ -58,6 +79,7 @@ export const siteSettings = defineType({
           ],
         },
       ],
+      group: 'headerNavigation',
     }),
 
     // Footer Branding
@@ -65,18 +87,21 @@ export const siteSettings = defineType({
       name: 'footerName',
       title: 'Footer Name',
       type: 'string',
+      group: 'footerNavigation',
     }),
 
     defineField({
       name: 'footerTagline',
       title: 'Footer Tagline',
       type: 'string',
+      group: 'footerNavigation',
     }),
 
     defineField({
       name: 'copyrightTag',
       title: 'Copyright Tag',
       type: 'string',
+      group: 'footerNavigation',
     }),
 
     // Footer CTAs
@@ -104,13 +129,14 @@ export const siteSettings = defineType({
           ],
         },
       ],
+      group: 'footerNavigation',
     }),
 
     // Footer Navigation Groups
     defineField({
       name: 'footerNavGroups',
       title: 'Footer Navigation Groups',
-      description: 'Product and legal sections are auto-generated',
+      description: 'Product and legal groups are auto-generated',
       type: 'array',
       of: [
         {
@@ -145,6 +171,7 @@ export const siteSettings = defineType({
           ],
         },
       ],
+      group: 'footerNavigation',
     }),
 
     // Mobile Menu Cards
@@ -153,6 +180,7 @@ export const siteSettings = defineType({
       title: 'Mobile Menu Cards',
       type: 'array',
       of: [{type: 'card'}],
+      group: 'headerNavigation',
     }),
   ],
 

@@ -20,12 +20,15 @@ export const card = defineType({
     defineField({
       name: 'href',
       title: 'Link',
+      description: 'For relative paths & full urls.',
       type: 'string',
       //validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'target',
       title: 'Target',
+      description:
+        'Define whether link should be opened in new tab or not. Defaults to same window.',
       type: 'string',
       options: {
         list: [

@@ -4,6 +4,32 @@ export const homePage = defineType({
   name: 'homePage',
   title: 'Home Page',
   type: 'document',
+  groups: [
+    {
+      name: 'seo',
+      title: 'Page SEO Settings',
+    },
+    {
+      name: 'hero',
+      title: 'Hero',
+    },
+    {
+      name: 'mission',
+      title: 'Mission',
+    },
+    {
+      name: 'architecture',
+      title: 'Architecture',
+    },
+    {
+      name: 'deploy',
+      title: 'Deploy',
+    },
+    {
+      name: 'cards',
+      title: 'Page Cards',
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -18,6 +44,7 @@ export const homePage = defineType({
       title: 'SEO Settings',
       type: 'seo',
       options: {collapsible: true, collapsed: false},
+      group: 'seo',
     }),
 
     // Hero Section
@@ -30,6 +57,7 @@ export const homePage = defineType({
         {name: 'videoSrc', title: 'Video Path', type: 'string'},
         {name: 'videoSrcMobile', title: 'Mobile Video Path', type: 'string'},
       ],
+      group: 'hero',
     }),
 
     // Mission Section
@@ -42,6 +70,7 @@ export const homePage = defineType({
         {name: 'title', title: 'Title', type: 'text'},
         {name: 'leadParagraph', title: 'Lead Paragraph', type: 'text'},
       ],
+      group: 'mission',
     }),
 
     // Architecture Section
@@ -67,6 +96,7 @@ export const homePage = defineType({
           ],
         },
       ],
+      group: 'architecture',
     }),
 
     // Deploy Section
@@ -78,6 +108,7 @@ export const homePage = defineType({
         {name: 'eyebrow', title: 'Eyebrow', type: 'string'},
         {name: 'title', title: 'Title', type: 'string'},
         {name: 'leadParagraph', title: 'Lead Paragraph', type: 'text'},
+        {name: 'videoSrc', title: 'Video Src', type: 'string'},
         {
           name: 'items',
           title: 'Items',
@@ -107,6 +138,7 @@ export const homePage = defineType({
           ],
         },
       ],
+      group: 'deploy',
     }),
 
     // Card Section
@@ -119,6 +151,7 @@ export const homePage = defineType({
           type: 'card',
         },
       ],
+      group: 'cards',
     }),
   ],
 })

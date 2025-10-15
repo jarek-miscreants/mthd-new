@@ -40,12 +40,11 @@ export default function Accordion({
               <p className="t:col-start-2 t:col-span-3 self-end">{text}</p>
               <video
                 src={mediaSrc}
-                autoPlay
                 playsInline
                 loop
                 muted
-                preload="auto"
-                className="w-full object-cover t:col-start-7 t:col-span-6"
+                preload="none"
+                className="w-full object-cover aspect-[16/9] t:col-start-7 t:col-span-6"
               ></video>
             </div>
           </div>

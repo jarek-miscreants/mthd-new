@@ -1,11 +1,14 @@
 import Link from "next/link";
 import Logo from "../brand/Logo";
-import MobileMenuIndicator from "@/components/elements/MobileMenuIndicator";
 import HeaderInteraction from "@/components/frame/HeaderInteraction";
 import styles from "./Header.module.css";
 import Card from "../elements/Card";
+import Image from "next/image";
+import MobileMenuIndicator from "@/components/elements/MobileMenuIndicator";
+import LogoAnimation from "../brand/LogoAnimation/LogoAnimation";
 
 interface DropdownItem {
+  productSymbol?: string;
   label: string;
   href: string;
   target?: "_self" | "_blank";
@@ -20,11 +23,19 @@ interface NavItem {
   dropdown?: DropdownItem[];
 }
 
-interface HeaderProps {
-  navItems: NavItem[];
+interface MobileMenuCard {
+  eyebrow: string;
+  title: string;
+  href: string;
+  target?: "_self" | "_blank";
 }
 
-export default function Header({ navItems }: HeaderProps) {
+interface HeaderProps {
+  navItems: NavItem[];
+  mobileMenuCards: MobileMenuCard[];
+}
+
+export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
   return (
     <>
       <HeaderInteraction />
@@ -33,9 +44,19 @@ export default function Header({ navItems }: HeaderProps) {
         className="header_wrap bg-theme-bg text-theme-text fixed top-[0] left-[0] right-[0] z-[9999]"
       >
         <div className="header_contain u-container max-w-[none] relative z-[99] drop-shadow-[0_4px_10px_rgba(0,0,0,0.05)] bg-theme-bg">
-          <div className="flex flex-row justify-between py-xxs">
-            <Link data-mobile-link href="/">
-              <Logo className="w-small t:w-[3.978125em]" />
+          <div
+            id="header-bar"
+            className="flex flex-row justify-between items-center py-xxs transition-[padding-top] ease duration-200
+"
+          >
+            <Link
+              className="relative w-small t:w-[3.978125em] aspect-[1.72/1]"
+              data-mobile-link
+              href="/"
+              aria-label="Logo"
+            >
+              <LogoAnimation />
+              {/* <Logo />*/}
             </Link>
             <nav className="t:block hidden">
               <ul className="flex flex-row gap-xxs items-center text-menu">
@@ -60,8 +81,11 @@ export default function Header({ navItems }: HeaderProps) {
               </ul>
             </nav>
 
-            <button id="mobile-menu-toggle" className="block t:hidden">
-              <MobileMenuIndicator className="w-[1.9375em]" />
+            <button
+              id="mobile-menu-toggle"
+              className="block t:hidden p-[.5em] cursor-pointer"
+            >
+              <MobileMenuIndicator className="w-[1.9375em] h-[1.3em]" />
             </button>
           </div>
 
@@ -80,6 +104,15 @@ export default function Header({ navItems }: HeaderProps) {
                         target={dropdownItem.target}
                         className="w-full text-center py-xxs rounded-main flex justify-center nav-cursor items-center group"
                       >
+                        {dropdownItem.productSymbol ? (
+                          <Image
+                            src={dropdownItem.productSymbol}
+                            alt=""
+                            width={67}
+                            height={57}
+                            className="w-[1.5em] mr-xxs"
+                          />
+                        ) : null}
                         {dropdownItem.label}
                         {dropdownItem.arrowIndicator ? (
                           <svg
@@ -114,7 +147,10 @@ export default function Header({ navItems }: HeaderProps) {
           <div className="flex flex-col py-main">
             {/* Mobile Navigation */}
             <nav className="flex-1 overflow-y-auto">
-              <ul className="flex flex-col gap-xs text-menu">
+              <ul
+                id="mobile-overlay-item-list"
+                className="flex flex-col gap-xs text-menu"
+              >
                 {navItems.map((navItem, index) => (
                   <li key={index}>
                     <Link
@@ -130,22 +166,17 @@ export default function Header({ navItems }: HeaderProps) {
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Card
-                    eyebrow="Join us"
-                    title="Careers"
-                    href="/"
-                    noHeading={true}
-                  />
-                </li>
-                <li>
-                  <Card
-                    eyebrow="Blog"
-                    title="News, insights & updates"
-                    href="/"
-                    noHeading={true}
-                  />
-                </li>
+                {mobileMenuCards.map((card, index) => (
+                  <li key={index}>
+                    <Card
+                      eyebrow={card.eyebrow}
+                      title={card.title}
+                      href={card.href}
+                      target={card.target}
+                      noHeading={true}
+                    />
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>

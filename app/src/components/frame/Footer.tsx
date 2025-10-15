@@ -61,7 +61,7 @@ export default function Footer({
                 {ctas.map((cta, index) => (
                   <li key={index}>
                     <Link
-                      className="btn-main-wrap is-primary"
+                      className="btn-main-wrap is-primary blink-effect"
                       href={cta.href}
                       target={cta.target}
                     >
@@ -134,7 +134,7 @@ export default function Footer({
 
           <div className="text-small uppercase font-secondary tracking-[0.15em]">{`©${getCurrentYear()} ${copyrightTag}`}</div>
         </div>
-        <Wordmark className="text-theme-bg mt-4 t:mt-[16.5em] pb-[var(--site--margin)] px-[var(--site--margin)]" />
+        <Wordmark className="text-theme-bg mt-4 t:mt-[16.5em] pb-small t:pb-[var(--site--margin)] px-[var(--site--margin)]" />
       </footer>
       <FooterInteraction componentId={uniqueId} />
     </>

@@ -50,7 +50,7 @@ export default async function Product({ params }: ProductPageProps) {
     name?: string;
     nameAddition?: string;
     productSymbolUrl?: string;
-    hero?: { videoSrc?: string };
+    hero?: { videoSrc?: string; videoSrcMobile?: string };
     tagline?: { eyebrow?: string; text?: string };
     solutions?: {
       eyebrow?: string;
@@ -80,6 +80,7 @@ export default async function Product({ params }: ProductPageProps) {
         name={data?.name || ""}
         nameAddition={data?.nameAddition || ""}
         videoSrc={data?.hero?.videoSrc || ""}
+        videoSrcMobile={data?.hero?.videoSrcMobile || ""}
       />
       <ProductTagline
         eyebrow={data?.tagline?.eyebrow || ""}

@@ -1,10 +1,13 @@
 import Image from "next/image";
+import VideoSwapper from "@/components/elements/VideoSwapper";
+import BackdropVariation from "@/components/elements/BackdropVariation";
 
 interface ProductHeroProps {
   productSymbol: string;
   name: string;
   nameAddition: string;
   videoSrc: string;
+  videoSrcMobile: string;
 }
 
 export default function ProductHero({
@@ -12,19 +15,16 @@ export default function ProductHero({
   name,
   nameAddition,
   videoSrc,
+  videoSrcMobile,
 }: ProductHeroProps) {
   return (
     <section>
       <div className="sticky top-[0]">
-        <video
-          src={videoSrc}
-          autoPlay
-          playsInline
-          loop
-          muted
-          preload="auto"
+        <VideoSwapper
+          videoSrc={videoSrc}
+          videoSrcMobile={videoSrcMobile}
           className="w-full object-cover ml:aspect-[16/9] aspect-[3/4]"
-        ></video>
+        />
         <div className="absolute inset-[0] bg-gradient-to-t from-dark to-transparent pointer-events-none translate-y-[1px]"></div>
       </div>
 

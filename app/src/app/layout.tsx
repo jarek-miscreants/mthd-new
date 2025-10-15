@@ -85,6 +85,7 @@ export default async function RootLayout({
     footerCtas,
     productLinks,
     legalLinks,
+    mobileMenuCards,
   } = await getNavigationData();
 
   return (
@@ -98,7 +99,7 @@ export default async function RootLayout({
         <GlobalEyebrowInteraction />
         {/* Global interactions */}
         <Lenis>
-          <Header navItems={headerNavItems} />
+          <Header navItems={headerNavItems} mobileMenuCards={mobileMenuCards} />
           <main>{children}</main>
           <Footer
             name={footerName}

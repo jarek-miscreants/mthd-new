@@ -40,7 +40,7 @@ export default function ScreenMockup({
         />
       </svg>
 
-      <div className="absolute inset-[0%] h-rull bg-[grey] w-full z-[-1] overflow-clip rounded-[5%] p-[1%]">
+      <div className="absolute inset-[1%] h-rull bg-theme-bg w-full z-[-1] overflow-clip p-[.5%] pr-[1.5%] translate-y-[-1.3%]">
         {children}
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
 } from "@/lib/queries";
 
 interface SanityProduct {
+  productSymbolUrl: string;
   name: string;
   slug: string;
 }
@@ -22,6 +23,7 @@ interface FooterNavGroup {
 }
 
 interface HeaderDropdownItem {
+  productSymbol?: string;
   label: string;
   href: string;
   target?: "_self" | "_blank";
@@ -68,6 +70,7 @@ export async function getNavigationData() {
       label: "Products",
       href: "/products",
       dropdown: products.map((product: SanityProduct) => ({
+        productSymbol: product.productSymbolUrl,
         label: product.name,
         href: `/products/${product.slug}`,
       })),

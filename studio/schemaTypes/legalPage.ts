@@ -4,6 +4,16 @@ export const legalPage = defineType({
   name: 'legalPage',
   title: 'Legal Page',
   type: 'document',
+  groups: [
+    {
+      name: 'seo',
+      title: 'Page SEO Settings',
+    },
+    {
+      name: 'body',
+      title: 'Body',
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -25,12 +35,14 @@ export const legalPage = defineType({
       title: 'SEO Settings',
       type: 'seo',
       options: {collapsible: true, collapsed: false},
+      group: 'seo',
     }),
 
     defineField({
       name: 'eyebrow',
       title: 'Eyebrow',
       type: 'string',
+      group: 'body',
     }),
 
     defineField({
@@ -85,6 +97,7 @@ export const legalPage = defineType({
           },
         },
       ],
+      group: 'body',
     }),
   ],
 })

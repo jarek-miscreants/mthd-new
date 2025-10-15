@@ -29,8 +29,7 @@ export default function Card({
           <Eyebrow>{eyebrow}</Eyebrow>
           <TitleTag className="u-text-style-h4">{title}</TitleTag>
         </div>
-
-        <LinkIndicator className="w-[3.0625em]" />
+        <LinkIndicator className="w-[2.25em] t:w-[3.0625em]" />
       </a>
     </LinkIndicatorInteraction>
   );

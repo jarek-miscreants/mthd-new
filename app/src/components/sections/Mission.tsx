@@ -2,6 +2,7 @@ import Eyebrow from "@/components/elements/GEyebrow";
 import Spacer from "@/components/util/Spacer";
 import MissionInteraction from "@/components/sections/MissionInteraction";
 import styles from "@/components/sections/Mission.module.css";
+import BackdropVariation from "@/components/elements/BackdropVariation";
 
 interface MissionProps {
   eyebrow?: string;
@@ -16,6 +17,7 @@ export default function Mission({
 }: MissionProps) {
   return (
     <section>
+      <BackdropVariation className="absolute z-[-2]" variation="variation1" />
       <Spacer />
       <MissionInteraction>
         <div

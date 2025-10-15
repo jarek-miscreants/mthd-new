@@ -22,6 +22,7 @@ export default function AccordionInteraction({
     const content = wrapper.querySelector<HTMLDivElement>(
       "[data-accordion-content]",
     );
+    const video = wrapper.querySelector<HTMLVideoElement>("video");
 
     if (!input || !content) return;
 
@@ -31,12 +32,24 @@ export default function AccordionInteraction({
           height: "auto",
           duration: 0.6,
           ease: "power2.inOut",
+          onComplete: () => {
+            if (video) {
+              video.play().catch((error) => {
+                console.error("Error playing video:", error);
+              });
+            }
+          },
         });
       } else {
         gsap.to(content, {
           height: 0,
           duration: 0.6,
           ease: "power2.inOut",
+          onComplete: () => {
+            if (video) {
+              video.pause();
+            }
+          },
         });
       }
     };

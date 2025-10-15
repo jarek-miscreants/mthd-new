@@ -24,9 +24,9 @@ export const homePageQuery = groq`
   }
 `;
 
-// All Products Query (for homepage ProductHighlight section)
+// All Products Query (for homepage ProductHighlight section); only products with a symbol uploaded will be displayed
 export const allProductsQuery = groq`
-  *[_type == "product"] | order(_createdAt asc) {
+  *[_type == "product" && defined(productSymbol.asset)] | order(_createdAt asc) {
     _id,
     name,
     nameAddition,
@@ -36,9 +36,9 @@ export const allProductsQuery = groq`
   }
 `;
 
-// Products Overview Query (for /products page)
+// Products Overview Query (for /products page); only products with a symbol uploaded will be displayed
 export const productsOverviewQuery = groq`
-  *[_type == "product"] | order(_createdAt asc) {
+  *[_type == "product" && defined(productSymbol.asset)] | order(_createdAt asc) {
     _id,
     name,
     nameAddition,
@@ -102,7 +102,8 @@ export const siteSettingsQuery = groq`
     footerName,
     footerTagline,
     copyrightTag,
-    footerCtas
+    footerCtas,
+    mobileMenuCards
   }
 `;
 
