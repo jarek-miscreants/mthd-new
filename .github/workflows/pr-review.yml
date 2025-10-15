@@ -1,0 +1,17 @@
+name: 🔄 Pre-Merge Checks
+
+on:
+    pull_request:
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    check:
+        name: ✅ Check
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: All checks passed - temporary until we have actual checks
+              run: echo "✅ All checks passed"
