@@ -7,6 +7,9 @@ import {product} from './product'
 import {siteSettings} from './siteSettings'
 import {seo} from './seo'
 import {legalPage} from './legalPage'
+import {blogPost} from './blogPost'
+import {blogPage} from './blogPage'
+import {blogAuthor} from './blogAuthor'
 
 export const schemaTypes = [
   // object types
@@ -20,4 +23,7 @@ export const schemaTypes = [
   product,
   siteSettings,
   legalPage,
+  blogPost,
+  blogPage,
+  blogAuthor,
 ]

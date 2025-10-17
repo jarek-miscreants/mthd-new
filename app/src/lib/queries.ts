@@ -134,3 +134,108 @@ export const legalPageQuery = groq`
     ${seoProjection}
   }
 `;
+
+// All Blog Posts Query
+export const allBlogPostsQuery = groq`
+  *[_type == "blogPost"] | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    excerpt,
+    "author": author->{
+      name,
+      "slug": slug.current,
+      role,
+      company,
+      "avatarUrl": avatar.asset->url
+    },
+    publishedAt,
+    category,
+    "featuredImageUrl": featuredImage.asset->url,
+    "featuredImageAlt": featuredImage.alt,
+    "estimatedReadingTime": select(
+      round(length(pt::text(body)) / 5 / 180) >= 1 => round(length(pt::text(body)) / 5 / 180),
+      1
+    )
+  }
+`;
+
+// Single Blog Post Query
+export const blogPostQuery = groq`
+  *[_type == "blogPost" && slug.current == $slug][0] {
+    title,
+    "slug": slug.current,
+    excerpt,
+    "author": author->{
+      name,
+      "slug": slug.current,
+      bio,
+      role,
+      company,
+      "avatarUrl": avatar.asset->url,
+      socialLinks
+    },
+    publishedAt,
+    category,
+    "featuredImageUrl": featuredImage.asset->url,
+    "featuredImageAlt": featuredImage.alt,
+    "estimatedReadingTime": select(
+      round(length(pt::text(body)) / 5 / 180) >= 1 => round(length(pt::text(body)) / 5 / 180),
+      1
+    ),
+    body[]{
+      ...,
+      _type == "image" => {
+        ...,
+        "asset": {
+          "url": asset->url,
+          "_id": asset->_id
+        }
+      }
+    },
+    ${seoProjection}
+  }
+`;
+
+// All Blog Post Slugs
+export const allBlogPostSlugsQuery = groq`
+  *[_type == "blogPost"]{"slug": slug.current}
+`;
+
+// Blog Page Query
+export const blogPageQuery = groq`
+  *[_type == "blogPage" && _id == "blogPage"][0] {
+    title,
+    description,
+    eyebrow,
+    subscribeButtonText,
+    subscribeButtonLink,
+    ${seoProjection}
+  }
+`;
+
+// All Blog Authors Query
+export const allBlogAuthorsQuery = groq`
+  *[_type == "blogAuthor"] | order(name asc) {
+    name,
+    "slug": slug.current,
+    bio,
+    role,
+    company,
+    "avatarUrl": avatar.asset->url,
+    socialLinks
+  }
+`;
+
+// Single Blog Author Query
+export const blogAuthorQuery = groq`
+  *[_type == "blogAuthor" && slug.current == $slug][0] {
+    name,
+    "slug": slug.current,
+    bio,
+    role,
+    company,
+    "avatarUrl": avatar.asset->url,
+    socialLinks
+  }
+`;

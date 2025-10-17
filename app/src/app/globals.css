@@ -256,6 +256,14 @@
   --spacing-3: var(--element-space--3);
   --spacing-4: var(--element-space--4);
 
+  /* Gap values for grid/flexbox */
+  --gap-*: initial;
+  --gap-1: var(--space-3xs);
+  --gap-2: var(--space-2xs);
+  --gap-3: var(--space-xs);
+  --gap-4: var(--element-space--4);
+  --gap-6: var(--space-small);
+
   --radius-*: initial;
   --radius-main: var(--radius--main);
   --radius-round: var(--radius--round);

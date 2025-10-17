@@ -3,12 +3,15 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'method-website'
+const dataset = process.env.SANITY_STUDIO_DATASET || 'development'
+
 export default defineConfig({
   name: 'default',
   title: 'method-website',
 
-  projectId: 'stmwtpl3',
-  dataset: 'production',
+  projectId: projectId,
+  dataset: dataset,
 
   plugins: [
     structureTool({
@@ -35,9 +38,14 @@ export default defineConfig({
             S.listItem()
               .title('Contact Page')
               .child(S.document().schemaType('contactPage').documentId('contactPage')),
+            S.listItem()
+              .title('Blog Page')
+              .child(S.document().schemaType('blogPage').documentId('blogPage')),
             S.divider(),
             // Regular documents
             S.documentTypeListItem('product').title('Products'),
+            S.documentTypeListItem('blogPost').title('Blog Posts'),
+            S.documentTypeListItem('blogAuthor').title('Blog Authors'),
             S.divider(),
             S.documentTypeListItem('legalPage').title('Legal Pages'),
           ]),
