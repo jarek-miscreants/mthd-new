@@ -20,6 +20,7 @@ coverage/
 # ------------------------------------------------------------
 app/.next/
 app/out/
+.next/
 
 # Production (app/)
 app/build/

@@ -1,0 +1,66 @@
+name: ⚒️ Build Job
+
+env:
+    NODE_VERSION: "22.21.0"
+
+on:
+    workflow_call:
+
+jobs:
+    build:
+        name: 🏗️ Build Process
+        runs-on: ubuntu-latest
+        steps:
+            - name: 📥 Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  fetch-tags: true
+
+            - name: 🟢 Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+
+            - name: 📦 Install dependencies
+              run: npm ci
+
+            # Add Next.js build caching for the frontend
+            - name: 💾 Cache Next.js App Build
+              uses: actions/cache@v3
+              with:
+                  path: app/.next/cache
+                  key: ${{ runner.os }}-nextjs-app-${{ hashFiles('app/**/*.js', 'app/**/*.jsx', 'app/**/*.ts', 'app/**/*.tsx') }}
+                  restore-keys: |
+                      ${{ runner.os }}-nextjs-app-
+
+            # Compute branch-aware env
+            - name: Compute dataset
+              id: envs
+              run: |
+                if [ "${{ github.event_name }}" = "pull_request" ]; then
+                  # decide by PR target branch
+                  if [ "${{ github.base_ref }}" = "develop" ]; then
+                    echo "DATASET=${{ vars.NEXT_PUBLIC_SANITY_PRODUCTION_DATASET }}" >> $GITHUB_OUTPUT
+                  else
+                    echo "DATASET=${{ vars.NEXT_PUBLIC_SANITY_DEVELOPMENT_DATASET }}" >> $GITHUB_OUTPUT
+                  fi
+                else
+                  # pushes
+                  if [ "${{ github.ref_name }}" = "develop" ]; then
+                    echo "DATASET=${{ vars.NEXT_PUBLIC_SANITY_PRODUCTION_DATASET }}" >> $GITHUB_OUTPUT
+                  else
+                    echo "DATASET=${{ vars.NEXT_PUBLIC_SANITY_DEVELOPMENT_DATASET }}" >> $GITHUB_OUTPUT
+                  fi
+                fi
+
+            # Write .env.local for Next.js
+            - name: Write env file
+              run: |
+                cat > app/.env.local <<EOF
+                NEXT_PUBLIC_SANITY_PROJECT_ID=${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+                NEXT_PUBLIC_SANITY_DATASET=${{ steps.envs.outputs.DATASET }}
+                EOF
+
+            - name: 🏗️ Build Next.js App
+              run: npm --workspace app run build

@@ -1,4 +1,4 @@
-name: 🔄 Pre-Merge Checks
+name: 🔍 PR Review
 
 on:
     pull_request:
@@ -8,10 +8,26 @@ permissions:
     contents: read
 
 jobs:
+    lint:
+        name: Lint All Projects
+        uses: ./.github/workflows/lint.yml
+
+    build:
+        name: Build App
+        uses: ./.github/workflows/build.yml
+        secrets: inherit
+
     check:
         name: ✅ Check
+
+        needs:
+            - lint
+            - build
+
         runs-on: ubuntu-latest
 
         steps:
-            - name: All checks passed - temporary until we have actual checks
-              run: echo "✅ All checks passed"
+            - name: Require all jobs to succeed
+              uses: re-actors/alls-green@release/v1
+              with:
+                  jobs: ${{ toJSON(needs) }}

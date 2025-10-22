@@ -20,7 +20,7 @@ export function scalePathDepth(basePath: string, multiplier: number): string {
   if (!match) return basePath;
 
   const [
-    _,
+    ,
     m_x,
     m_y, // M point
     l1_x,

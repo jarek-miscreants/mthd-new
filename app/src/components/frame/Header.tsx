@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Logo from "../brand/Logo";
 import HeaderInteraction from "@/components/frame/HeaderInteraction";
 import styles from "./Header.module.css";
 import Card from "../elements/Card";

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import VideoSwapper from "@/components/elements/VideoSwapper";
-import BackdropVariation from "@/components/elements/BackdropVariation";
 
 interface ProductHeroProps {
   productSymbol: string;

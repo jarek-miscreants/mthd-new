@@ -6,9 +6,7 @@ import BlogPost from "@/components/sections/BlogPost";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 
 interface BlogPostPageProps {
-    params: {
-        slug: string;
-    };
+    params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -17,6 +15,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+    const { slug } = await params;
     const post = await client.fetch<{
         title?: string;
         excerpt?: string;
@@ -27,7 +26,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             ogDescription?: string;
             ogImage?: { url?: string } | null;
         } | null;
-    }>(blogPostQuery, { slug: params.slug });
+    }>(blogPostQuery, { slug });
 
     if (!post) {
         return {
@@ -47,7 +46,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     return mapSeoToMetadata(seoWithDefaults, {
         defaultOg: "",
         robots: { index: true, follow: true },
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${params.slug}`,
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
     });
 }
 
@@ -74,7 +73,7 @@ interface SanityBlogPost {
     featuredImageUrl?: string;
     featuredImageAlt?: string;
     estimatedReadingTime?: number;
-    body: any[];
+    body: unknown[];
     seo?: {
         title?: string;
         description?: string;
@@ -85,7 +84,8 @@ interface SanityBlogPost {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-    const post = await client.fetch<SanityBlogPost>(blogPostQuery, { slug: params.slug });
+    const { slug } = await params;
+    const post = await client.fetch<SanityBlogPost>(blogPostQuery, { slug });
 
     if (!post) {
         notFound();
