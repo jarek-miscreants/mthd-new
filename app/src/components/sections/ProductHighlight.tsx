@@ -31,7 +31,7 @@ export default function ProductHighlight({
       data-theme="dark"
       className={`bg-theme-bg text-theme-text overflow-clip sticky border-t-[0.0625em] first:border-t-[0em] border-t-light ${className}`}
     >
-      <Spacer size="small" calc="size/2" />
+      <Spacer size="large" calc="size/1.5" />
       <div className="u-container flex flex-col t:flex-row t:items-end gap-[3em] items-start">
         <LinkIndicatorInteraction triggerOnHover>
           <Link
@@ -74,7 +74,7 @@ export default function ProductHighlight({
           </ScreenMockup>
         </div>
       </div>
-      <Spacer size="small" />
+      <Spacer size="large" />
     </section>
   );
 }

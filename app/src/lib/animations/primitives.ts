@@ -13,7 +13,7 @@ export const animate = {
     duration = 1,
     revealDelay = 1,
     speed = 0.5,
-    scrollTriggerConfig?: ScrollTrigger.Vars,
+    scrollTriggerConfig?: ScrollTrigger.Vars
   ) => {
     return gsap.to(element, {
       duration,
@@ -52,7 +52,7 @@ export const animate = {
     element: Element,
     varName: string,
     fromValue: string,
-    duration = 0.9,
+    duration = 0.9
   ) => {
     return gsap.from(element, {
       [varName]: fromValue,

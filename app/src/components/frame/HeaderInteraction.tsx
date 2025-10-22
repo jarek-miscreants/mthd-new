@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 import { gsap } from "gsap";
 
+const HERO_MODE_CLASS = styles.heroMode;
+
 export default function HeaderInteraction() {
   const lastScrollY = useRef(0);
+  const isHoveringHeader = useRef(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
   useEffect(() => {
     const header = document.getElementById("header");
     const headerBar = document.getElementById("header-bar");
@@ -13,7 +20,7 @@ export default function HeaderInteraction() {
     const toggleButton = document.getElementById("mobile-menu-toggle");
     const mobileLinks = document.querySelectorAll("[data-mobile-link]");
     const menuOverlayItemLinks = document.querySelectorAll(
-      "#mobile-overlay-item-list > li",
+      "#mobile-overlay-item-list > li"
     );
 
     if (!header || !headerBar || !mobileOverlay || !toggleButton) return;
@@ -21,10 +28,10 @@ export default function HeaderInteraction() {
     let isOpen = false;
 
     const iconOpen = toggleButton.querySelector(
-      ".menu-icon-open",
+      ".menu-icon-open"
     ) as HTMLElement;
     const iconClosed = toggleButton.querySelector(
-      ".menu-icon-closed",
+      ".menu-icon-closed"
     ) as HTMLElement;
 
     const toggleMenu = () => {
@@ -102,7 +109,7 @@ export default function HeaderInteraction() {
 
           if (hasDropdown) {
             const targetDropdown = document.querySelector(
-              `[data-dropdown-index="${index}"]`,
+              `[data-dropdown-index="${index}"]`
             );
             if (targetDropdown) {
               targetDropdown.classList.add(styles.isOpen);
@@ -129,24 +136,57 @@ export default function HeaderInteraction() {
 
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY <= 100) {
+      // Hero mode: only on homepage when at the very top and not hovering
+      if (isHomePage && currentScrollY <= 100 && !isHoveringHeader.current) {
+        header.classList.add(HERO_MODE_CLASS);
+        header.setAttribute("data-theme", "dark");
         gsap.to(header, {
           yPercent: 0,
           duration: 0.3,
           ease: "power2.out",
         });
-      } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        gsap.to(header, {
-          yPercent: -100,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      } else if (currentScrollY < lastScrollY.current) {
+      } else if (
+        isHomePage &&
+        currentScrollY <= 100 &&
+        isHoveringHeader.current
+      ) {
+        // Hovering in hero zone: dark mode with background
+        header.classList.remove(HERO_MODE_CLASS);
+        header.setAttribute("data-theme", "dark");
         gsap.to(header, {
           yPercent: 0,
           duration: 0.3,
           ease: "power2.out",
         });
+      } else {
+        header.classList.remove(HERO_MODE_CLASS);
+        if (!isOpen) {
+          header.removeAttribute("data-theme");
+        }
+
+        // Normal scroll behavior
+        if (currentScrollY <= 100) {
+          gsap.to(header, {
+            yPercent: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        } else if (
+          currentScrollY > lastScrollY.current &&
+          currentScrollY > 100
+        ) {
+          gsap.to(header, {
+            yPercent: -100,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        } else if (currentScrollY < lastScrollY.current) {
+          gsap.to(header, {
+            yPercent: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
       }
 
       lastScrollY.current = currentScrollY;
@@ -154,14 +194,33 @@ export default function HeaderInteraction() {
 
     window.addEventListener("scroll", handleScroll);
 
+    // Mouse hover handlers for hero mode
+    const handleMouseEnter = () => {
+      isHoveringHeader.current = true;
+      handleScroll(); // Re-evaluate state
+    };
+
+    const handleMouseLeave = () => {
+      isHoveringHeader.current = false;
+      handleScroll(); // Re-evaluate state
+    };
+
+    header.addEventListener("mouseenter", handleMouseEnter);
+    header.addEventListener("mouseleave", handleMouseLeave);
+
+    // Initialize hero mode on mount if on homepage
+    handleScroll();
+
     return () => {
       toggleButton.removeEventListener("click", toggleMenu);
       mobileLinks.forEach((link) => {
         link.removeEventListener("click", closeMenu);
       });
       window.removeEventListener("scroll", handleScroll);
+      header.removeEventListener("mouseenter", handleMouseEnter);
+      header.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [isHomePage]);
 
   return null;
 }

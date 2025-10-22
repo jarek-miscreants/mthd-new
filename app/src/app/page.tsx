@@ -54,13 +54,12 @@ export default async function Home() {
       href: product.slug || "",
       leadParagraph: product.highlight?.leadParagraph || "",
       showcaseSrc: product.highlight?.showcaseSrc || "",
-    }),
+    })
   );
 
   return (
     <>
       <HomeHero
-        title={homeData?.hero?.title || ""}
         videoSrc={homeData?.hero?.videoSrc || ""}
         videoSrcMobile={homeData?.hero?.videoSrcMobile || ""}
       />

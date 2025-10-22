@@ -17,7 +17,7 @@ export default function Mission({
 }: MissionProps) {
   return (
     <section>
-      <BackdropVariation className="absolute z-[-2]" variation="variation1" />
+      {/* <BackdropVariation className="absolute z-[-2]" variation="variation1" /> */}
       <Spacer />
       <MissionInteraction>
         <div

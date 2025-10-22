@@ -41,9 +41,12 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
       <HeaderInteraction />
       <header
         id="header"
-        className="header_wrap bg-theme-bg text-theme-text fixed top-[0] left-[0] right-[0] z-[9999]"
+        data-theme="dark"
+        className={`${styles.header} header_wrap bg-theme-bg text-theme-text fixed top-[0] left-[0] right-[0] z-[9999]`}
       >
-        <div className="header_contain u-container max-w-[none] relative z-[99] drop-shadow-[0_4px_10px_rgba(0,0,0,0.05)] bg-theme-bg">
+        <div
+          className={`${styles.headerContain} header_contain u-container max-w-[none] relative z-[99] drop-shadow-[0_4px_10px_rgba(0,0,0,0.05)] bg-theme-bg`}
+        >
           <div
             id="header-bar"
             className="flex flex-row justify-between items-center py-xxs transition-[padding-top] ease duration-200
@@ -134,7 +137,7 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
                   ))}
                 </ul>
               </div>
-            ) : null,
+            ) : null
           )}
         </div>
 

@@ -6,3 +6,21 @@
 .headerDropdown.isOpen {
   height: auto;
 }
+
+/* Hero mode - transparent background with smooth transitions */
+.header {
+  transition: background-color 0.25s ease;
+}
+
+.headerContain {
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.heroMode {
+  background: transparent !important;
+}
+
+.heroMode .headerContain {
+  background: transparent !important;
+  box-shadow: none !important;
+}
