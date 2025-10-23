@@ -2,6 +2,7 @@ import {card} from './card'
 import {homePage} from './homePage'
 import {companyPage} from './companyPage'
 import {contactPage} from './contactPage'
+import {careersPage} from './careersPage'
 import {productsOverviewPage} from './productsOverviewPage'
 import {product} from './product'
 import {siteSettings} from './siteSettings'
@@ -19,6 +20,7 @@ export const schemaTypes = [
   homePage,
   companyPage,
   contactPage,
+  careersPage,
   productsOverviewPage,
   product,
   siteSettings,

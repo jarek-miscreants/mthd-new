@@ -123,20 +123,22 @@ For now, follow the instructions below under `Making Content (CMS) Schema Edits`
 
 1. Clone the production dataset into a new development dataset in Sanity
 
-If a `development` branch already exists and you won't conflict, delete it in Sanity. In the future, we can do more complicated dataset management.
+If a `development` dataset already exists and you may conflict, proceed with caution. In the future, we can do more complicated dataset management.
 
 ```bash
 cd studio
 sanity login
 sanity dataset export production production-backup.tar.gz
+# Only if the dataset doesn't exist
 sanity dataset create development --visibility private
 sanity dataset import production-backup.tar.gz development
+# If the dataset already exists
+sanity dataset import production-backup.tar.gz development --replace
 ```
 
 2. Run the Next.js app and Sanity studio locally
 
 3. Make your code, content schema, and content edits - make sure to publish to the Sanity `development` dataset
-  - In this process, as you are making schema edits, you need to deploy them to Santiy Cloud `development` dataset so your local App UI can load them, so after every schema edit make sure to do `npm run deploy:studio` 
 
 4. Make a pull request into the `development` branch
 

@@ -39,6 +39,9 @@ export default defineConfig({
               .title('Contact Page')
               .child(S.document().schemaType('contactPage').documentId('contactPage')),
             S.listItem()
+              .title('Careers Page')
+              .child(S.document().schemaType('careersPage').documentId('careersPage')),
+            S.listItem()
               .title('Blog Page')
               .child(S.document().schemaType('blogPage').documentId('blogPage')),
             S.divider(),

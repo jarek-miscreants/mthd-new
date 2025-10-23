@@ -94,6 +94,38 @@ export const contactPageQuery = groq`
   }
 `;
 
+// Careers Page Query
+export const careersPageQuery = groq`
+  *[_type == "careersPage" && _id == "careersPage"][0] {
+    eyebrow,
+    text,
+    careersPageUrl,
+    section1Eyebrow,
+    section1Items[] {
+      title,
+      description
+    },
+    section2Eyebrow,
+    section2Items[] {
+      title,
+      description
+    },
+    mainImage {
+      "src": asset->url,
+      alt,
+      aspectRatio,
+      cutAngle
+    },
+    secondaryImages[] {
+      "src": asset->url,
+      alt,
+      aspectRatio,
+      cutAngle
+    },
+    ${seoProjection}
+  }
+`;
+
 // Site Settings Query
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings" && _id == "siteSettings"][0] {
