@@ -70,17 +70,15 @@ export default async function Home() {
         leadParagraph={homeData?.mission?.leadParagraph || ""}
       />
 
-      <div>
-        {productHighlightItems.length > 0 && (
-          <ProductHighlightSection items={productHighlightItems} />
-        )}
+      {productHighlightItems.length > 0 && (
+        <ProductHighlightSection items={productHighlightItems} />
+      )}
 
-        <Architecture
-          eyebrow={homeData?.architecture?.eyebrow}
-          title={homeData?.architecture?.title || ""}
-          items={homeData?.architecture?.items || []}
-        />
-      </div>
+      <Architecture
+        eyebrow={homeData?.architecture?.eyebrow}
+        title={homeData?.architecture?.title || ""}
+        items={homeData?.architecture?.items || []}
+      />
 
       <DeploySection
         eyebrow={homeData?.deploy?.eyebrow}
