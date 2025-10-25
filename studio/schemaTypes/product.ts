@@ -59,6 +59,15 @@ export const product = defineType({
       group: 'hero',
     }),
 
+    defineField({
+      name: 'sortOrder',
+      title: 'Sort Order',
+      type: 'number',
+      description: 'Lower numbers appear first in navigation (e.g., 1, 2, 3)',
+      validation: (Rule) => Rule.required().min(0).integer(),
+      group: 'hero',
+    }),
+
     //SEO
     defineField({
       name: 'seo',

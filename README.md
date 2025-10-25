@@ -155,7 +155,7 @@ sanity login
 sanity dataset export development development-backup.tar.gz
 # In case anything goes wrong
 sanity dataset export production production-backup.tar.gz
-sanity dataset import development.tar.gz production --replace
+sanity dataset import development-backup.tar.gz production --replace
 ```
 
 

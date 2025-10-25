@@ -56,6 +56,7 @@ export const blogPost = defineType({
           {title: 'Product', value: 'Product'},
           {title: 'Engineering', value: 'Engineering'},
           {title: 'Customers', value: 'Customers'},
+          {title: 'News', value: 'News'},
         ],
       },
       validation: (Rule) => Rule.required(),

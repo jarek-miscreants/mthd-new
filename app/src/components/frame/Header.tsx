@@ -70,7 +70,7 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
                     <Link
                       className={
                         navItem.btnStyle
-                          ? `btn-main-wrap is-secondary blink-effect`
+                          ? `btn-main-wrap is-secondary`
                           : `p-xxs rounded-main nav-cursor`
                       }
                       href={navItem.href}

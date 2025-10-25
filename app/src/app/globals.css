@@ -366,9 +366,6 @@
         border-color: var(--theme--button-primary--border-hover);
       }
 
-      &.blink-effect:hover {
-        animation: blink-primary 0.16s none 2;
-      }
     }
 
     &.is-secondary {
@@ -382,37 +379,6 @@
         border-color: var(--theme--button-secondary--border-hover);
       }
 
-      &.blink-effect:hover {
-        animation: blink-secondary 0.16s none 2;
-      }
-    }
-  }
-
-  @keyframes blink-primary {
-    0%,
-    100% {
-      background-color: var(--theme--button-primary--background);
-      color: var(--theme--button-primary--text);
-      border-color: var(--theme--button-primary--border);
-    }
-    50% {
-      background-color: var(--theme--button-primary--background-hover);
-      color: var(--theme--button-primary--text-hover);
-      border-color: var(--theme--button-primary--border-hover);
-    }
-  }
-
-  @keyframes blink-secondary {
-    0%,
-    100% {
-      background-color: var(--theme--button-secondary--background);
-      color: var(--theme--button-secondary--text);
-      border-color: var(--theme--button-secondary--border);
-    }
-    50% {
-      background-color: var(--theme--button-secondary--background-hover);
-      color: var(--theme--button-secondary--text-hover);
-      border-color: var(--theme--button-secondary--border-hover);
     }
   }
 
@@ -422,27 +388,15 @@
     }
 
     &:hover {
-      animation: blink-nav-cursor 0.16s none 2;
       background-color: var(--theme--text);
       color: var(--theme--background);
 
       img {
         filter: invert(var(--theme--invert-hover));
-        animation: image-type-invert 0.16s none 2;
       }
     }
   }
-  @keyframes blink-nav-cursor {
-    0%,
-    100% {
-      background-color: var(--theme--text);
-      color: var(--theme--background);
-    }
-    50% {
-      background-color: var(--theme--background);
-      color: var(--theme--text);
-    }
-  }
+
   @keyframes image-type-invert {
     0%,
     100% {

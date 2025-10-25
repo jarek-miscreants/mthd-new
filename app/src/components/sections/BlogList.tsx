@@ -37,7 +37,7 @@ interface BlogListProps {
     };
 }
 
-const categories = ["All Posts", "Company", "Product", "Engineering", "Customers"];
+const categories = ["All Posts", "Company", "Product", "Engineering", "Customers", "News"];
 
 export default function BlogList({ posts, pageData }: BlogListProps) {
     const [activeCategory, setActiveCategory] = useState("All Posts");

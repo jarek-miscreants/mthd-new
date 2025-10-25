@@ -13,10 +13,10 @@ export default function CompanyHighlight({
 }: CompanyHighlightProps) {
   return (
     <section>
-      <BackdropVariation className="fixed z-[-2]" variation="variation2" />
+      <BackdropVariation className="fixed z-[-2] opacity-25" variation="variation2" />
       <Spacer />
       <CompanyHighlightInteraction>
-        <div className="u-container flex flex-col gap-large pt-[30vh]">
+        <div className="u-container flex flex-col gap-large pt-[15vh]">
           {highlightTexts.map((highlightText, index) => (
             <HighlightText key={index} {...highlightText} />
           ))}

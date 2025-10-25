@@ -61,7 +61,7 @@ export default function Footer({
                 {ctas.map((cta, index) => (
                   <li key={index}>
                     <Link
-                      className="btn-main-wrap is-primary blink-effect"
+                      className="btn-main-wrap is-primary"
                       href={cta.href}
                       target={cta.target}
                     >
