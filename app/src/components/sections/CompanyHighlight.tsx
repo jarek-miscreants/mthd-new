@@ -13,7 +13,11 @@ export default function CompanyHighlight({
 }: CompanyHighlightProps) {
   return (
     <section>
-      <BackdropVariation className="fixed z-[-2] opacity-25" variation="variation2" />
+      <BackdropVariation
+        className="fixed z-[-2]"
+        variation="variation2"
+        data-backdrop="company"
+      />
       <Spacer />
       <CompanyHighlightInteraction>
         <div className="u-container flex flex-col gap-large pt-[15vh]">

@@ -11,6 +11,7 @@ interface BackdropVariationProps {
   loop?: boolean;
   autoplay?: boolean;
   speed?: number;
+  "data-backdrop"?: string;
 }
 
 const animationPaths: Record<BackdropVariation, string> = {
@@ -24,6 +25,7 @@ export default function BackdropVariation({
   className = "",
   loop = true,
   autoplay = true,
+  ...props
 }: BackdropVariationProps) {
   const [animationData, setAnimationData] = useState<unknown>(null);
   const [error, setError] = useState(false);
@@ -56,7 +58,11 @@ export default function BackdropVariation({
   }
 
   return (
-    <div className={`inset-[0] pointer-events-none ${className}`}>
+    <div
+      className={`inset-[0] pointer-events-none ${className}`}
+      style={{ opacity: 0.5 }}
+      {...props}
+    >
       <Lottie
         animationData={animationData}
         loop={loop}

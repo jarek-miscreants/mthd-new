@@ -19,7 +19,7 @@ export const animate = {
       duration,
       scrambleText: {
         text: element.textContent,
-        chars: "!?%$&_!?%$&",
+        chars: "!?%$&_____!?%$&1234567890axyzvlwrz",
         revealDelay,
         speed,
         tweenLength: false,

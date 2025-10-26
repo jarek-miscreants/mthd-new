@@ -12,7 +12,7 @@ export default function DeployItem({
   cta,
 }: DeployItemProps) {
   return (
-    <li className="bg-dark-secondary py-xs px-xs rounded-main d:col-span-3 flex flex-col gap-xs justify-between">
+    <li className="bg-dark-secondary py-xs px-xs rounded-main d:col-span-4 flex flex-col gap-xs justify-between">
       <div className="flex gap-small items-center justify-between">
         <h3 className="text-large">
           <span className="font-secondary text-neutral">{indexDeco} </span>

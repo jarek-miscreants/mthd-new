@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeHeroInteraction({
   componentId,
 }: {
   componentId: string;
 }) {
+  const pathname = usePathname();
+
   useEffect(() => {
     const heroText = document.querySelector(
       `[data-hero-text="${componentId}"]`
@@ -40,9 +40,12 @@ export default function HomeHeroInteraction({
 
     return () => {
       animation.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      // Restore original text on cleanup
+      if (heroText) {
+        heroText.textContent = originalText;
+      }
     };
-  }, [componentId]);
+  }, [componentId, pathname]);
 
   return null;
 }

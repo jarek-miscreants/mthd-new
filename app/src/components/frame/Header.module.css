@@ -9,11 +9,11 @@
 
 /* Hero mode - transparent background with smooth transitions */
 .header {
-  transition: background-color 0.25s ease;
+  transition: background 0.25s ease;
 }
 
 .headerContain {
-  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .heroMode {
@@ -21,6 +21,6 @@
 }
 
 .heroMode .headerContain {
-  background: transparent !important;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%) !important;
   box-shadow: none !important;
 }
