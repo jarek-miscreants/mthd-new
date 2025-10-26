@@ -40,8 +40,8 @@ export const product = defineType({
     }),
 
     defineField({
-      name: 'nameAddition',
-      title: 'Product Name Addition',
+      name: 'description',
+      title: 'Product Description',
       type: 'string',
       validation: (Rule) => Rule.required(),
       group: 'hero',

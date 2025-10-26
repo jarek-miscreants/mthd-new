@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 interface SanityProduct {
   name: string;
-  nameAddition: string;
+  description: string;
   highlight: {
     leadParagraph: string;
   };
@@ -45,7 +45,7 @@ export default async function Products() {
   const items = products.map((product: SanityProduct) => ({
     productSymbol: product.productSymbolUrl || "",
     name: product.name,
-    nameAddition: product.nameAddition,
+    description: product.description,
     leadParagraph: product.highlight?.leadParagraph,
     href: `/products/${product.slug}`,
   }));

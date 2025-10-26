@@ -29,7 +29,7 @@ export const allProductsQuery = groq`
   *[_type == "product" && defined(productSymbol.asset)] | order(sortOrder asc) {
     _id,
     name,
-    nameAddition,
+    description,
     "slug": slug.current,
     "productSymbolUrl": productSymbol.asset->url,
     highlight
@@ -41,7 +41,7 @@ export const productsOverviewQuery = groq`
   *[_type == "product" && defined(productSymbol.asset)] | order(sortOrder asc) {
     _id,
     name,
-    nameAddition,
+    description,
     "slug": slug.current,
     "productSymbolUrl": productSymbol.asset->url,
     highlight {
@@ -63,7 +63,7 @@ export const productsOverviewPageQuery = groq`
 export const productQuery = groq`
   *[_type == "product" && slug.current == $slug][0] {
     name,
-    nameAddition,
+    description,
     "productSymbolUrl": productSymbol.asset->url,
     hero,
     tagline,
@@ -73,9 +73,9 @@ export const productQuery = groq`
   }
 `;
 
-// Company Page Query
-export const companyPageQuery = groq`
-  *[_type == "companyPage" && _id == "companyPage"][0] {
+// About Page Query
+export const aboutPageQuery = groq`
+  *[_type == "aboutPage" && _id == "aboutPage"][0] {
     title,
     highlightTexts,
     cards,
@@ -269,5 +269,16 @@ export const blogAuthorQuery = groq`
     company,
     "avatarUrl": avatar.asset->url,
     socialLinks
+  }
+`;
+
+// Company Overview Query - gets dropdown items from Company nav
+export const companyOverviewQuery = groq`
+  *[_type == "siteSettings" && _id == "siteSettings"][0] {
+    "companyItems": headerNavItems[label == "Company"][0].dropdown[] {
+      label,
+      href,
+      target
+    }
   }
 `;

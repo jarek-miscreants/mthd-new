@@ -32,9 +32,9 @@ export default defineConfig({
               .child(
                 S.document().schemaType('productsOverviewPage').documentId('productsOverviewPage'),
               ),
-            S.listItem()
-              .title('Company Page')
-              .child(S.document().schemaType('companyPage').documentId('companyPage')),
+              S.listItem()
+              .title('About Page')
+              .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
             S.listItem()
               .title('Contact Page')
               .child(S.document().schemaType('contactPage').documentId('contactPage')),

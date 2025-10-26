@@ -48,7 +48,7 @@ export default async function Product({ params }: ProductPageProps) {
 
   const data = await client.fetch<{
     name?: string;
-    nameAddition?: string;
+    description?: string;
     productSymbolUrl?: string;
     hero?: { videoSrc?: string; videoSrcMobile?: string };
     tagline?: { eyebrow?: string; text?: string };
@@ -78,7 +78,7 @@ export default async function Product({ params }: ProductPageProps) {
       <ProductHero
         productSymbol={data?.productSymbolUrl || ""}
         name={data?.name || ""}
-        nameAddition={data?.nameAddition || ""}
+        description={data?.description || ""}
         videoSrc={data?.hero?.videoSrc || ""}
         videoSrcMobile={data?.hero?.videoSrcMobile || ""}
       />

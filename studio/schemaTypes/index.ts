@@ -1,6 +1,6 @@
 import {card} from './card'
 import {homePage} from './homePage'
-import {companyPage} from './companyPage'
+import {aboutPage} from './aboutPage'
 import {contactPage} from './contactPage'
 import {careersPage} from './careersPage'
 import {productsOverviewPage} from './productsOverviewPage'
@@ -18,7 +18,7 @@ export const schemaTypes = [
   seo,
   // docuement types
   homePage,
-  companyPage,
+  aboutPage,
   contactPage,
   careersPage,
   productsOverviewPage,

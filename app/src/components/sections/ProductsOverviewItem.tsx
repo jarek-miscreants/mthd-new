@@ -6,7 +6,7 @@ import BackdropVariation from "../elements/BackdropVariation";
 export interface ProductsOverviewItemProps {
   productSymbol: string;
   name: string;
-  nameAddition: string;
+  description: string;
   leadParagraph: string;
   href: string;
   variation?: "variation1" | "variation2";
@@ -15,7 +15,7 @@ export interface ProductsOverviewItemProps {
 export default function ProductsOverviewItem({
   productSymbol,
   name,
-  nameAddition,
+  description,
   leadParagraph,
   href,
   variation = "variation1",
@@ -24,7 +24,7 @@ export default function ProductsOverviewItem({
     <LinkIndicatorInteraction triggerOnHover>
       <a
         href={href}
-        className="bg-theme-bg-secondary text-theme-text p-xs t:p-small sticky top-main flex flex-col gap-small t:gap-main rounded-main"
+        className="bg-theme-bg-secondary text-theme-text p-xs t:p-small flex flex-col gap-small t:gap-main rounded-main"
       >
         <BackdropVariation
           variation={variation}
@@ -40,7 +40,7 @@ export default function ProductsOverviewItem({
 
         <h2 className="u-text-style-h2 whitespace-pre-line">
           {name}
-          <span className="block text-neutral">{nameAddition}</span>
+          <span className="block text-neutral">{description}</span>
         </h2>
         <div className="flex flex-col t:flex-row justify-between t:items-end gap-small">
           {leadParagraph && (
