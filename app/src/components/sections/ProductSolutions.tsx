@@ -1,10 +1,12 @@
 import Eyebrow from "@/components/elements/GEyebrow";
 import Spacer from "../util/Spacer";
-import Accordion, { AccordionProps } from "@/components/elements/Accordion";
+import ProductSolutionItem, {
+  ProductSolutionItemProps,
+} from "@/components/elements/ProductSolutionItem";
 
 interface ProductSolutionsProps {
   eyebrow: string;
-  items: AccordionProps[];
+  items: ProductSolutionItemProps[];
 }
 
 export default function ProductSolutions({
@@ -18,7 +20,7 @@ export default function ProductSolutions({
         <Eyebrow>{eyebrow}</Eyebrow>
         <ul>
           {items.map((item, index) => (
-            <Accordion key={index} {...item} />
+            <ProductSolutionItem key={index} {...item} />
           ))}
         </ul>
       </div>
