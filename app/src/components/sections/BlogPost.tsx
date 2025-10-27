@@ -51,7 +51,8 @@ export default function BlogPost({ post }: BlogPostProps) {
                 {/* Header */}
                 <header>
                     <div className="flex items-center gap-2">
-                        <Link href="/blog" className="btn-main-wrap is-secondary text-small group flex items-center gap-2">
+                        {/* Hide this link until we have more than 1 blog post */}
+                        <Link href="/blog" className="hidden btn-main-wrap is-secondary text-small group flex items-center gap-2">
                             <svg
                                 className="w-[0.75em] rotate-[225deg] group-hover:rotate-[180deg] transition-transform duration-[400ms] ease-[ease]"
                                 width="100%"
@@ -125,8 +126,9 @@ export default function BlogPost({ post }: BlogPostProps) {
                     <PortableTextRenderer value={post.body as any} />
                 </div>
 
+                {/* Hide this link until we have more than 1 blog post */}
                 {/* Back to Blog Button */}
-                <div className="flex justify-center mt-large">
+                <div className="hidden flex justify-center mt-large">
                     <Link href="/blog" className="btn-main-wrap is-secondary text-small group flex items-center gap-2">
                         <svg
                             className="w-[0.75em] rotate-[225deg] group-hover:rotate-[180deg] transition-transform duration-[400ms] ease-[ease]"
