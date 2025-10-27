@@ -52,10 +52,10 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
 "
           >
             <Link
-              className="relative w-small t:w-[3.978125em] aspect-[1.72/1]"
+              className="relative w-[8em] t:w-[10em] h-[2em]"
               data-mobile-link
               href="/"
-              aria-label="Logo"
+              aria-label="Method Logo"
             >
               <LogoAnimation />
               {/* <Logo />*/}

@@ -11,13 +11,13 @@ const componentId = "home-hero";
 export default function HomeHero({ videoSrc, videoSrcMobile }: HomeHeroProps) {
   return (
     <section className="max-w-[none] overflow-clip">
-      <div className="relative w-full h-auto">
+      <div className="relative w-full h-[80vh]">
         {/* Video Layer */}
-        <div className="relative w-full h-auto">
+        <div className="relative w-full h-full">
           <VideoSwapper
             videoSrc={videoSrc}
             videoSrcMobile={videoSrcMobile}
-            className="w-full object-cover ml:aspect-[16/9] aspect-[3/4] block"
+            className="w-full h-full object-cover block"
           />
         </div>
 

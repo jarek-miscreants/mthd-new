@@ -22,12 +22,12 @@ export default function ProductHero({
         <VideoSwapper
           videoSrc={videoSrc}
           videoSrcMobile={videoSrcMobile}
-          className="w-full object-cover ml:aspect-[16/9] aspect-[3/4]"
+          className="w-full object-cover ml:aspect-[16/9] aspect-[3/4] h-auto max-h-[80vh]"
         />
         <div className="absolute inset-[0] bg-gradient-to-t from-dark to-transparent pointer-events-none translate-y-[1px]"></div>
       </div>
 
-      <div className="u-container mt-[-10em]">
+      <div className="u-container t:mt-[0] mt-[-5em]">
         <div className="flex flex-col t:flex-row gap-main items-start">
           <Image
             src={productSymbol}
