@@ -11,7 +11,7 @@ const componentId = "home-hero";
 export default function HomeHero({ videoSrc, videoSrcMobile }: HomeHeroProps) {
   return (
     <section className="max-w-[none] overflow-clip">
-      <div className="relative w-full h-[80vh]">
+      <div className="relative w-full h-[65vh] t:h-[80vh]">
         {/* Video Layer */}
         <div className="relative w-full h-full">
           <VideoSwapper
@@ -37,6 +37,7 @@ export default function HomeHero({ videoSrc, videoSrcMobile }: HomeHeroProps) {
 
         {/* Text overlay */}
         <div
+          className="p-2 t:p-[var(--site--gutter)]"
           style={{
             position: "absolute",
             top: 0,
@@ -46,15 +47,13 @@ export default function HomeHero({ videoSrc, videoSrcMobile }: HomeHeroProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            paddingLeft: "3rem",
-            paddingRight: "2rem",
             zIndex: 20,
           }}
         >
           <h2
             data-theme="dark"
             data-hero-text={componentId}
-            className="u-text-style-h2 t:text-[5em] text-theme-text"
+            className="text-[2.2em] t:text-[5em] u-text-style-h2 text-theme-text"
             style={{
               WebkitTextStroke: "0.1px rgba(0, 0, 0, .5)",
             }}
