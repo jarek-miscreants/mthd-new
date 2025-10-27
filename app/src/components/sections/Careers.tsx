@@ -108,7 +108,7 @@ export default function Careers({
                 </>
             )}
 
-            <Spacer size="large" />
+            <Spacer size="main" />
             {careersPageUrl && (
                 <CareersButtonInteraction>
                     <div className="u-container flex justify-center">

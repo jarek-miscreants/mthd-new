@@ -76,6 +76,48 @@ export default function HighlightItemInteraction({ children }: HighlightItemInte
                     "<"
                 );
             });
+
+            // mobile
+            mm.add("(max-width: 767px)", () => {
+                const splitTitle = new SplitText(title, {
+                    type: "words,lines",
+                    linesClass: "line",
+                    mask: "lines",
+                    reduceWhiteSpace: false,
+                });
+                const splitDescription = new SplitText(description, {
+                    type: "words,lines",
+                    linesClass: "line",
+                    mask: "lines",
+                    reduceWhiteSpace: false,
+                });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: "top bottom",
+                        toggleActions: "restart none none none",
+                        markers: false,
+                    },
+                });
+                tl.from(
+                    splitTitle.lines,
+                    {
+                        ...splitAnimationDefaults,
+                    },
+                    "+0.25"
+                );
+
+                tl.from(title, { ...lineAnimationDefaults }, "<=0.2");
+
+                tl.from(
+                    splitDescription.lines,
+                    {
+                        ...splitAnimationDefaults,
+                    },
+                    "<=0.2"
+                );
+            });
         }, wrapper);
 
         return () => ctx.revert();

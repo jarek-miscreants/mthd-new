@@ -24,7 +24,7 @@ export default function Architecture({
           <h2 className="u-text-style-h3">{title}</h2>
         </div>
 
-        <div className="flex flex-col gap-large mt-large max-w-[83em] mx-auto">
+        <div className="flex flex-col gap-main t:gap-large mt-main t:mt-large max-w-[83em] mx-auto">
           {items.map((item, index) => (
             <ArchitectureItem key={index} {...item} />
           ))}

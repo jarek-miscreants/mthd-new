@@ -29,18 +29,23 @@
 }
 
 @media (max-width: 767px) {
+  .item_wrapper {
+    position: relative;
+  }
+
   .item_h {
-    --height: 5rem;
+    position: static;
   }
 
   .item_h::after {
-    content: "";
+    position: absolute;
+  }
+
+  .item_p {
     position: static;
-    margin-top: 1rem;
   }
 
   .item_p::before {
-    content: "";
     display: none;
   }
 }
