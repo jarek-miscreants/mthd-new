@@ -60,14 +60,27 @@ export default function BackdropVariation({
   return (
     <div
       className={`inset-[0] pointer-events-none ${className}`}
-      style={{ opacity: 0.5 }}
+      style={{
+        opacity: 0.65,
+        width: "100vw",
+        height: "100dvh", // dynamic viewport height for mobile (accounts for address bar)
+      }}
       {...props}
     >
       <Lottie
         animationData={animationData}
         loop={loop}
         autoplay={autoplay}
-        style={{ width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          minWidth: "100%",
+          minHeight: "100%",
+          width: "auto",
+          height: "auto",
+        }}
       />
     </div>
   );

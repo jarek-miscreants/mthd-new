@@ -26,6 +26,10 @@ export const product = defineType({
       title: 'Product Highlight (Used for products homepage section)',
     },
     {
+      name: 'cta',
+      title: 'CTA Section',
+    },
+    {
       name: 'cards',
       title: 'Page Cards',
     },
@@ -151,6 +155,19 @@ export const product = defineType({
         },
       ],
       group: 'solutions',
+    }),
+
+    // CTA Section
+    defineField({
+      name: 'cta',
+      title: 'CTA Section',
+      type: 'object',
+      fields: [
+        {name: 'ctaTitle', title: 'CTA Title', type: 'string'},
+        {name: 'ctaButtonText', title: 'CTA Button Text', type: 'string'},
+        {name: 'ctaLink', title: 'CTA Link', type: 'string'},
+      ],
+      group: 'cta',
     }),
 
     // Bottom Cards

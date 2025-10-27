@@ -68,6 +68,7 @@ export const productQuery = groq`
     hero,
     tagline,
     solutions,
+    cta,
     cards,
     ${seoProjection}
   }
