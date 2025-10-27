@@ -283,3 +283,20 @@ export const companyOverviewQuery = groq`
     }
   }
 `;
+
+// First Blog Post Query (for about page)
+export const firstBlogPostQuery = groq`
+  *[_type == "blogPost"] | order(publishedAt desc)[0] {
+    title,
+    body[]{
+      ...,
+      _type == "image" => {
+        ...,
+        "asset": {
+          "url": asset->url,
+          "_id": asset->_id
+        }
+      }
+    }
+  }
+`;
