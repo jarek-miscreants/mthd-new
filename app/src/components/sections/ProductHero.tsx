@@ -27,8 +27,8 @@ export default function ProductHero({
         <div className="absolute inset-[0] bg-gradient-to-t from-dark to-transparent pointer-events-none translate-y-[1px]"></div>
       </div>
 
-      <div className="u-container t:mt-[0] mt-[-5em]">
-        <div className="flex flex-col t:flex-row gap-main items-start">
+      <div className="u-container t:mt-[0] mt-[-6em]">
+        <div className="flex flex-col t:flex-row t:gap-main gap-small items-start">
           <Image
             src={productSymbol}
             alt=""
