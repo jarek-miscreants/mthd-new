@@ -8,19 +8,31 @@ export type MinimalSeo = {
   ogImage?: { url?: string } | null;
 };
 
+export type SocialDefaults = {
+  title?: string;
+  description?: string;
+  url?: string;
+  imageUrl?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+};
+
 export function mapSeoToMetadata(
   seo: MinimalSeo | null | undefined,
   options?: {
     defaultOg?: string;
     robots?: { index: boolean; follow: boolean };
     canonical?: string;
+    socialDefaults?: SocialDefaults;
   },
 ): Metadata {
   const title = seo?.title || "";
   const description = seo?.description || "";
-  const socialTitle = seo?.ogTitle || title;
-  const socialDescription = seo?.ogDescription || description;
-  const ogImageUrl = seo?.ogImage?.url || options?.defaultOg || "";
+  const socialTitle = seo?.ogTitle || title || options?.socialDefaults?.title || "";
+  const socialDescription = seo?.ogDescription || description || options?.socialDefaults?.description || "";
+  const ogImageUrl = seo?.ogImage?.url || options?.defaultOg || options?.socialDefaults?.imageUrl || "";
+  const ogImageWidth = options?.socialDefaults?.imageWidth;
+  const ogImageHeight = options?.socialDefaults?.imageHeight;
 
   return {
     title,
@@ -30,9 +42,17 @@ export function mapSeoToMetadata(
       ? { canonical: options.canonical }
       : undefined,
     openGraph: {
+      type: "website",
       title: socialTitle,
       description: socialDescription,
-      images: [{ url: ogImageUrl }],
+      url: options?.socialDefaults?.url,
+      images: [
+        {
+          url: ogImageUrl,
+          width: ogImageWidth,
+          height: ogImageHeight,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",

@@ -136,7 +136,17 @@ export const siteSettingsQuery = groq`
     footerTagline,
     copyrightTag,
     footerCtas,
-    mobileMenuCards
+    mobileMenuCards,
+    socialLinkPreviewTitle,
+    socialLinkPreviewDescription,
+    socialLinkPreviewUrl,
+    "socialLinkPreviewImageUrl": socialLinkPreviewImage.asset->url,
+    "socialLinkPreviewImageMetadata": socialLinkPreviewImage.asset->metadata {
+      dimensions {
+        width,
+        height
+      }
+    }
   }
 `;
 

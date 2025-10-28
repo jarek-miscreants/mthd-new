@@ -13,6 +13,10 @@ export const siteSettings = defineType({
       name: 'footerNavigation',
       title: 'Footer Navigation',
     },
+    {
+      name: 'socialMedia',
+      title: 'Social Media',
+    },
   ],
   fields: [
     // Header Navigation
@@ -181,6 +185,39 @@ export const siteSettings = defineType({
       type: 'array',
       of: [{type: 'card'}],
       group: 'headerNavigation',
+    }),
+
+    // Social Media
+    defineField({
+      name: 'socialLinkPreviewImage',
+      title: 'Social Link Preview Image',
+      description: 'Image displayed when sharing links on social media',
+      type: 'image',
+      group: 'socialMedia',
+    }),
+
+    defineField({
+      name: 'socialLinkPreviewTitle',
+      title: 'Social Link Preview Title',
+      description: 'Title displayed when sharing links on social media',
+      type: 'string',
+      group: 'socialMedia',
+    }),
+
+    defineField({
+      name: 'socialLinkPreviewDescription',
+      title: 'Social Link Preview Description',
+      description: 'Description displayed when sharing links on social media',
+      type: 'text',
+      group: 'socialMedia',
+    }),
+
+    defineField({
+      name: 'socialLinkPreviewUrl',
+      title: 'Social Link Preview URL',
+      description: 'URL displayed when sharing links on social media',
+      type: 'url',
+      group: 'socialMedia',
     }),
   ],
 
