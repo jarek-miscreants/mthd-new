@@ -1,0 +1,92 @@
+# Method Security
+
+Method Security is dedicated to enhancing cyber resilience for critical institutions through innovative autonomous cyber systems. With a mission to protect vital assets against evolving threats, the platform combines offensive and defensive strategies to equip security teams with comprehensive visibility and control over their environments. Catering to diverse clients, including the Department of Defense and Fortune 500 companies, Method prioritizes safety, trust, and performance in its offerings.
+
+## About Us
+
+The About page outlines the company's mission to deliver cyber resilience to America's critical institutions amidst rising cyber threats. Method Security emphasizes the need for a new approach that integrates offensive capabilities into traditional defense mechanisms. 
+
+- **Main Focus:**
+  - Deliver cyber resilience to institutions facing advanced threats.
+  - Build systems that blend offense and defense.
+  - Create a digital twin for operational clarity and precision in security measures.
+  - Support clients across various sectors, including government and private organizations.
+
+### Links
+- [Careers](careers)
+- [Products](products)
+
+## Blog
+
+The blog features various posts covering company news, product updates, and engineering insights. It serves as a platform for sharing knowledge and engaging with the community.
+
+- **Recent Posts:**
+  - "Intro to Method" - An overview of Method's approach to cyber resilience.
+  - "A second blog with an image" - Insights into engineering aspects.
+
+### Links
+- [Subscribe on Substack](https://methodsecurity.substack.com/)
+
+## Careers
+
+The Careers page invites prospective employees to contribute to an impactful mission at the frontier of security and AI. Method Security values high expectations, autonomy, and trust, fostering an environment where team members can thrive.
+
+- **Core Values:**
+  - Focus on mission-driven work.
+  - Autonomy in project execution.
+  - Commitment to transparency and integrity.
+
+- **Benefits:**
+  - Competitive compensation.
+  - Comprehensive healthcare coverage.
+  - Opportunities for growth in a collaborative environment.
+
+### Links
+- [View Open Positions](https://jobs.ashbyhq.com/method.security)
+
+## Products
+
+Method Security offers two primary products: **Bastion** and **Reaper**. Both products are designed to meet the robust needs of security teams.
+
+### Bastion
+Bastion provides digital-twin driven exposure management, enabling organizations to map, validate, and control their resources and possible attack paths.
+
+- **Use Cases:**
+  - Holistic exposure management.
+  - Attack path simulation.
+  - Autonomous penetration testing.
+
+### Reaper
+Reaper focuses on software-defined offensive operations, facilitating the planning and execution of red team operations.
+
+- **Use Cases:**
+  - Scalable red team operations.
+  - Adversary emulation for training.
+  - Atomic detection validation.
+
+### Links
+- [Request a Demo](mailto:sales@method.security)
+
+## Contact
+
+The Contact page encourages users to reach out for demo requests, product inquiries, or general information. It includes options for reporting vulnerabilities or providing feedback.
+
+- **Sections:**
+  - Request a demo.
+  - Ask product questions.
+  - Report vulnerabilities.
+  - General inquiries.
+
+## Legal
+
+The Legal section covers the Privacy Policy and Terms & Conditions, providing transparency regarding data handling practices and user rights.
+
+### Privacy Policy
+Details on the collection and usage of personal information.
+
+### Terms & Conditions
+General legal terms governing the use of Method Security's services and website.
+
+### Links
+- [Privacy Policy](legal/privacy-policy)
+- [Terms & Conditions](legal/terms-and-conditions)

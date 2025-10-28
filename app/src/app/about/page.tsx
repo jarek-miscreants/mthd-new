@@ -4,6 +4,26 @@ import PortableTextRenderer from "@/components/elements/PortableTextRenderer";
 import Spacer from "@/components/util/Spacer";
 import styles from "./page.module.css";
 import CardSection from "@/components/sections/CardSection";
+import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    const data = await client.fetch<{
+        seo?: {
+            title?: string;
+            description?: string;
+            ogTitle?: string;
+            ogDescription?: string;
+            ogImage?: { url?: string } | null;
+        } | null;
+    }>(aboutPageQuery);
+
+    return mapSeoToMetadata(data?.seo, {
+        defaultOg: "",
+        robots: { index: true, follow: true },
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/about`,
+    });
+}
 
 interface BlogPost {
     title: string;

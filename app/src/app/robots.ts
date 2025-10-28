@@ -1,15 +1,15 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  //const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   return {
     rules: [
       {
         userAgent: "*",
-        disallow: "/", //CHANGE TO "allow" when going live
+        allow: "/",
       },
     ],
-    //sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

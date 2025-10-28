@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return mapSeoToMetadata(data?.seo, {
     defaultOg: "",
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true },
     canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/products`,
   });
 }

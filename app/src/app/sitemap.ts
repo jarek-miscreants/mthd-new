@@ -21,6 +21,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/contact`,
     },
+    {
+      url: `${baseUrl}/careers`,
+    },
+    {
+      url: `${baseUrl}/blog`,
+    },
+    {
+      url: `${baseUrl}/about`,
+    },
   ];
 
   // Dynamic product pages
@@ -33,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  // Dynamic product pages
+  // Dynamic legal pages
   const legalPages: MetadataRoute.Sitemap = legals.map((legal) => ({
     url: `${baseUrl}/legal/${legal.slug}`,
   }));
