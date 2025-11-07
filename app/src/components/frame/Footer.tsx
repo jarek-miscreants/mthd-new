@@ -1,7 +1,6 @@
 import { useId } from "react";
 import styles from "./Footer.module.css";
 import Link from "next/link";
-import Wordmark from "../brand/Wordmark";
 import Spacer from "../util/Spacer";
 import FooterInteraction from "./FooterInteraction";
 
@@ -133,8 +132,8 @@ export default function Footer({
           </div>
 
           <div className="text-small uppercase font-secondary tracking-[0.15em]">{`©${getCurrentYear()} ${copyrightTag}`}</div>
+          <Spacer size="small" />
         </div>
-        <Wordmark className="text-theme-bg mt-4 t:mt-[16.5em] pb-small t:pb-[var(--site--margin)] px-[var(--site--margin)]" />
       </footer>
       <FooterInteraction componentId={uniqueId} />
     </>
