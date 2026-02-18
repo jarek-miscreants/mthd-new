@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, ClockFading } from "lucide-react";
-import PortableTextRenderer from "@/components/elements/PortableTextRenderer";
 import styles from "./BlogPost.module.css";
 import Spacer from "../util/Spacer";
 
@@ -29,8 +28,7 @@ interface BlogPostProps {
         featuredImageUrl?: string;
         featuredImageAlt?: string;
         estimatedReadingTime?: number;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        body: any[];
+        contentHtml: string;
     };
 }
 
@@ -120,10 +118,10 @@ export default function BlogPost({ post }: BlogPostProps) {
                 </header>
 
                 {/* Content */}
-                <div className={styles.prose}>
-                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                    <PortableTextRenderer value={post.body as any} />
-                </div>
+                <div
+                    className={styles.prose}
+                    dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+                />
 
                 {/* Back to Blog Button */}
                 <div className="flex justify-center mt-large">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client } from "@/lib/sanity";
-import { blogPostQuery, allBlogPostSlugsQuery } from "@/lib/queries";
+import { getContentWithBody, getContent, getCollectionSlugs, getReadingTime } from "@/lib/content";
+import type { BlogPostData, AuthorData } from "@/lib/content-types";
 import BlogPost from "@/components/sections/BlogPost";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 
@@ -10,29 +10,21 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-    const slugs = await client.fetch<{ slug: string }[]>(allBlogPostSlugsQuery);
-    return slugs.map(({ slug }) => ({ slug }));
+    const slugs = getCollectionSlugs("blog");
+    return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
     const { slug } = await params;
-    const post = await client.fetch<{
-        title?: string;
-        excerpt?: string;
-        seo?: {
-            title?: string;
-            description?: string;
-            ogTitle?: string;
-            ogDescription?: string;
-            ogImage?: { url?: string } | null;
-        } | null;
-    }>(blogPostQuery, { slug });
 
-    if (!post) {
-        return {
-            title: "Post Not Found",
-        };
+    let result: { frontmatter: BlogPostData; contentHtml: string };
+    try {
+        result = await getContentWithBody<BlogPostData>(`blog/${slug}`);
+    } catch {
+        return { title: "Post Not Found" };
     }
+
+    const post = result.frontmatter;
 
     // Merge post data with seo data
     const seoWithDefaults = {
@@ -50,46 +42,52 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     });
 }
 
-interface SanityBlogPost {
-    title: string;
-    slug: string;
-    excerpt: string;
-    author: {
-        name: string;
-        slug: string;
-        bio?: string;
-        role?: string;
-        company?: string;
-        avatarUrl?: string;
-        socialLinks?: {
-            twitter?: string;
-            linkedin?: string;
-            github?: string;
-            website?: string;
-        };
-    };
-    publishedAt: string;
-    category: string;
-    featuredImageUrl?: string;
-    featuredImageAlt?: string;
-    estimatedReadingTime?: number;
-    body: unknown[];
-    seo?: {
-        title?: string;
-        description?: string;
-        ogTitle?: string;
-        ogDescription?: string;
-        ogImage?: { url?: string } | null;
-    } | null;
-}
-
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
     const { slug } = await params;
-    const post = await client.fetch<SanityBlogPost>(blogPostQuery, { slug });
 
-    if (!post) {
+    let result: { frontmatter: BlogPostData; contentHtml: string };
+    try {
+        result = await getContentWithBody<BlogPostData>(`blog/${slug}`);
+    } catch {
         notFound();
     }
 
-    return <BlogPost post={post} />;
+    const post = result.frontmatter;
+
+    // Resolve author
+    let author: AuthorData;
+    try {
+        author = await getContent<AuthorData>(`authors/${post.author}`);
+        author.slug = post.author;
+    } catch {
+        author = { name: post.author, slug: post.author };
+    }
+
+    // Get reading time
+    const estimatedReadingTime = getReadingTime(`blog/${slug}`);
+
+    return (
+        <BlogPost
+            post={{
+                title: post.title,
+                slug,
+                excerpt: post.excerpt,
+                author: {
+                    name: author.name,
+                    slug: author.slug || post.author,
+                    bio: author.bio,
+                    role: author.role,
+                    company: author.company,
+                    avatarUrl: author.avatarUrl,
+                    socialLinks: author.socialLinks,
+                },
+                publishedAt: post.publishedAt,
+                category: post.category,
+                featuredImageUrl: post.featuredImageUrl,
+                featuredImageAlt: post.featuredImageAlt,
+                estimatedReadingTime,
+                contentHtml: result.contentHtml,
+            }}
+        />
+    );
 }

@@ -1,14 +1,12 @@
 import { MetadataRoute } from "next";
-import { client } from "@/lib/sanity";
-import { allProductSlugsQuery, allLegalSlugsQuery } from "@/lib/queries";
-
-export const revalidate = 60;
+import { getCollectionSlugs } from "@/lib/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL!;
 
-  const products = await client.fetch<{ slug: string }[]>(allProductSlugsQuery);
-  const legals = await client.fetch<{ slug: string }[]>(allLegalSlugsQuery);
+  const productSlugs = getCollectionSlugs("products");
+  const legalSlugs = getCollectionSlugs("legal");
+  const blogSlugs = getCollectionSlugs("blog");
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -37,15 +35,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/products`,
     },
-    ...products.map((product) => ({
-      url: `${baseUrl}/products/${product.slug}`,
+    ...productSlugs.map((slug) => ({
+      url: `${baseUrl}/products/${slug}`,
     })),
   ];
 
   // Dynamic legal pages
-  const legalPages: MetadataRoute.Sitemap = legals.map((legal) => ({
-    url: `${baseUrl}/legal/${legal.slug}`,
+  const legalPages: MetadataRoute.Sitemap = legalSlugs.map((slug) => ({
+    url: `${baseUrl}/legal/${slug}`,
   }));
 
-  return [...staticPages, ...productPages, ...legalPages];
+  // Dynamic blog pages
+  const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+    url: `${baseUrl}/blog/${slug}`,
+  }));
+
+  return [...staticPages, ...productPages, ...legalPages, ...blogPages];
 }

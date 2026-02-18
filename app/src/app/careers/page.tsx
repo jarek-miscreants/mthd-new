@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import { client } from "@/lib/sanity";
-import { careersPageQuery } from "@/lib/queries";
+import { getContent } from "@/lib/content";
+import type { CareersPageData } from "@/lib/content-types";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 import Careers from "@/components/sections/Careers";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const data = await client.fetch<{
-        seo?: {
-            title?: string;
-            description?: string;
-            ogTitle?: string;
-            ogDescription?: string;
-            ogImage?: { url?: string } | null;
-        } | null;
-    }>(careersPageQuery);
+    const data = await getContent<CareersPageData>("pages/careers");
 
     return mapSeoToMetadata(data?.seo, {
         defaultOg: "",
@@ -23,39 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CareersPage() {
-    const data = await client.fetch<{
-        eyebrow?: string;
-        text?: string;
-        careersPageUrl?: string;
-        section1Eyebrow?: string;
-        section1Items?: Array<{
-            title: string;
-            description: string;
-        }>;
-        section2Eyebrow?: string;
-        section2Items?: Array<{
-            title: string;
-            description: string;
-        }>;
-        mainImage?: {
-            src: string;
-            alt: string;
-            aspectRatio?: number | null;
-            cutAngle?: number | null;
-        };
-        secondaryImages?: Array<{
-            src: string;
-            alt: string;
-            aspectRatio?: number | null;
-            cutAngle?: number | null;
-        }>;
-        cards?: Array<{
-            eyebrow: string;
-            title: string;
-            href: string;
-            target?: "_self" | "_blank";
-        }>;
-    } | null>(careersPageQuery);
+    const data = await getContent<CareersPageData>("pages/careers");
 
     return (
         <Careers

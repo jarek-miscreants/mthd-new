@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { client } from "@/lib/sanity";
-import { companyOverviewQuery } from "@/lib/queries";
+import { getContent } from "@/lib/content";
+import type { CompanyPageData } from "@/lib/content-types";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 import CompanyOverview from "@/components/sections/CompanyOverview";
 import Spacer from "@/components/util/Spacer";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const data = await client.fetch<{
-        seo?: {
-            title?: string;
-            description?: string;
-            ogTitle?: string;
-            ogDescription?: string;
-            ogImage?: { url?: string } | null;
-        } | null;
-    }>(companyOverviewQuery);
+    const data = await getContent<CompanyPageData>("pages/company");
 
     return mapSeoToMetadata(data?.seo, {
         defaultOg: "",
@@ -23,20 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
     });
 }
 
-interface CompanyNavItem {
-    label: string;
-    href: string;
-    target?: "_self" | "_blank";
-}
-
 export default async function Company() {
-    const [navData] = await Promise.all([
-        client.fetch<{
-            companyItems?: CompanyNavItem[];
-        } | null>(companyOverviewQuery),
-    ]);
+    const data = await getContent<CompanyPageData>("pages/company");
 
-    const items = navData?.companyItems || [];
+    const items = data?.companyItems || [];
 
     return (
         <>

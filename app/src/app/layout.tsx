@@ -6,9 +6,12 @@ import Footer from "@/components/frame/Footer";
 import Lenis from "@/components/util/Lenis";
 import ThemeHandler from "@/components/util/ThemeHandler";
 import GlobalEyebrowInteraction from "@/components/elements/EyebrowInteraction";
+import type { Metadata } from "next";
 import { getNavigationData } from "@/lib/navigation";
 
-export const revalidate = 60;
+export const metadata: Metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://method.security"),
+};
 
 const untitledSans = localFont({
     variable: "--font-untitled-sans",

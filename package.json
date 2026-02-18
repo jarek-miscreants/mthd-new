@@ -2,22 +2,15 @@
   "name": "method-security",
   "private": true,
   "workspaces": [
-    "app",
-    "studio"
+    "app"
   ],
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "dev": "npm-run-all -p dev:app dev:studio",
-    "dev:app": "npm --workspace app run dev",
-    "dev:studio": "npm --workspace studio run dev",
-    "build": "npm-run-all build:app",
-    "build:app": "npm --workspace app run build",
-    "build:studio": "npm --workspace studio run build",
-    "deploy:studio": "npm --workspace studio run deploy",
-    "lint": "npm-run-all lint:app",
-    "lint:app": "npm --workspace app run lint",
+    "dev": "npm --workspace app run dev",
+    "build": "npm --workspace app run build",
+    "lint": "npm --workspace app run lint",
     "start": "npm --workspace app run start"
   },
   "devDependencies": {

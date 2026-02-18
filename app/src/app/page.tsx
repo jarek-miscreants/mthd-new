@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { client } from "@/lib/sanity";
-import { homePageQuery, allProductsQuery } from "@/lib/queries";
+import { getContent, getCollection } from "@/lib/content";
+import type { HomePageData, ProductData } from "@/lib/content-types";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 import Architecture from "@/components/sections/Architecture";
 import DeploySection from "@/components/sections/Deploy";
@@ -11,15 +11,7 @@ import ProductHighlightSection from "@/components/sections/ProductsHighlightSect
 import type { ProductHighlightProps } from "@/components/sections/ProductHighlight";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch<{
-    seo?: {
-      title?: string;
-      description?: string;
-      ogTitle?: string;
-      ogDescription?: string;
-      ogImage?: { url?: string } | null;
-    } | null;
-  }>(homePageQuery);
+  const data = await getContent<HomePageData>("pages/home");
 
   return mapSeoToMetadata(data?.seo, {
     defaultOg: "",
@@ -28,34 +20,27 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-interface SanityProduct {
-  name: string;
-  slug: string;
-  productSymbolUrl?: string;
-  highlight?: {
-    eyebrow?: string;
-    title?: string;
-    leadParagraph?: string;
-    showcaseSrc?: string;
-  };
-}
-
 export default async function Home() {
-  const [homeData, products] = await Promise.all([
-    client.fetch(homePageQuery),
-    client.fetch<SanityProduct[]>(allProductsQuery),
+  const [homeData, productEntries] = await Promise.all([
+    getContent<HomePageData>("pages/home"),
+    getCollection<ProductData>("products"),
   ]);
 
-  const productHighlightItems: ProductHighlightProps[] = products.map(
-    (product: SanityProduct) => ({
-      eyebrow: product.highlight?.eyebrow || product.name,
-      productSymbol: product.productSymbolUrl || "",
-      title: product.highlight?.title || "",
-      href: product.slug || "",
-      leadParagraph: product.highlight?.leadParagraph || "",
-      showcaseSrc: product.highlight?.showcaseSrc || "",
-    })
+  // Sort by sortOrder and build highlight items
+  const sortedProducts = productEntries.sort(
+    (a, b) => (a.frontmatter.sortOrder ?? 99) - (b.frontmatter.sortOrder ?? 99)
   );
+
+  const productHighlightItems: ProductHighlightProps[] = sortedProducts
+    .filter((p) => p.frontmatter.productSymbolUrl)
+    .map((p) => ({
+      eyebrow: p.frontmatter.highlight?.eyebrow || p.frontmatter.name,
+      productSymbol: p.frontmatter.productSymbolUrl || "",
+      title: p.frontmatter.highlight?.title || "",
+      href: p.slug || "",
+      leadParagraph: p.frontmatter.highlight?.leadParagraph || "",
+      showcaseSrc: p.frontmatter.highlight?.showcaseSrc || "",
+    }));
 
   return (
     <>

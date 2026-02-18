@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import { client } from "@/lib/sanity";
-import {
-  productsOverviewQuery,
-  productsOverviewPageQuery,
-} from "@/lib/queries";
+import { getContent, getCollection } from "@/lib/content";
+import type { ProductData, ProductsOverviewPageData } from "@/lib/content-types";
 import ProductsOverview from "@/components/sections/ProductsOverview";
 import CardSection from "@/components/sections/CardSection";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch<{
-    seo?: {
-      title?: string;
-      description?: string;
-      ogTitle?: string;
-      ogDescription?: string;
-      ogImage?: { url?: string } | null;
-    } | null;
-  }>(productsOverviewPageQuery);
+  const data = await getContent<ProductsOverviewPageData>("pages/products-overview");
 
   return mapSeoToMetadata(data?.seo, {
     defaultOg: "",
@@ -26,28 +15,23 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-interface SanityProduct {
-  name: string;
-  description: string;
-  highlight: {
-    leadParagraph: string;
-  };
-  slug: string;
-  productSymbolUrl?: string;
-}
-
 export default async function Products() {
-  const [products, pageData] = await Promise.all([
-    client.fetch<SanityProduct[]>(productsOverviewQuery),
-    client.fetch(productsOverviewPageQuery),
+  const [productEntries, pageData] = await Promise.all([
+    getCollection<ProductData>("products"),
+    getContent<ProductsOverviewPageData>("pages/products-overview"),
   ]);
 
-  const items = products.map((product: SanityProduct) => ({
-    productSymbol: product.productSymbolUrl || "",
-    name: product.name,
-    description: product.description,
-    leadParagraph: product.highlight?.leadParagraph,
-    href: `/products/${product.slug}`,
+  // Sort by sortOrder
+  const sortedProducts = productEntries.sort(
+    (a, b) => (a.frontmatter.sortOrder ?? 99) - (b.frontmatter.sortOrder ?? 99)
+  );
+
+  const items = sortedProducts.map((p) => ({
+    productSymbol: p.frontmatter.productSymbolUrl || "",
+    name: p.frontmatter.name,
+    description: p.frontmatter.description,
+    leadParagraph: p.frontmatter.highlight?.leadParagraph || "",
+    href: `/products/${p.slug}`,
   }));
 
   return (

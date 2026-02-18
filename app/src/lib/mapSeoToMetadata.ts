@@ -5,7 +5,7 @@ export type MinimalSeo = {
   description?: string;
   ogTitle?: string;
   ogDescription?: string;
-  ogImage?: { url?: string } | null;
+  ogImage?: string | null;
 };
 
 export type SocialDefaults = {
@@ -30,7 +30,7 @@ export function mapSeoToMetadata(
   const description = seo?.description || "";
   const socialTitle = seo?.ogTitle || title || options?.socialDefaults?.title || "";
   const socialDescription = seo?.ogDescription || description || options?.socialDefaults?.description || "";
-  const ogImageUrl = seo?.ogImage?.url || options?.defaultOg || options?.socialDefaults?.imageUrl || "";
+  const ogImageUrl = seo?.ogImage || options?.defaultOg || options?.socialDefaults?.imageUrl || "";
   const ogImageWidth = options?.socialDefaults?.imageWidth;
   const ogImageHeight = options?.socialDefaults?.imageHeight;
 

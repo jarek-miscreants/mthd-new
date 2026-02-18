@@ -1,15 +1,5 @@
-import { client } from "@/lib/sanity";
-import {
-  siteSettingsQuery,
-  allProductsQuery,
-  allLegalPagesQuery,
-} from "@/lib/queries";
-
-interface SanityProduct {
-  productSymbolUrl: string;
-  name: string;
-  slug: string;
-}
+import { getContent, getCollection } from "@/lib/content";
+import type { SiteSettingsData, ProductData, LegalPageData } from "@/lib/content-types";
 
 interface FooterNavLink {
   label: string;
@@ -17,77 +7,39 @@ interface FooterNavLink {
   target?: "_self" | "_blank";
 }
 
-interface FooterNavGroup {
-  groupLabel: string;
-  links: FooterNavLink[];
-}
-
-interface HeaderDropdownItem {
-  productSymbol?: string;
-  label: string;
-  href: string;
-  target?: "_self" | "_blank";
-  arrowIndicator?: boolean;
-}
-
-interface HeaderNavItem {
-  label: string;
-  href: string;
-  target?: "_self" | "_blank";
-  btnStyle?: boolean;
-  dropdown?: HeaderDropdownItem[];
-}
-
-interface SanitySettings {
-  headerNavItems?: HeaderNavItem[];
-  footerNavGroups?: FooterNavGroup[];
-  footerName?: string;
-  footerTagline?: string;
-  copyrightTag?: string;
-  footerCtas?: { label: string; href: string; target?: "_self" | "_blank" }[];
-  mobileMenuCards?: Array<{
-    eyebrow: string;
-    title: string;
-    href: string;
-    target?: "_self" | "_blank";
-  }>;
-}
-
-interface LegalPage {
-  title: string;
-  slug: string;
-}
-
 export async function getNavigationData() {
-  const [settings, products, legalPages] = await Promise.all([
-    client.fetch<SanitySettings>(siteSettingsQuery),
-    client.fetch<SanityProduct[]>(allProductsQuery),
-    client.fetch<LegalPage[]>(allLegalPagesQuery),
+  const [settings, productEntries, legalEntries] = await Promise.all([
+    getContent<SiteSettingsData>("settings/site"),
+    getCollection<ProductData>("products"),
+    getCollection<LegalPageData>("legal"),
   ]);
+
+  // Sort products by sortOrder
+  const sortedProducts = productEntries.sort(
+    (a, b) => (a.frontmatter.sortOrder ?? 99) - (b.frontmatter.sortOrder ?? 99)
+  );
 
   const headerNavItems = [
     {
       label: "Products",
       href: "/products",
-      dropdown: products.map((product: SanityProduct) => ({
-        productSymbol: product.productSymbolUrl,
-        label: product.name,
-        href: `/products/${product.slug}`,
+      dropdown: sortedProducts.map((p) => ({
+        productSymbol: p.frontmatter.productSymbolUrl,
+        label: p.frontmatter.name,
+        href: `/products/${p.slug}`,
       })),
     },
     ...(settings?.headerNavItems || []),
   ];
 
-  const productLinks: FooterNavLink[] = products.map(
-    (product: SanityProduct) => ({
-      label: product.name,
-      href: `/products/${product.slug}`,
-    }),
-  );
+  const productLinks: FooterNavLink[] = sortedProducts.map((p) => ({
+    label: p.frontmatter.name,
+    href: `/products/${p.slug}`,
+  }));
 
-  const legalLinks: FooterNavLink[] = legalPages.map((lp) => ({
-    label: lp.title,
-    href: `/legal/${lp.slug}`,
+  const legalLinks: FooterNavLink[] = legalEntries.map((l) => ({
+    label: l.frontmatter.title,
+    href: `/legal/${l.slug}`,
   }));
 
   return {

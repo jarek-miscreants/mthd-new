@@ -1,175 +1,233 @@
 # Method - Marketing Website
 
-Website Monorepo (Next.js app + Sanity Studio)
-
 ## Overview
 
-- This repository is a monorepo containing:
-  - /app → Next.js application (frontend)
-  - /studio → Sanity Studio (CMS)
-  - Root-level package.json manages scripts and dependencies for both.
+Next.js 15 marketing site with local MDX content. All content lives in the repo as `.mdx` files with YAML frontmatter. Content is code: editable by developers and AI agents, versioned in git, deployed statically.
+
+### Tech Stack
+
+- **Framework:** Next.js 15 (App Router), React 18, TypeScript
+- **Styling:** Tailwind CSS v4, CSS custom properties
+- **Content:** Local MDX files parsed with `gray-matter` + `remark`
+- **Animations:** GSAP (ScrollTrigger, SplitText), Lottie, Lenis smooth scroll
+- **Hosting:** Vercel
+- **Analytics:** Vercel Analytics
+
+### Repository Structure
+
+```
+/
+├── app/                        # Next.js application
+│   ├── content/                # All site content (MDX files)
+│   │   ├── pages/              # Singleton pages (home, about, contact, etc.)
+│   │   ├── products/           # Product pages (slug = filename)
+│   │   ├── blog/               # Blog posts (slug = filename, has markdown body)
+│   │   ├── legal/              # Legal pages (slug = filename, has markdown body)
+│   │   ├── authors/            # Blog authors
+│   │   └── settings/           # Site-wide settings (nav, footer, social)
+│   ├── public/                 # Static assets
+│   │   ├── content/            # Content images (blog, authors, careers, seo)
+│   │   ├── product-symbols/    # Product SVG icons
+│   │   └── product-solutions/  # Product solution videos
+│   └── src/
+│       ├── app/                # Next.js routes and pages
+│       ├── components/         # React components (sections, elements, frame, util)
+│       └── lib/                # Content loading, types, SEO, navigation
+├── scripts/                    # Migration and utility scripts
+└── package.json                # Workspace root
+```
+
+## Architecture
+
+```
+MDX File (content/)
+    ↓
+gray-matter (parse YAML frontmatter)
+    ↓
+Page component (app/src/app/**/page.tsx)
+    ↓
+Section components (props from frontmatter)
+    ↓
+Static HTML (built at deploy time)
+```
+
+Content loading is handled by `app/src/lib/content.ts`:
+
+| Function | Purpose |
+|----------|---------|
+| `getContent<T>(path)` | Read frontmatter only (singleton pages, settings) |
+| `getContentWithBody<T>(path)` | Read frontmatter + render markdown body to HTML (blog, legal) |
+| `getCollection<T>(dir)` | List all files in a directory with `{ slug, frontmatter }` |
+| `getCollectionSlugs(dir)` | Return slug array for `generateStaticParams()` |
+| `getReadingTime(path)` | Calculate reading time from markdown body |
 
 ## Developer Setup
 
-### CLI Dependencies
+### Prerequisites
 
-Install the Sanity CLI:
+- Node.js >= 22
+
+### Installation
 
 ```bash
-npm install --global sanity@latest
+npm install
 ```
 
-### Environment Variables Setup
+### Environment Variables
 
-Create a new file for the app at `app/.env.local` with the following contents:
+Create `app/.env.local`:
 
-```yaml
-NEXT_PUBLIC_SANITY_PROJECT_ID=<our project ID>
-NEXT_PUBLIC_SANITY_DATASET=development
+```
 NEXT_PUBLIC_SITE_URL=https://www.method.security
-NEXT_PUBLIC_SANITY_API_READ_TOKEN=<get from Marketing/Sanity Method-Website Project Dev Read Only Token in Bitwarden>
-SANITY_USE_CDN=false
-```
-
-Create a new file for the studio at `studio/.env.local` with the following contents:
-
-```yaml
-SANITY_STUDIO_PROJECT_ID=<our project ID>
-SANITY_STUDIO_DATASET=development
-```
-
-### Package Installation
-
-In repository root run `npm install`. This installs everything across the `app` and `sutdio` projects.
-
-### Adding A New Dependency To App
-
-```bash
-npm install -w app <your package>
 ```
 
 ### Run (Development)
 
-Open two CLIs in your IDE:
-
-1. Next.js app:
-
 ```bash
-npm run dev:app
+npm run dev
 ```
+
 URL: http://localhost:3000
-
-2. Sanity Studio:
-
-```bash
-source studio/.env.local
-npm run dev:studio
-```
-
-URL: http://localhost:3333
-
-Note: If you want to see exactly what is in production, for the two `DATASET` env vars, change that to `production`.
 
 ### Build (Production)
 
-1. Next.js app:
-
 ```bash
-npm run build:app
+npm run build
 npm run start
 ```
 
-2. Sanity Studio:
+### Adding a Dependency
 
 ```bash
-npm run build:studio
+npm install -w app <package-name>
 ```
 
-## Local Development Architecture
+## Deployment
 
-Your local instance of Next.js app is reading from Sanity Cloud. Your Local Studio UI has local schema changes that may not yet be pushed to Sanity Cloud.
+Vercel hosts the site with automatic deploys from GitHub.
 
-┌─────────────────────┐
-│  Local Studio UI    │──┐
-│  (localhost:3333)   │  │
-└─────────────────────┘  │
-                         ├──→ Sanity Cloud (development dataset)
-┌─────────────────────┐  │
-│  Local Next.js App  │──┘
-│  (localhost:3000)   │
-└─────────────────────┘
+| Branch | Environment | URL |
+|--------|-------------|-----|
+| `main` | Production | https://www.method.security |
+| `development` | Staging | Vercel preview URL |
+| Feature branches | Preview | Auto-generated Vercel preview link per PR |
 
-## Deployment and Preview Overview
+**Workflow:**
 
-GitHub Actions is doing checks while Vercel hosts permanent instances and previews.
+1. Create a feature branch from `main`
+2. Make changes (code and/or content)
+3. Open a PR — Vercel generates a preview link automatically
+4. Review the preview, get approval
+5. Merge to `staging` for team-wide review (Vercel deploys a preview)
+6. Merge to `main` to deploy to production
 
-Permanent instances:
-- The `main` branch is production, so the latest there is deployed to (https://www.method.security)[https://www.method.security]
-  - This branch is synced with the `production` dataset in Sanity
-- The `development` branch is a staging environment, so the latest there is deployed to (https://marketing-website-ten-beta-development.vercel.app/)[https://marketing-website-ten-beta-development.vercel.app/], this is configured in [Vercel](https://vercel.com/method-security/marketing-website/settings/environments/development-deploy)
-  - This branch is synced with the `development` dataset in Sanity
+## Content Authoring
 
-Every pull request opened will get a preview link that is automatically generated by the Vercel<>GitHub integration. If your pull request is into the `main` branch, Vercel preview will use the `production` Sanity dataset, if your pull request is into the `development` branch, Vercel preview will use the `development` Sanity dataset
+All content is in `app/content/` as `.mdx` files. Most pages use **frontmatter only** (structured YAML data). Blog posts and legal pages also have a **markdown body** below the frontmatter.
 
-## Workflows
+### Content Types
 
-Important note: this production & development split does not work well if there are going to be many people collaborating all at once. If we get to that point we will have to think about more workflows that involves more Sanity datasets.
+| Directory | Slug source | Body? | Description |
+|-----------|-------------|-------|-------------|
+| `pages/` | Fixed filenames | No | Singleton pages (home, about, contact, careers, etc.) |
+| `products/` | Filename | No | Product pages — filename becomes `/products/{slug}` |
+| `blog/` | Filename | Yes | Blog posts — filename becomes `/blog/{slug}` |
+| `legal/` | Filename | Yes | Legal pages — filename becomes `/legal/{slug}` |
+| `authors/` | Filename | No | Blog authors — referenced by slug from blog posts |
+| `settings/` | Fixed | No | Site-wide config (navigation, footer, social preview) |
 
-### Making Content (CMS) Edits Only
+### Adding a Blog Post
 
-For now, follow the instructions below under `Making Content (CMS) Schema Edits`. We can potentially look at Staging Releases or Previewing Drafts (which involves some code changes to switch the routes) as an improvement.
+1. Create a new file at `app/content/blog/your-post-slug.mdx`
+2. Add frontmatter and markdown body:
 
-### Making Content (CMS) Schema Edits
-
-1. Clone the production dataset into a new development dataset in Sanity
-
-If a `development` dataset already exists and you may conflict, proceed with caution. In the future, we can do more complicated dataset management.
-
-```bash
-cd studio
-sanity login
-sanity dataset export production production-backup.tar.gz
-# Only if the dataset doesn't exist
-sanity dataset create development --visibility private
-sanity dataset import production-backup.tar.gz development
-# If the dataset already exists
-sanity dataset import production-backup.tar.gz development --replace
-```
-
-2. Run the Next.js app and Sanity studio locally
-
-3. Make your code, content schema, and content edits - make sure to publish to the Sanity `development` dataset
-
-4. Make a pull request into the `development` branch
-
-5. Align on final `development` deploy content internally, [details](#deployment-and-preview-overview), make sure everything looks good, if not open new pull request into `development` branch accordingly
-
-6. Open a pull request to the `main` branch, and get it approved and deployed
-
-7. As soon as 6 is deployed, clone the `development` dataset and clone it to `production`
-  - WARNING: This will result in manual labor work each time and risk a few seconds of downtime - Future TODO - can make this more rigorous
-  
-```bash
-cd studio
-sanity login
-sanity dataset export development development-backup.tar.gz
-# In case anything goes wrong
-sanity dataset export production production-backup.tar.gz
-sanity dataset import development-backup.tar.gz production --replace
-```
-
-
+```yaml
+---
+title: Your Post Title
+excerpt: A short summary for the blog listing page.
+author: sam-jones           # Must match a filename in content/authors/
+publishedAt: "2026-02-16T12:00:00.000Z"
+category: Engineering       # One of: Company, Product, Engineering, Customers, News
+featuredImageUrl: /content/blog/your-post-slug/hero.png
+featuredImageAlt: Description of the image
+seo:
+  title: Your Post Title | Method Security
+  description: SEO description for search results
+  ogImage: /content/seo/your-og-image.png
 ---
 
-### SEO taks before going live
+Your markdown content goes here.
 
-- Ensure index/follow are true in `mapSeoToMetadata()`
-- Change `robots.ts` to allow crawlers (+ uncomment sitemap)
+## Subheadings work
 
-## Open points
+So do **bold**, *italic*, [links](https://example.com), lists, and images:
 
-    - Final animation/video files (provide sources and exported formats)
-        - MP4/WebM/Lottie
-    - Stylistic & Interaction refinements
-    - Provide video urls via CDN to keep away from builds
+![Alt text](/content/blog/your-post-slug/inline-image.png)
+```
 
+3. Add images to `app/public/content/blog/your-post-slug/`
+4. Commit and push — the post will appear on the blog page
+
+### Adding a Product
+
+1. Create `app/content/products/your-product.mdx` with the product frontmatter
+2. Add the product symbol SVG to `app/public/product-symbols/your-product.svg`
+3. The product automatically appears in navigation dropdowns, the products overview page, and the homepage highlights
+
+### Adding an Author
+
+Create `app/content/authors/author-slug.mdx`:
+
+```yaml
+---
+name: Full Name
+role: Title
+company: Method Security
+avatarUrl: /content/authors/avatar.jpg
+bio: Short bio text.
+socialLinks:
+  twitter: https://twitter.com/handle
+  linkedin: https://linkedin.com/in/handle
+---
+```
+
+### Editing Site Navigation & Footer
+
+Edit `app/content/settings/site.mdx`. This controls:
+
+- Header navigation items and dropdowns
+- Footer link groups, CTAs, and tagline
+- Mobile menu cards
+- Social link preview metadata (OG defaults)
+
+Product links in the nav dropdown and footer are auto-generated from product files.
+
+The `target` field on links controls how the link opens:
+
+- `_self` (default) — opens in the same tab (use for internal pages)
+- `_blank` — opens in a new tab (use for external URLs like docs, social media, mailto links)
+
+### Editing Singleton Pages
+
+Edit the corresponding file in `app/content/pages/`. For example:
+
+- Home page: `app/content/pages/home.mdx`
+- About page: `app/content/pages/about.mdx`
+- Contact page: `app/content/pages/contact.mdx`
+
+The frontmatter fields map directly to component props. Look at the corresponding `page.tsx` to see which fields are used.
+
+### SEO
+
+Every content file can include an `seo` block in its frontmatter:
+
+```yaml
+seo:
+  title: Page Title
+  description: Meta description for search engines
+  ogTitle: Open Graph title (defaults to seo.title)
+  ogDescription: Open Graph description (defaults to seo.description)
+  ogImage: /content/seo/og-image.png
+```
+
+OG images should be placed in `app/public/content/seo/` at 1200x628px.

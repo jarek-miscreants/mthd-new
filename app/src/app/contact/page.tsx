@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import { client } from "@/lib/sanity";
-import { contactPageQuery } from "@/lib/queries";
+import { getContent } from "@/lib/content";
+import type { ContactPageData } from "@/lib/content-types";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 import CardSection from "@/components/sections/CardSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch<{
-    seo?: {
-      title?: string;
-      description?: string;
-      ogTitle?: string;
-      ogDescription?: string;
-      ogImage?: { url?: string } | null;
-    } | null;
-  }>(contactPageQuery);
+  const data = await getContent<ContactPageData>("pages/contact");
 
   return mapSeoToMetadata(data?.seo, {
     defaultOg: "",
@@ -23,16 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Contact() {
-  const data = await client.fetch<{
-    eyebrow?: string;
-    text?: string;
-    cards?: Array<{
-      eyebrow: string;
-      title: string;
-      href: string;
-      target?: "_self" | "_blank";
-    }>;
-  } | null>(contactPageQuery);
+  const data = await getContent<ContactPageData>("pages/contact");
 
   return (
     <>
