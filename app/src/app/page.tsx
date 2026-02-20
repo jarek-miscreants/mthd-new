@@ -6,6 +6,7 @@ import Architecture from "@/components/sections/Architecture";
 import DeploySection from "@/components/sections/Deploy";
 import HomeHero from "@/components/sections/HomeHero";
 import Mission from "@/components/sections/Mission";
+import Partners from "@/components/sections/Partners";
 import CardSection from "@/components/sections/CardSection";
 import ProductHighlightSection from "@/components/sections/ProductsHighlightSection";
 import type { ProductHighlightProps } from "@/components/sections/ProductHighlight";
@@ -53,6 +54,11 @@ export default async function Home() {
         eyebrow={homeData?.mission?.eyebrow}
         title={homeData?.mission?.title || ""}
         leadParagraph={homeData?.mission?.leadParagraph || ""}
+      />
+
+      <Partners
+        eyebrow={homeData?.partners?.eyebrow}
+        logos={homeData?.partners?.logos || []}
       />
 
       {productHighlightItems.length > 0 && (

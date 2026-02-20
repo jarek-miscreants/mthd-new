@@ -35,4 +35,6 @@ jobs:
                       ${{ runner.os }}-nextjs-app-
 
             - name: 🏗️ Build Next.js App
+              env:
+                  NEXT_PUBLIC_SITE_URL: https://www.method.security
               run: npm --workspace app run build

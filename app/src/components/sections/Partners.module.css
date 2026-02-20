@@ -1,0 +1,13 @@
+.item_1 {
+  --height: 0%;
+}
+.item_1::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: var(--site--margin);
+  width: 0.0625rem;
+  height: var(--height);
+  background-color: var(--swatch--dark);
+}

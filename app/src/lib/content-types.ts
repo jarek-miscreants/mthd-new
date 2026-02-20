@@ -27,6 +27,13 @@ export interface HomePageData {
     title?: string;
     leadParagraph?: string;
   };
+  partners?: {
+    eyebrow?: string;
+    logos?: Array<{
+      src: string;
+      alt: string;
+    }>;
+  };
   architecture?: {
     eyebrow?: string;
     title?: string;
