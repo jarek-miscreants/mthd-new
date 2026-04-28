@@ -106,14 +106,6 @@ export interface ProductsOverviewPageData {
   seo?: SeoData;
 }
 
-// About Page
-export interface AboutPageData {
-  title?: string;
-  highlightTexts?: Array<{ eyebrow: string; text: string }>;
-  cards?: CardData[];
-  seo?: SeoData;
-}
-
 // Contact Page
 export interface ContactPageData {
   title?: string;
@@ -195,7 +187,7 @@ export interface BlogPostWithAuthor {
   estimatedReadingTime?: number;
 }
 
-// Blog Page settings
+// Blog Page settings (also the basis for `MissionPageData` frontmatter)
 export interface BlogPageData {
   title?: string;
   description?: string;
@@ -203,6 +195,11 @@ export interface BlogPageData {
   subscribeButtonText?: string;
   subscribeButtonLink?: string;
   seo?: SeoData;
+}
+
+/** Mission page: blog-style MDX frontmatter plus optional bottom cards */
+export interface MissionPageData extends BlogPageData {
+  cards?: CardData[];
 }
 
 // Legal Page

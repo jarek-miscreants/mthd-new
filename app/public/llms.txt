@@ -1,18 +1,15 @@
 # Method Security
 
-Method Security is dedicated to enhancing cyber resilience for critical institutions through innovative autonomous cyber systems. With a mission to protect vital assets against evolving threats, the platform combines offensive and defensive strategies to equip security teams with comprehensive visibility and control over their environments. Catering to diverse clients, including the Department of Defense and Fortune 500 companies, Method prioritizes safety, trust, and performance in its offerings.
+Method Security is dedicated to enhancing cyber resilience for America's critical institutions through autonomous cyber systems. As AI accelerates offensive capabilities, Method fuses offensive and defensive tooling into a full-spectrum platform so security teams gain visibility, can challenge their estates, and defeat adversaries, with safety, trust, and performance suited to no-fail environments. The company supports the Department of Defense, US Federal Government, and Fortune 500 customers.
 
-## About Us
+## Mission
 
-The About page outlines the company's mission to deliver cyber resilience to America's critical institutions amidst rising cyber threats. Method Security emphasizes the need for a new approach that integrates offensive capabilities into traditional defense mechanisms. 
+The [Mission](mission) page states the company's goal: **deliver cyber resilience to America's critical institutions.** It describes how machine-speed attacks and AI-scale offense leave essential institutions needing true resilience, not more fragmented point solutions or compliance theater. Method argues the industry must move beyond the "Cyber Industrial Complex" toward systems that blend offense, defense, software, and autonomy.
 
-- **Main Focus:**
-  - Deliver cyber resilience to institutions facing advanced threats.
-  - Build systems that blend offense and defense.
-  - Create a digital twin for operational clarity and precision in security measures.
-  - Support clients across various sectors, including government and private organizations.
+**Method builds autonomous cyber systems for America's top security teams.** The narrative covers: fusing data into a **digital twin** for resources, configurations, and exposures; using that foundation for **autonomous attacks** with precision and trust; operating across **cloud, on-premise, and internet-denied** networks; and **dual-use** design serving public and private sectors alike.
 
 ### Links
+- [Mission](mission)
 - [Careers](careers)
 - [Products](products)
 
