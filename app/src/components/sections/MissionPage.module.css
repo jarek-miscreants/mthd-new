@@ -1,0 +1,33 @@
+.container {
+  max-width: 800px;
+}
+
+.title {
+  font-size: var(--font-size--h4);
+  margin: 0;
+}
+
+.prose {
+  color: var(--theme-text);
+  line-height: 1.7;
+}
+
+.prose p {
+  margin-bottom: 1.25em;
+  /* Halfway between text-main (1.125em) and text-large (1.5em) */
+  font-size: 1.3125em;
+}
+
+.prose strong {
+  font-weight: var(--font--primary-medium);
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: var(--font-size--h3);
+  }
+
+  .prose p {
+    font-size: var(--font-size--text-main);
+  }
+}
