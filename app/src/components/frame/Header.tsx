@@ -98,9 +98,9 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
                 data-dropdown-index={index}
                 className={`${styles.headerDropdown} t:block hidden bg-theme-bg-secondary mx-[calc(var(--site--margin)*-1)] px-[var(--site--margin)]`}
               >
-                <ul className="flex py-xxs">
+                <ul className="flex py-xxs justify-end">
                   {navItem.dropdown.map((dropdownItem, dropdownIndex) => (
-                    <li key={dropdownIndex} className="flex-1">
+                    <li key={dropdownIndex} className="w-[250px]">
                       <Link
                         href={dropdownItem.href}
                         target={dropdownItem.target}
