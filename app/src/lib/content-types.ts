@@ -130,12 +130,12 @@ export interface CareersPageData {
     title: string;
     description: string;
   }>;
-  mainImage?: {
+  mainImages?: Array<{
     src: string;
     alt: string;
     aspectRatio?: number | null;
     cutAngle?: number | null;
-  };
+  }>;
   secondaryImages?: Array<{
     src: string;
     alt: string;

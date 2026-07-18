@@ -26,7 +26,7 @@ export default async function CareersPage() {
             section1Items={data?.section1Items}
             section2Eyebrow={data?.section2Eyebrow}
             section2Items={data?.section2Items}
-            mainImage={data?.mainImage}
+            mainImages={data?.mainImages}
             secondaryImages={data?.secondaryImages}
         />
     );
