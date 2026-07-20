@@ -152,7 +152,7 @@ export default function Careers({
                   <div className="flex flex-col gap-small">
                     {pairedItems.map((item, index) => (
                       <div key={index} className="flex flex-col gap-xxs">
-                        <h3 className="u-text-style-h3 max-w-[20ch]">{item.title}</h3>
+                        <h3 className="u-text-style-h3 max-w-[20ch] whitespace-pre-line">{item.title}</h3>
                         <p className="text-main max-w-[36ch]">{item.description}</p>
                       </div>
                     ))}
