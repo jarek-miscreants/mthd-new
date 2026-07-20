@@ -97,6 +97,123 @@ export interface ProductData {
   };
   cards?: CardData[];
   seo?: SeoData;
+  /** Bespoke /products/reaper page copy (see ReaperPageData). */
+  reaperPage?: ReaperPageData;
+  /** Bespoke /products/bastion page copy (see BastionPageData). */
+  bastionPage?: BastionPageData;
+}
+
+/**
+ * All editorial copy for the bespoke /products/reaper page, sourced from the
+ * `reaperPage:` block in content/products/reaper.mdx. Written there in page
+ * order as the single source of truth the client edits; section components
+ * receive their slice as props.
+ *
+ * NOTE (by-index coupling): the `howItWorks.tabs[].secondary` lists (agent
+ * types / rules / hosts) are rendered as tab labels AND consumed *by index* by
+ * the in-code SVG vizzes (ReaperAgentsViz / ReaperRulesViz / ReaperScaleViz).
+ * The viz arrays stay in code — keep the YAML order in sync with them.
+ * Text rendered inside the SVGs is intentionally NOT in here.
+ */
+export interface ReaperPageData {
+  hero?: {
+    title?: string;
+    tagline?: string;
+    tabs?: { label?: string; video?: string; poster?: string }[];
+  };
+  intro?: {
+    paragraph?: string;
+  };
+  howItWorks?: {
+    heading?: string;
+    body?: string;
+    tabs?: Array<{
+      n: string;
+      title: string;
+      desc: string;
+      secondaryEyebrow: string;
+      secondary: string[];
+    }>;
+  };
+  toolkit?: {
+    heading?: string;
+    body?: string | string[];
+    tabs?: Array<{
+      label: string;
+      items: Array<{ title: string; desc: string }>;
+    }>;
+  };
+  useCases?: {
+    heading?: string;
+    intro?: string;
+    items?: Array<{ title: string; desc: string }>;
+  };
+  byot?: {
+    heading?: string;
+    body?: string;
+    items?: Array<{ title: string; desc: string; comingSoon?: boolean }>;
+  };
+  frontier?: {
+    heading?: string;
+    body?: string;
+    buttonLabel?: string;
+    layers?: Array<{ title: string; meta: string }>;
+  };
+  cta?: {
+    title?: string;
+    tagline?: string;
+    onboarding?: string;
+    buttons?: Array<{ label: string; href: string }>;
+  };
+}
+
+/**
+ * All editorial copy for the bespoke /products/bastion page, sourced from the
+ * `bastionPage:` block in content/products/bastion.mdx. Same pattern as
+ * ReaperPageData: written there in page order as the single source of truth
+ * the client edits; each section component receives its slice as props. Text
+ * rendered INSIDE the canvas vizzes / SVG animations is NOT here — it lives in
+ * code (e.g. BastionServeViz DEFENSE/OFFENSE badges, BastionScaleViz labels).
+ */
+export interface BastionPageData {
+  hero?: {
+    title?: string;
+    tagline?: string;
+    tabs?: { label?: string; video?: string; poster?: string }[];
+  };
+  intro?: {
+    paragraph?: string;
+  };
+  scale?: {
+    heading?: string;
+    body?: string;
+    columns?: Array<{ title: string; desc: string }>;
+  };
+  inventory?: {
+    heading?: string;
+    body?: string;
+    columns?: Array<{ title: string; desc: string }>;
+  };
+  challenge?: {
+    heading?: string;
+    body?: string;
+    features?: Array<{ title: string; desc: string; image?: string }>;
+  };
+  reaper?: {
+    eyebrow?: string;
+    text?: string;
+  };
+  serve?: {
+    heading?: string;
+    body?: string;
+    rows?: Array<{ title: string; desc: string }>;
+  };
+  cta?: {
+    title?: string;
+    tagline?: string;
+    onboarding?: string;
+    buttons?: Array<{ label: string; href: string }>;
+  };
 }
 
 // Products Overview Page

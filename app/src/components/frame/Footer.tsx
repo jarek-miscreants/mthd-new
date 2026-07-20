@@ -46,6 +46,7 @@ export default function Footer({
     <>
       <footer
         data-footer={uniqueId}
+        data-theme="light"
         className="footer_wrap bg-theme-bg-secondary text-theme-text"
       >
         <Spacer size="small" />

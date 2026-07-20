@@ -1,5 +1,5 @@
 ---
-cards: 
+cards:
   - eyebrow: Careers
     href: /careers
     target: _self
@@ -8,30 +8,175 @@ cards:
     href: /blog
     target: _self
     title: Company updates
-cta: 
+cta:
   ctaButtonText: Request Demo
   ctaLink: "mailto:sales@method.security"
   ctaTitle: Get started with a demo
 description: Software-defined offensive operations
-hero: 
+hero:
   videoSrc: /reaper_hero.mp4
   videoSrcMobile: /reaper_hero_mobile.mp4
-highlight: 
+highlight:
   eyebrow: Reaper
   leadParagraph: Plan and execute red team operations and adversary emulation exercises on top of robust autonomy and software defined C2 infrastructure.
   showcaseSrc: /Reaper-Loop.mp4
   title: Software-defined  offensive operations
 name: Reaper
 productSymbolUrl: /product-symbols/reaper.svg
-seo: 
-  description: Plan and execute red team operations and adversary emulation exercises on top of robust autonomy and software defined C2 infrastructure.
-  ogDescription: Plan and execute red team operations and adversary emulation exercises on top of robust autonomy and software defined C2 infrastructure.
+# ───────────────────────────────────────────────────────────────────────────
+# reaperPage — ALL editorial copy for the bespoke /products/reaper page, in the
+# order it appears on the page. Single source of truth: edit copy here.
+# Text rendered INSIDE the SVG animations is NOT here (it lives in code).
+# Coupling note: howItWorks.tabs[].secondary order must match the in-code viz
+# arrays (ReaperAgentsViz / ReaperRulesViz / ReaperScaleViz consume them by index).
+# ───────────────────────────────────────────────────────────────────────────
+reaperPage:
+  # ── HERO ──
+  hero:
+    title: "Reaper"
+    tagline: "100x your offensive operators"
+    tabs:
+      - label: "Plan"
+        video: "/products/reaper/hero-plan.mp4"
+        poster: "/products/reaper/hero-plan.webp"
+      - label: "Deliver Effects"
+        video: "/products/reaper/hero-operate.mp4"
+        poster: "/products/reaper/hero-operate.webp"
+      - label: "Observe"
+        video: "/products/reaper/hero-observe.mp4"
+        poster: "/products/reaper/hero-observe.webp"
+      - label: "Report"
+        video: "/products/reaper/hero-report.mp4"
+        poster: "/products/reaper/hero-report.webp"
+
+  # ── INTRO (scroll-reveal statement) ──
+  intro:
+    paragraph: "Reaper is the end-to-end mission system for autonomous offensive operations. Orchestrate your data, tooling, C2, intelligence, and autonomy from a single workspace. Bring trusted, deterministic safeguards around frontier AI and unleash your operators’ tradecraft at massive scale."
+
+  # ── HOW IT WORKS (accordion tabs) ──
+  howItWorks:
+    heading: "Autonomously emulate adversaries against production infrastructure"
+    body: "Reaper takes your intel and rules of engagement, and pairs it with frontier AI to create custom agents that autonomously run adversary emulation against your estate."
+    tabs:
+      - n: "01"
+        title: "Adversary agents"
+        desc: "Build custom agents to emulate your adversaries. Bring adversary TTPs and threat intel as context to power AI-driven adversary emulation exercises."
+        secondaryEyebrow: "Agent type"
+        secondary:
+          - "Adversary"
+          - "Pathfinder"
+          - "Data Analyst"
+      - n: "02"
+        title: "Rules of engagement"
+        desc: "Deterministic guardrails and policies govern what actions AI agents can do, meaning you can utilize them safely and within trusted bounds."
+        secondaryEyebrow: "Rule"
+        secondary:
+          - "Disable data exfil from two unknown sources"
+          - "Disable tools that create excess log noise"
+          - "Wait for human approval before targeting asset"
+      - n: "03"
+        title: "Scale"
+        desc: "Method enables previously unthinkable levels of scale, allowing you to 100x your adversary emulation exercises, while remaining in control."
+        secondaryEyebrow: "Host"
+        secondary:
+          - "AURIC-DYNAMICS-IT-01"
+          - "AURIC-DYNAMICS-IT-02"
+          - "172.16.6.1"
+          - "172.16.6.12"
+
+  # ── TOOLKIT (vertical tabs) ──
+  toolkit:
+    heading: "Unleash your entire offensive toolkit in one workspace"
+    body:
+      - "Reaper orchestrates the entire offensive toolkit, from custom tooling and adversary intelligence, to C2, implants, and operational history."
+    tabs:
+      - label: "Infrastructure"
+        items:
+          - title: "Jackal"
+            desc: "Jackals flex from simple job runner or a stealthy implant. Minimal and configurable on the fly, with post-deployment reconfigurability, able to deploy to anything with compute and connectivity."
+          - title: "C2"
+            desc: "A flexible range of Command and Control options, provided by Method or plugging in custom ones that your operators already use."
+          - title: "Tools"
+            desc: "Method ships with a library of default, open source tools for a range of offensive activities, scans or API integrations, and can be extended with operators’ existing or custom tooling."
+      - label: "Operational Context"
+        items:
+          - title: "Data"
+            desc: "Output and findings from tools and actions, stored as structured, strongly-typed objects."
+          - title: "Intelligence"
+            desc: "Adversary, operator and environment intel to enrich ongoing operations. Extensible with your own preferred threat intel."
+          - title: "Adversary TTPs"
+            desc: "Integrate and use adversary intel mapped to specific tactics and tools."
+      - label: "Results"
+        items:
+          - title: "Findings"
+            desc: "Mission reports, findings and attack paths are all available within the platform, and exportable for easy sharing."
+          - title: "Operation History"
+            desc: "Every action from every operation, logged and absorbed into context for future missions."
+
+  # ── USE CASES ("Different Missions. Same Method.", pinned scroll) ──
+  useCases:
+    heading: "Different missions.\nSame Method."
+    intro: "Reaper is a single system that can adapt to a range of mission types."
+    items:
+      - title: "Immediately augment your existing missions"
+        desc: "Method plugs into missions straight away using the Overwatch terminal monitor. Absorb operator knowledge and mission context and intelligence, while using all your existing tools and workflows."
+      - title: "Run selective automated assumed breach exercises"
+        desc: "Execute specifically-scoped assumed breach exercises with your preferred level of autonomy, allowing granular control and oversight."
+      - title: "Autonomously emulate adversaries at production scale"
+        desc: "Execute end-to-end offensive operations within Method. Run large-scale autonomous operations with operators controlling offensive agents, orchestrating C2, tooling, intelligence, and operation context."
+
+  # ── BYOT (Bring Your Own Tradecraft) ──
+  byot:
+    heading: "BYOT: Bring Your Own Tradecraft"
+    body: "Method integrates your expertise into every part of the system, then scales it with safely harnessed frontier AI."
+    items:
+      - title: "Adversary intel"
+        desc: "TTPs from your threat intel team. Method builds adversary agents from them."
+      - title: "Operational history"
+        desc: "Past operations stay accessible. Future ones reference them."
+      - title: "Environment intel"
+        desc: "Drop in recon you already have. Operations ground in your real environment."
+      - title: "Your tools"
+        desc: "Plug in your own tools alongside Method's library."
+      - title: "BYO–Jackal"
+        desc: "Bring your own job runner or implant. Method stays as the C2 you interact with."
+        comingSoon: true
+      - title: "Your C2"
+        desc: "Use your preferred C2 infrastructure to communicate between targets and the Method Platform."
+        comingSoon: true
+
+  # ── FRONTIER (Frontier models, on a deterministic harness) ──
+  frontier:
+    heading: "Frontier models on a deterministic harness"
+    body: "Leverage frontier AI for adversary emulation, wrapped in the ontology, guardrails, and security UX that let you deploy them safely in production environments with real stakes."
+    buttonLabel: "See the full platform"
+    layers:
+      - title: "Unified data layer"
+        meta: "Models interact with their environments via Method's cyber Ontology, which provides them with mission context, environment context, tools, and more"
+      - title: "Deterministic guardrails"
+        meta: "Your Policies and Rules of Engagement are enforced deterministically, ensuring that autonomy can only act within operator-determined bounds."
+      - title: "Purpose-built UX"
+        meta: "Method Platform augments AI with a cybersecurity-focused UX to multiply operator impact"
+
+  # ── CLOSING CTA ──
+  cta:
+    title: "Reaper"
+    tagline: "100x your offensive operators"
+    onboarding: "Start by scheduling a bootcamp and demo with your team."
+    buttons:
+      - label: "Book a demo"
+        href: "mailto:sales@method.security"
+      - label: "Contact us"
+        href: "/contact"
+seo:
+  description: "The end-to-end offensive mission system: orchestrate data, tooling, C2, and autonomy with deterministic safeguards around frontier AI to scale adversary emulation."
+  ogDescription: "The end-to-end offensive mission system: orchestrate data, tooling, C2, and autonomy with deterministic safeguards around frontier AI to scale adversary emulation."
   ogImage: /content/seo/reaper-social-1200x628.png
-  ogTitle: Reaper | Software-Defined Offensive Operations
-  title: Reaper | Software-Defined Offensive Operations
-solutions: 
+  ogTitle: Reaper | 100x your offensive operators
+  title: Reaper | 100x your offensive operators
+solutions:
   eyebrow: Uses Cases
-  items: 
+  items:
     - eyebrow: r-01
       mediaSrc:
       text:
@@ -49,7 +194,7 @@ solutions:
       text:
       title: Atomic Detection Validation
 sortOrder: 2
-tagline: 
+tagline:
   eyebrow: Reaper
   text: Plan and execute red team operations and adversary emulation exercises on top of robust autonomy and software defined C2 infrastructure.
 ---

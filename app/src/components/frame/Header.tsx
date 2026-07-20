@@ -146,7 +146,16 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
           data-theme="dark"
           className="fixed z-[98] top-[0] left-[0] right-[0] bg-theme-bg text-theme-text overflow-auto w-full h-[0] u-container max-w-[none] t:hidden transition-height duration-0"
         >
-          <div className="flex flex-col py-main">
+          {/* Top padding clears the fixed header bar above the overlay:
+              its open-state pt-xs + tallest bar item (2.3em toggle) + pb-xxs,
+              plus an xs gap. Keeps the first menu item from being cut off. */}
+          <div
+            className="flex flex-col pb-main"
+            style={{
+              paddingTop:
+                "calc(var(--space-xs) + 2.3em + var(--space-2xs) + var(--space-xs))",
+            }}
+          >
             {/* Mobile Navigation */}
             <nav className="flex-1 overflow-y-auto">
               <ul

@@ -1,5 +1,5 @@
 ---
-cards: 
+cards:
   - eyebrow: Careers
     href: /careers
     target: _self
@@ -8,30 +8,123 @@ cards:
     href: /blog
     target: _self
     title: Company updates
-cta: 
+cta:
   ctaButtonText: Request Demo
   ctaLink: "mailto:sales@method.security"
   ctaTitle: Get started with a demo
-description: Digital-twin driven exposure management
-hero: 
-  videoSrc: /bastion_hero.mp4
-  videoSrcMobile: /bastion_hero_mobile.mp4
-highlight: 
+description: Challenge every asset, 24x7
+hero:
+  videoSrc: /products/bastion/hero-challenge.mp4
+  videoSrcMobile: /products/bastion/hero-challenge.mp4
+highlight:
   eyebrow: Bastion
   leadParagraph: Map, validate, and control the totality of resources and possible attack paths in the context of your business.
   showcaseSrc: /Bastion-Loop.mp4
-  title: Digital-twin driven exposure management
+  title: Challenge every asset, 24x7
 name: Bastion
 productSymbolUrl: /product-symbols/bastion.svg
-seo: 
-  description: Map, validate, and control the totality of resources and possible attack paths in the context of your business.
-  ogDescription: Map, validate, and control the totality of resources and possible attack paths in the context of your business.
+# ───────────────────────────────────────────────────────────────────────────
+# bastionPage — ALL editorial copy for the bespoke /products/bastion page, in
+# the order it appears on the page. Single source of truth: edit copy here.
+# Text rendered INSIDE the canvas vizzes / SVG animations is NOT here (it lives
+# in code — e.g. BastionServeViz DEFENSE/OFFENSE badges, BastionScaleViz query
+# callouts / vendor labels).
+# ───────────────────────────────────────────────────────────────────────────
+bastionPage:
+  # ── HERO ──
+  hero:
+    title: "Bastion"
+    tagline: "Challenge every asset, 24x7"
+    tabs:
+      - label: "Challenge"
+        video: "/products/bastion/hero-challenge.mp4"
+        poster: "/products/bastion/hero-challenge.webp"
+      - label: "Investigate"
+        video: "/products/bastion/hero-serve.mp4"
+        poster: "/products/bastion/hero-serve.webp"
+      - label: "Defend"
+        video: "/products/bastion/hero-protect.mp4"
+        poster: "/products/bastion/hero-protect.webp"
+
+  # ── INTRO (scroll-reveal statement) ──
+  intro:
+    paragraph: "Bastion challenges your assets as hard as real adversaries. A weapons-grade system with fine-grained controls, it combines autonomous agents, deterministic rules of engagement, and a digital twin of your environment to produce validated exploitable paths."
+
+  # ── MAP AT PLANETARY SCALE (viz + 3 columns) ──
+  scale:
+    heading: "Map estates of planetary scale"
+    body: "Method maps estates of massive scale, building a living digital twin of even the largest enterprises."
+    columns:
+      - title: "Built for enterprise scale"
+        desc: "Method is designed to meet the complex trust, safety, and scale needs of large, critical enterprise."
+      - title: "24/7 coverage"
+        desc: "Method continuously scans your estates to discover new assets and serve them to adversarial agents to challenge."
+      - title: "Global sensor placement"
+        desc: "Method deploys fleets of cloud, on-prem, and edge sensors to hit targets harder from every angle."
+
+  # ── CREATE A CONTINUOUS, ATTACKER-MINDED INVENTORY (viz + 3 columns) ──
+  inventory:
+    heading: "Build a continuous, attacker-minded inventory"
+    body: "Bastion creates a living map of your digital estate from internal and external sources, inventorying it just like an attacker would."
+    columns:
+      - title: "One data model for every function"
+        desc: "Bastion builds up a highly-contextualized and temporally-tracked data model, backed by Method's cyber Ontology."
+      - title: "Full change history of every asset"
+        desc: "Bastion provides a single, continuously updated, view of every asset, tracking all changes, associated risks, and linked actions over time."
+      - title: "Fuse multi-domain perspectives"
+        desc: "Bastion combines unauthenticated external and internal scanning with that of authenticated data sources for an information advantage."
+
+  # ── CHALLENGE EVERY ASSET (accordion tabs + viz) ──
+  challenge:
+    heading: "Challenge every asset, 24x7"
+    body: "Bastion runs continuous discovery and validation of attack paths against your enterprise, to identify real, exploitable risks."
+    features:
+      - title: "Continuous mapping and research"
+        desc: "Bastion’s agents execute a continuous set of micro-attacks to stress-test your resilience to real threats."
+        image: "/products/bastion/challenge-autonomous-validation.webp"
+      - title: "Governed by your Rules of Engagement"
+        desc: "Bastion lets you safely unleash frontier AI capabilities, governed by a deterministic set of rules and guardrails. Take granular control over the targets, tools, and level of autonomy permissible in your environments."
+        image: "/products/bastion/challenge-your-roe.webp"
+      - title: "Extract signal from noise"
+        desc: "Bastion provides a constant stream of validated targets and attack paths for deeper investigation by human operators."
+        image: "/products/bastion/challenge-extract-signal.webp"
+
+  # ── REAPER HAND-OFF CARD (links to /products/reaper) ──
+  reaper:
+    eyebrow: "Reaper"
+    text: "Validated targets, mapped attack paths, business context. All available to Reaper for 100x offensive operators."
+
+  # ── SERVE TARGETS FOR OFFENSE AND DEFENSE (rows + viz) ──
+  serve:
+    heading: "Produce targets for offense and defense"
+    body: "Deliver validated findings from Bastion to your offensive and defensive teams, for red teaming or remediation."
+    rows:
+      - title: "Validated targets and weaknesses"
+        desc: "To better focus human focus hours on what’s confirmed exploitable rather than closing false positives or drowning in noise."
+      - title: "Feed intel to your offensive team"
+        desc: "Bastion's rich data model and validated weaknesses feeds your offensive operators - in Reaper or elsewhere - to stress-test your organization as real attackers would."
+      - title: "Report and learn"
+        desc: "Summarize, visualize, analyze. Follow Bastion’s progress and gain a clear idea of each challenge, resulting risk and highlight and isolate focus areas for follow-up."
+
+  # ── CLOSING CTA ──
+  cta:
+    title: "Bastion"
+    tagline: "Challenge every asset, 24/7"
+    onboarding: "Start by scheduling a bootcamp and demo with your team."
+    buttons:
+      - label: "Book a demo"
+        href: "mailto:sales@method.security"
+      - label: "Contact us"
+        href: "/contact"
+seo:
+  description: Continuously challenge every asset with autonomous validation agents, deterministic rules of engagement, and a digital twin that surfaces real, exploitable risk.
+  ogDescription: Continuously challenge every asset with autonomous validation agents, deterministic rules of engagement, and a digital twin that surfaces real, exploitable risk.
   ogImage: /content/seo/bastion-social-1200x628.png
-  ogTitle: Bastion | Digital-Twin Driven Exposure Management
-  title: Bastion | Digital-Twin Driven Exposure Management
-solutions: 
+  ogTitle: Bastion | Challenge every asset, 24x7
+  title: Bastion | Challenge every asset, 24x7
+solutions:
   eyebrow: Use Cases
-  items: 
+  items:
     - eyebrow: b-01
       mediaSrc:
       text:
@@ -56,7 +149,7 @@ solutions:
       text:
       title: Strategic Security Governance
 sortOrder: 1
-tagline: 
+tagline:
   eyebrow: Bastion
   text: Map, validate, and control the totality of resources and possible attack paths in the context of your business.
 ---

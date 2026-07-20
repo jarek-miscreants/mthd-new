@@ -161,6 +161,48 @@
   --theme--button-secondary--border-hover: var(--swatch--neutral);
 }
 
+/* Explicit light theme — lets a subtree opt back into light styling even
+   when an ancestor (e.g. body on /products) is set to the dark theme. */
+[data-theme="light"] {
+  --theme--background: var(--swatch--light);
+  --theme--background-secondary: var(--swatch--light-secondary);
+  --theme--text: var(--swatch--dark);
+  --theme--border: var(--swatch--neutral);
+
+  --theme--selection-background: var(--swatch--dark);
+  --theme--selection-text: var(--swatch--light);
+
+  --theme--invert-default: 100%;
+  --theme--invert-hover: 0%;
+
+  --logo--invert: 0%;
+
+  /* button primary */
+  --theme--button-primary--background: var(--swatch--dark);
+  --theme--button-primary--text: var(--swatch--light);
+  --theme--button-primary--border: var(--swatch--dark);
+  --theme--button-primary--background-hover: var(--swatch--light);
+  --theme--button-primary--text-hover: var(--swatch--dark);
+  --theme--button-primary--border-hover: var(--swatch--light);
+
+  /* button secondary */
+  --theme--button-secondary--background: var(--swatch--transparent);
+  --theme--button-secondary--text: var(--swatch--dark);
+  --theme--button-secondary--border: var(--swatch--neutral);
+  --theme--button-secondary--background-hover: var(--swatch--dark);
+  --theme--button-secondary--text-hover: var(--swatch--light);
+  --theme--button-secondary--border-hover: var(--swatch--neutral);
+}
+
+/* Reaper bespoke page: pin body & label text to fixed rem sizes so they
+   don't ride the fluid --size-font scaling. Headings stay fluid (em). */
+[data-reaper-page] {
+  --font-size--text-large: 1.5rem;
+  --font-size--text-main: 1.125rem;
+  --font-size--text-menu: 0.9375rem;
+  --font-size--text-small: 0.75rem;
+}
+
 /* Tablet */
 @media screen and (max-width: 991px) {
   :root {
@@ -179,12 +221,24 @@
 
     --site--margin: 1.25em;
 
+    --font-size--h1: 3.5em;
     --font-size--h2: 1.875em;
     --font-size--h3: 1.5em;
     --font-size--text-large: 1em;
     --font-size--text-main: 1em;
     --font-size--text-menu: 0.9375em;
     --font-size--text-small: 0.625em;
+
+    /* Tighten section spacing on mobile — the desktop rhythm (3/6/9em,
+       stacked top+bottom between sections) leaves huge gaps on small
+       screens. Use rem here so the spacing is predictable and doesn't ride
+       the fluid --size-font scaling. */
+    --space-small: 1rem;
+    --space-main: 2rem;
+    --space-large: 3rem;
+    --space-xl: 3.5rem;
+    --space-2xl: 4rem;
+    --space-3xl: 4.5rem;
   }
 }
 
@@ -292,6 +346,16 @@
     scroll-behavior: smooth;
   }
 
+  /* All interactive elements get a pointer cursor (buttons default to the
+     arrow in most browsers). */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+
   body {
     font-family: var(--font-untitled-sans);
     font-size: var(--size-font);
@@ -395,6 +459,15 @@
       img {
         filter: invert(var(--theme--invert-hover));
       }
+    }
+  }
+
+  @keyframes reaper-tab-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
     }
   }
 
