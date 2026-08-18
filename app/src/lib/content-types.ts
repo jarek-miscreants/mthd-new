@@ -281,6 +281,7 @@ export interface AuthorData {
 // Blog Post (frontmatter)
 export interface BlogPostData {
   title: string;
+  subtitle?: string;
   slug?: string;
   excerpt: string;
   author: string; // slug reference to author file
@@ -294,6 +295,7 @@ export interface BlogPostData {
 // Blog Post with resolved author (after joining)
 export interface BlogPostWithAuthor {
   title: string;
+  subtitle?: string;
   slug: string;
   excerpt: string;
   author: AuthorData;

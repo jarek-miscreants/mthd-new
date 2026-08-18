@@ -38,6 +38,23 @@
   font-size: var(--font-size--text-main);
 }
 
+.prose a {
+  color: #3b82f6;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease;
+}
+
+.prose a:hover,
+.prose a:focus-visible {
+  color: #2563eb;
+}
+
+.prose a:visited {
+  color: #4f46e5;
+}
+
 .prose ul, .prose ol {
   margin-bottom: 1.25em;
   padding-left: 1.5em;
@@ -83,7 +100,15 @@
 
 .title {
   font-size: var(--font-size--h2);
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
   margin-bottom: 1.5rem;
+  color: var(--theme-text-secondary);
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  line-height: 1.5;
+  max-width: 60ch;
 }
 
 .metadata {

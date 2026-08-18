@@ -70,6 +70,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <BlogPost
             post={{
                 title: post.title,
+                subtitle: post.subtitle,
                 slug,
                 excerpt: post.excerpt,
                 author: {

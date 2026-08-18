@@ -7,6 +7,7 @@ import Spacer from "../util/Spacer";
 interface BlogPostProps {
     post: {
         title: string;
+        subtitle?: string;
         slug: string;
         excerpt: string;
         author: {
@@ -70,6 +71,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                         </button>
                     </div>
                     <h1 className={styles.title}>{post.title}</h1>
+                    {post.subtitle && <p className={styles.subtitle}>{post.subtitle}</p>}
 
                     <div className={`${styles.metadata} mt-small`}>
                         <div className={styles.authorSection}>
