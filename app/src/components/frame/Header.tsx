@@ -5,6 +5,7 @@ import Card from "../elements/Card";
 import Image from "next/image";
 import MobileMenuIndicator from "@/components/elements/MobileMenuIndicator";
 import LogoAnimation from "../brand/LogoAnimation/LogoAnimation";
+import AnnouncementBanner from "@/components/frame/AnnouncementBanner";
 
 interface DropdownItem {
   productSymbol?: string;
@@ -43,6 +44,7 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
         data-theme="dark"
         className={`${styles.header} header_wrap bg-theme-bg text-theme-text fixed top-[0] left-[0] right-[0] z-[9999]`}
       >
+        <AnnouncementBanner />
         <div
           className={`${styles.headerContain} header_contain u-container max-w-[none] relative z-[99] drop-shadow-[0_4px_10px_rgba(0,0,0,0.05)] bg-theme-bg`}
         >
@@ -153,7 +155,7 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
             className="flex flex-col pb-main"
             style={{
               paddingTop:
-                "calc(var(--space-xs) + 2.3em + var(--space-2xs) + var(--space-xs))",
+                "calc(var(--announcement-h, 0px) + var(--space-xs) + 2.3em + var(--space-2xs) + var(--space-xs))",
             }}
           >
             {/* Mobile Navigation */}
