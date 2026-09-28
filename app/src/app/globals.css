@@ -369,6 +369,8 @@
 
   main {
     overflow: clip;
+    /* Tracks the homepage announcement as it animates open. */
+    padding-top: var(--announcement-h, 0px);
   }
 
   section,
