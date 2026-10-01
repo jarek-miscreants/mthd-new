@@ -32,7 +32,7 @@ export default function ProductHighlightSection({
           <Spacer size="small" />
           <div className="flex flex-col gap-xxs">
             <Eyebrow>METHOD PLATFORM</Eyebrow>
-            <h2 className="u-text-style-h3">Our Products</h2>
+            <h2 className="u-text-style-h3">One platform, many missions</h2>
             <Spacer size="small" />
           </div>
         </div>

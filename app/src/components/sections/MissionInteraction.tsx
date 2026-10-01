@@ -36,22 +36,10 @@ export default function MissionInteraction({
       "[data-mission-paragraph]",
     );
 
-    if (!title || !paragraph) return;
+    if (!container || !title) return;
 
     const timeoutId = setTimeout(() => {
-      paragraph.innerHTML = paragraph.textContent!.replace(
-        /\n\n/g,
-        "<br>&nbsp;<br>",
-      );
-
       ctx = gsap.context(() => {
-        const splitParagraph = new SplitText(paragraph, {
-          type: "words,lines",
-          linesClass: "line",
-          mask: "lines",
-          reduceWhiteSpace: false,
-        });
-
         const tl1 = gsap.timeline({
           scrollTrigger: {
             trigger: wrapper,
@@ -60,15 +48,6 @@ export default function MissionInteraction({
             markers: false,
           },
         });
-        const tl2 = gsap.timeline({
-          scrollTrigger: {
-            trigger: paragraph,
-            start: "top 100%",
-            toggleActions: "restart none none none",
-            markers: false,
-          },
-        });
-
         tl1.to(
           container,
           {
@@ -77,6 +56,30 @@ export default function MissionInteraction({
           },
           "<",
         );
+
+        // Heading-only sections still get the line animation.
+        if (!paragraph) return;
+
+        paragraph.innerHTML = paragraph.textContent!.replace(
+          /\n\n/g,
+          "<br>&nbsp;<br>",
+        );
+
+        const splitParagraph = new SplitText(paragraph, {
+          type: "words,lines",
+          linesClass: "line",
+          mask: "lines",
+          reduceWhiteSpace: false,
+        });
+
+        const tl2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: paragraph,
+            start: "top 100%",
+            toggleActions: "restart none none none",
+            markers: false,
+          },
+        });
 
         tl1.from(
           paragraph,

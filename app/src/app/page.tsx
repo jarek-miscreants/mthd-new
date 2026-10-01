@@ -5,7 +5,7 @@ import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
 import Architecture from "@/components/sections/Architecture";
 import DeploySection from "@/components/sections/Deploy";
 import HomeHero from "@/components/sections/HomeHero";
-import Mission from "@/components/sections/Mission";
+import Method from "@/components/sections/Method";
 import Partners from "@/components/sections/Partners";
 import CardSection from "@/components/sections/CardSection";
 import ProductHighlightSection from "@/components/sections/ProductsHighlightSection";
@@ -36,6 +36,7 @@ export default async function Home() {
     .filter((p) => p.frontmatter.productSymbolUrl)
     .map((p) => ({
       eyebrow: p.frontmatter.highlight?.eyebrow || p.frontmatter.name,
+      subTitle: p.frontmatter.highlight?.subTitle || "",
       productSymbol: p.frontmatter.productSymbolUrl || "",
       title: p.frontmatter.highlight?.title || "",
       href: p.slug || "",
@@ -46,14 +47,15 @@ export default async function Home() {
   return (
     <>
       <HomeHero
+        title={homeData?.hero?.title || ""}
         videoSrc={homeData?.hero?.videoSrc || ""}
         videoSrcMobile={homeData?.hero?.videoSrcMobile || ""}
       />
 
-      <Mission
-        eyebrow={homeData?.mission?.eyebrow}
-        title={homeData?.mission?.title || ""}
-        leadParagraph={homeData?.mission?.leadParagraph || ""}
+      <Method
+        eyebrow={homeData?.method?.eyebrow}
+        title={homeData?.method?.title || ""}
+        leadParagraph={homeData?.method?.leadParagraph || ""}
       />
 
       <Partners

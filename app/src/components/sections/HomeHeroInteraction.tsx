@@ -6,8 +6,10 @@ import { gsap } from "gsap";
 
 export default function HomeHeroInteraction({
   componentId,
+  title,
 }: {
   componentId: string;
+  title: string;
 }) {
   const pathname = usePathname();
 
@@ -18,7 +20,7 @@ export default function HomeHeroInteraction({
 
     if (!heroText) return;
 
-    const originalText = heroText.textContent || "";
+    const originalText = title;
 
     // Create an object to animate
     const textObject = { value: 0 };
@@ -45,7 +47,7 @@ export default function HomeHeroInteraction({
         heroText.textContent = originalText;
       }
     };
-  }, [componentId, pathname]);
+  }, [componentId, pathname, title]);
 
   return null;
 }

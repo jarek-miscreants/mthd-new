@@ -7,6 +7,7 @@ import LinkIndicatorInteraction from "@/components/elements/LinkIndicatorInterac
 
 export interface ProductHighlightProps {
   eyebrow?: string;
+  subTitle?: string;
   productSymbol: string;
   title: string;
   href: string;
@@ -17,6 +18,7 @@ export interface ProductHighlightProps {
 
 export default function ProductHighlight({
   eyebrow,
+  subTitle,
   productSymbol,
   title,
   href,
@@ -33,24 +35,29 @@ export default function ProductHighlight({
             href={`/products/${href}`}
             className="product_info_contain flex flex-col t:gap-[6em] gap-[3em] w-[100%]"
           >
-            <div className="flex flex-row items-center gap-[1rem]">
-              {productSymbol && (
-                <Image
-                  src={productSymbol}
-                  alt={eyebrow || ""}
-                  width={67}
-                  height={57}
-                  className="w-[2em]"
-                />
-              )}
-              {eyebrow && <h5 className="u-text-style-h5">{eyebrow}</h5>}
+            <div className="flex flex-col gap-xxs">
+              <div className="flex flex-row items-center gap-[1rem]">
+                {productSymbol && (
+                  <Image
+                    src={productSymbol}
+                    alt={eyebrow || ""}
+                    width={67}
+                    height={57}
+                    className="w-[2em]"
+                  />
+                )}
+                {eyebrow && <h5 className="u-text-style-h5">{eyebrow}</h5>}
+              </div>
+              <div className="flex flex-col gap-xxs">
+                <h5 className="u-text-style-h5 text-neutral">{subTitle}</h5>
+              </div>
             </div>
 
             <div className="flex flex-col gap-xxs">
               <h2 className="u-text-style-h2">{title}</h2>
             </div>
             <div className="flex flex-col gap-xs">
-              <p className="max-w-[25ch] text-main">{leadParagraph}</p>
+              <p className="max-w-[30ch] text-main">{leadParagraph}</p>
               <LinkIndicator className="w-[2.25em]" />
             </div>
           </Link>

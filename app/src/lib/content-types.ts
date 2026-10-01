@@ -19,8 +19,14 @@ export interface CardData {
 export interface HomePageData {
   title?: string;
   hero?: {
+    title?: string;
     videoSrc?: string;
     videoSrcMobile?: string;
+  };
+  method?: {
+    eyebrow?: string;
+    title?: string;
+    leadParagraph?: string;
   };
   mission?: {
     eyebrow?: string;
@@ -77,6 +83,7 @@ export interface ProductData {
   };
   highlight?: {
     eyebrow?: string;
+    subTitle?: string;
     title?: string;
     leadParagraph?: string;
     showcaseSrc?: string;

@@ -12,7 +12,7 @@ export default function ArchitectureItem({ title, subtext }: ArchitectureItemPro
             <div className={`${styles.item_wrapper} t:grid t:grid-cols-12 flex flex-col`}>
                 <h3
                     data-architecture-title
-                    className={`${styles.item_h} relative t:col-start-1 t:col-end-6 u-text-style-h2 max-w-[10ch] pl-[20px] t:pl-[0.5em] py-3xs`}
+                    className={`${styles.item_h} relative t:col-start-1 t:col-end-6 u-text-style-h2 max-w-[14ch] pl-[20px] t:pl-[0.5em] py-3xs`}
                 >
                     {title}
                 </h3>
