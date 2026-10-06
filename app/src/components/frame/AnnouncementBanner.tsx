@@ -85,7 +85,7 @@ export default function AnnouncementBanner() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="u-container max-w-[none] flex flex-row items-center justify-between gap-xs py-[1.5em] text-left">
+        <div className="w-full max-w-[1800px] mx-auto px-[24px] min-[1200px]:px-[32px] flex flex-row items-center justify-between gap-xs py-[1.5em] text-left">
           <p className="text-menu t:text-main leading-[1.3] min-w-0 flex-1">
             Method Awarded $30M STRATFI with US Space Force – Bringing a Cyber
             Mission System to Space

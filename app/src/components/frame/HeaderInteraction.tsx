@@ -36,6 +36,7 @@ export default function HeaderInteraction() {
 
     const toggleMenu = () => {
       isOpen = !isOpen;
+      toggleButton.setAttribute("aria-expanded", String(isOpen));
 
       if (iconOpen && iconClosed) {
         if (isOpen) {
@@ -50,7 +51,6 @@ export default function HeaderInteraction() {
       if (isOpen) {
         header.setAttribute("data-theme", "dark");
         header.setAttribute("data-lenis-prevent", "");
-        headerBar.classList.add("pt-xs");
         document.body.style.overflow = "hidden";
         mobileOverlay.classList.remove("h-[0]");
         mobileOverlay.classList.add("h-screen");
@@ -64,7 +64,6 @@ export default function HeaderInteraction() {
       } else {
         header.removeAttribute("data-theme");
         header.removeAttribute("data-lenis-prevent");
-        headerBar.classList.remove("pt-xs");
         document.body.style.overflow = "";
         mobileOverlay.classList.add("h-[0]");
         mobileOverlay.classList.remove("h-screen");
@@ -74,6 +73,8 @@ export default function HeaderInteraction() {
     const closeMenu = () => {
       if (isOpen) {
         isOpen = false;
+        toggleButton.setAttribute("aria-expanded", "false");
+        header.removeAttribute("data-lenis-prevent");
 
         if (iconOpen && iconClosed) {
           iconOpen.style.display = "none";
@@ -81,55 +82,22 @@ export default function HeaderInteraction() {
         }
 
         header.removeAttribute("data-theme");
-        headerBar.classList.remove("pt-xs");
         document.body.style.overflow = "";
         mobileOverlay.classList.remove("h-screen");
         mobileOverlay.classList.add("h-[0]");
       }
     };
 
+    const desktopQuery = window.matchMedia("(min-width: 1200px)");
+    const handleBreakpoint = () => {
+      if (desktopQuery.matches) closeMenu();
+    };
+    desktopQuery.addEventListener("change", handleBreakpoint);
     toggleButton.addEventListener("click", toggleMenu);
 
     mobileLinks.forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
-
-    const headerContain = document.querySelector(".header_contain");
-    const navItems = headerContain?.querySelectorAll("nav ul li");
-    const dropdowns = document.querySelectorAll("[data-dropdown-index]");
-
-    if (headerContain && navItems) {
-      navItems.forEach((item, index) => {
-        const hasDropdown = item.hasAttribute("data-has-dropdown");
-
-        item.addEventListener("mouseenter", () => {
-          dropdowns.forEach((dropdown) => {
-            dropdown.classList.remove(styles.isOpen);
-          });
-
-          if (hasDropdown) {
-            const targetDropdown = document.querySelector(
-              `[data-dropdown-index="${index}"]`
-            );
-            if (targetDropdown) {
-              targetDropdown.classList.add(styles.isOpen);
-            }
-          }
-        });
-      });
-
-      headerContain.addEventListener("mouseleave", () => {
-        dropdowns.forEach((dropdown) => {
-          dropdown.classList.remove(styles.isOpen);
-        });
-      });
-
-      dropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("mouseenter", () => {
-          dropdown.classList.add(styles.isOpen);
-        });
-      });
-    }
 
     const handleScroll = () => {
       if (!header) return;
@@ -212,6 +180,8 @@ export default function HeaderInteraction() {
     handleScroll();
 
     return () => {
+      closeMenu();
+      desktopQuery.removeEventListener("change", handleBreakpoint);
       toggleButton.removeEventListener("click", toggleMenu);
       mobileLinks.forEach((link) => {
         link.removeEventListener("click", closeMenu);
@@ -220,7 +190,7 @@ export default function HeaderInteraction() {
       header.removeEventListener("mouseenter", handleMouseEnter);
       header.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [isHomePage]);
+  }, [isHomePage, pathname]);
 
   return null;
 }

@@ -2,25 +2,15 @@ import Link from "next/link";
 import HeaderInteraction from "@/components/frame/HeaderInteraction";
 import styles from "./Header.module.css";
 import Card from "../elements/Card";
-import Image from "next/image";
 import MobileMenuIndicator from "@/components/elements/MobileMenuIndicator";
 import LogoAnimation from "../brand/LogoAnimation/LogoAnimation";
 import AnnouncementBanner from "@/components/frame/AnnouncementBanner";
-
-interface DropdownItem {
-  productSymbol?: string;
-  label: string;
-  href: string;
-  target?: "_self" | "_blank";
-  arrowIndicator?: boolean;
-}
 
 interface NavItem {
   label: string;
   href: string;
   target?: "_self" | "_blank";
   btnStyle?: boolean;
-  dropdown?: DropdownItem[];
 }
 
 interface MobileMenuCard {
@@ -36,6 +26,27 @@ interface HeaderProps {
 }
 
 export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
+  const primaryItems = navItems.filter((item) =>
+    ["/platform", "/developer", "/missions"].includes(item.href)
+  );
+  const utilityItems = navItems.filter((item) => !primaryItems.includes(item));
+
+  const renderLinks = (items: NavItem[]) => (
+    <ul className={styles.navList}>
+      {items.map((item) => (
+        <li key={item.href}>
+          <Link
+            className={item.btnStyle ? `btn-main-wrap is-secondary ${styles.demoButton}` : styles.navLink}
+            href={item.href}
+            target={item.target}
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <>
       <HeaderInteraction />
@@ -45,117 +56,40 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
         className={`${styles.header} header_wrap bg-theme-bg text-theme-text fixed top-[0] left-[0] right-[0] z-[9999]`}
       >
         <AnnouncementBanner />
-        <div
-          className={`${styles.headerContain} header_contain u-container max-w-[none] relative z-[99] drop-shadow-[0_4px_10px_rgba(0,0,0,0.05)] bg-theme-bg`}
-        >
-          <div
-            id="header-bar"
-            className="flex flex-row justify-between items-center py-xxs transition-[padding-top] ease duration-200
-"
-          >
-            <Link
-              className="relative w-[8em] t:w-[10em] h-[2em]"
-              data-mobile-link
-              href="/"
-              aria-label="Method Logo"
-            >
+        <div className={`${styles.headerContain} header_contain relative z-[99] bg-theme-bg`}>
+          <div id="header-bar" className={styles.headerBar}>
+            <Link className={styles.logo} data-mobile-link href="/" aria-label="Method home">
               <LogoAnimation />
-              {/* <Logo />*/}
             </Link>
-            <nav className="t:block hidden">
-              <ul className="flex flex-row gap-xxs items-center text-menu">
-                {navItems.map((navItem, index) => (
-                  <li
-                    key={index}
-                    data-has-dropdown={navItem.dropdown ? "true" : undefined}
-                  >
-                    <Link
-                      className={
-                        navItem.btnStyle
-                          ? `btn-main-wrap is-secondary`
-                          : `p-xxs rounded-main nav-cursor`
-                      }
-                      href={navItem.href}
-                      target={navItem.target}
-                    >
-                      {navItem.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <nav className={styles.primaryNav} aria-label="Primary">
+              {renderLinks(primaryItems)}
             </nav>
-
+            <nav className={styles.utilityNav} aria-label="Utility">
+              {renderLinks(utilityItems)}
+            </nav>
             <button
               id="mobile-menu-toggle"
-              className="block t:hidden p-[.5em] cursor-pointer"
+              className={styles.mobileToggle}
+              aria-label="Toggle navigation"
+              aria-controls="mobile-overlay"
+              aria-expanded="false"
             >
-              <MobileMenuIndicator className="w-[1.9375em] h-[1.3em]" />
+              <MobileMenuIndicator className="w-[31px] h-[21px]" />
             </button>
           </div>
-
-          {navItems.map((navItem, index) =>
-            navItem.dropdown ? (
-              <div
-                key={index}
-                data-dropdown-index={index}
-                className={`${styles.headerDropdown} t:block hidden bg-theme-bg-secondary mx-[calc(var(--site--margin)*-1)] px-[var(--site--margin)]`}
-              >
-                <ul className="flex py-xxs justify-end">
-                  {navItem.dropdown.map((dropdownItem, dropdownIndex) => (
-                    <li key={dropdownIndex} className="w-[250px]">
-                      <Link
-                        href={dropdownItem.href}
-                        target={dropdownItem.target}
-                        className="w-full text-center py-xxs rounded-main flex justify-center nav-cursor items-center group"
-                      >
-                        {dropdownItem.productSymbol ? (
-                          <Image
-                            src={dropdownItem.productSymbol}
-                            alt=""
-                            width={67}
-                            height={57}
-                            className="w-[1.5em] mr-xxs"
-                          />
-                        ) : null}
-                        {dropdownItem.label}
-                        {dropdownItem.arrowIndicator ? (
-                          <svg
-                            className="w-[0.75em] ml-xxs rotate-[45deg] group-hover:rotate-[0deg] transition-transform duration-[400ms] ease-[ease]"
-                            width="100%"
-                            height="100%"
-                            viewBox="0 0 21 17"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M0.430332 7.57992L16.682 7.58375L11.2771 2.17879L12.78 0.675862L20.7046 8.60042L12.8243 16.4806L11.402 15.0583L16.8247 9.63556L0.430821 9.65201L0.430332 7.57992Z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        ) : null}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null
-          )}
         </div>
 
         {/* Mobile Overlay Menu */}
         <div
           id="mobile-overlay"
           data-theme="dark"
-          className="fixed z-[98] top-[0] left-[0] right-[0] bg-theme-bg text-theme-text overflow-auto w-full h-[0] u-container max-w-[none] t:hidden transition-height duration-0"
+          className={`${styles.mobileOverlay} fixed z-[98] top-[0] left-[0] right-[0] bg-theme-bg text-theme-text overflow-auto w-full h-[0] u-container max-w-[none] transition-height duration-0`}
         >
-          {/* Top padding clears the fixed header bar above the overlay:
-              its open-state pt-xs + tallest bar item (2.3em toggle) + pb-xxs,
-              plus an xs gap. Keeps the first menu item from being cut off. */}
           <div
             className="flex flex-col pb-main"
             style={{
               paddingTop:
-                "calc(var(--announcement-h, 0px) + var(--space-xs) + 2.3em + var(--space-2xs) + var(--space-xs))",
+                "calc(var(--announcement-h, 0px) + 80px + 24px)",
             }}
           >
             {/* Mobile Navigation */}
@@ -174,6 +108,7 @@ export default function Header({ navItems, mobileMenuCards }: HeaderProps) {
                           : `block p-[1.78125em] bg-theme-bg-secondary text-theme-text text-center rounded-main text-[1.125em]`
                       }
                       href={navItem.href}
+                      target={navItem.target}
                     >
                       {navItem.label}
                     </Link>

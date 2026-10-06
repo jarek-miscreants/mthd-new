@@ -31,6 +31,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  staticPages.push(
+    ...["platform", "developer", "missions"].map((slug) => ({
+      url: `${baseUrl}/${slug}`,
+    }))
+  );
+
   // Dynamic product pages
   const productPages: MetadataRoute.Sitemap = [
     {
