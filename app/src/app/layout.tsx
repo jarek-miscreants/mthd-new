@@ -1,13 +1,15 @@
 import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/frame/Header";
-import Footer from "@/components/frame/Footer";
+import GraphiteHeader from "@/components/frame/GraphiteHeader";
+import GraphiteFooter, { type FooterPrototypeData } from "@/components/frame/GraphiteFooter";
+import { getContent } from "@/lib/content";
 import Lenis from "@/components/util/Lenis";
 import ThemeHandler from "@/components/util/ThemeHandler";
 import GlobalEyebrowInteraction from "@/components/elements/EyebrowInteraction";
 import type { Metadata } from "next";
 import { getNavigationData } from "@/lib/navigation";
+import { getNavigationPrototype } from "@/lib/navigation-prototype";
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://method.security"),
@@ -80,17 +82,12 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const {
-        headerNavItems,
-        footerNavGroups,
-        footerName,
-        footerTagline,
-        copyrightTag,
-        footerCtas,
-        productLinks,
-        legalLinks,
-        mobileMenuCards,
-    } = await getNavigationData();
+    const [navigationData, navigationPrototype, footerContact] = await Promise.all([
+        getNavigationData(),
+        getNavigationPrototype(),
+        getContent<FooterPrototypeData>("settings/footer-prototype"),
+    ]);
+    const { copyrightTag } = navigationData;
 
     return (
         <html lang="en">
@@ -100,17 +97,9 @@ export default async function RootLayout({
                 <GlobalEyebrowInteraction />
                 {/* Global interactions */}
                 <Lenis>
-                    <Header navItems={headerNavItems} mobileMenuCards={mobileMenuCards} />
+                    <GraphiteHeader data={navigationPrototype} />
                     <main>{children}</main>
-                    <Footer
-                        name={footerName}
-                        tagline={footerTagline}
-                        ctas={footerCtas}
-                        copyrightTag={copyrightTag}
-                        footerNavGroups={footerNavGroups}
-                        productLinks={productLinks}
-                        legalLinks={legalLinks}
-                    />
+                    <GraphiteFooter copyrightTag={copyrightTag} data={footerContact} />
                 </Lenis>
                 <Analytics />
             </body>

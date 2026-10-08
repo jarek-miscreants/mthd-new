@@ -1,0 +1,12 @@
+.footer { background: #222; color: #f3f3f1; padding: clamp(32px, 4.4vw, 80px); }
+.top { display: grid; grid-template-columns: 1fr 3fr; gap: 48px; padding-bottom: 80px; }
+.brand { position: relative; display: block; width: 180px; height: 36px; }
+.groups { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(210px, 1.3fr) minmax(0, 1fr); gap: 24px; }
+.groups h2 { font: var(--prototype-label-size) var(--font-rom-mono), monospace; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 28px; }
+.groups ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.groups a, .pending { color: #bcbcbc; font-size: 14px; line-height: 1.5; transition: color 180ms ease; }
+.groups a:hover, .groups a:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.groups address { font-style: normal; overflow-wrap: anywhere; }
+.bottom { border-top: 1px solid #444; padding-top: 24px; color: #aaa; font: 11px var(--font-rom-mono), monospace; text-transform: uppercase; letter-spacing: .06em; }
+@media (max-width: 1100px) { .top { grid-template-columns: 1fr; } }
+@media (max-width: 767px) { .groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; } .top { padding-bottom: 48px; } .groups > div:nth-child(3) { grid-column: 1 / -1; } }

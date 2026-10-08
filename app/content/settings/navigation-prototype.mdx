@@ -1,0 +1,102 @@
+---
+background: "#222222"
+homeLabel: Method home
+mobile:
+  openLabel: Open navigation
+  closeLabel: Close navigation
+  backLabel: All navigation
+  homeLabel: Home
+primary:
+  - id: platform
+    label: Platform
+    eyebrow: One platform, many missions
+    description: Full stack mission system from models up to operationalize intelligence in the security enterprise.
+    groups:
+      - label: Explore
+        links:
+          - label: Platform
+            href: /platform
+          - label: Docs
+            href: https://docs.method.security
+            target: _blank
+  - id: developer
+    label: Developer
+    eyebrow: Build on Method
+    description: Turn your tools and expertise into autonomous workflows. Keep every action within your rules of engagement.
+    groups:
+      - label: Build
+        links:
+          - label: Developer
+            href: /developer
+          - label: Docs
+            href: https://docs.method.security/developer
+            target: _blank
+  - id: missions
+    label: Missions
+    eyebrow: Mission advantage
+    description: Bring security intelligence and controlled action everywhere from the enterprise to the battlefield.
+    groups:
+      - label: Missions
+        links:
+          - label: Offensive Operations
+            href: /missions
+          - label: Enterprise Resilience
+            href: /missions
+          - label: Close Access Operations
+            href: /missions
+company:
+  id: company
+  label: Company
+  eyebrow: Method Security
+  description: Delivering cyber resilience and deterrence to the U.S. Government and critical enterprises.
+  details:
+    - label: Contact
+      links:
+        - label: contact@method.security
+          href: mailto:contact@method.security
+    - label: Social
+      links:
+        - label: X
+          href: https://x.com/method_security
+          target: _blank
+        - label: LinkedIn
+          href: https://www.linkedin.com/company/method-security
+          target: _blank
+  groups:
+    - label: Company
+      links:
+        - label: Our mission
+          href: /mission
+        - label: About us
+          href: /company
+        - label: Blog
+          href: /blog
+    - label: Work with us
+      links:
+        - label: Careers
+          href: /careers
+        - label: Open roles
+          href: https://jobs.ashbyhq.com/method.security
+          target: _blank
+        - label: Contact
+          href: /contact
+---
+
+# Graphite navigation prototype
+
+This is the active prototype header's content source. The original header and
+`settings/site.mdx` remain available. Edit the primary array to control the
+centered links and menus, and the company block to control the right-hand menu.
+
+Items with an `href` navigate directly on desktop and mobile. Platform and Developer now use menus with a page link and documentation link. Missions and Company open their subheader navigation panels.
+On desktop, hovering either menu opens its panel; leaving the header closes it
+after a short delay. Click, touch, and keyboard navigation are also supported.
+
+Each dropdown has an introduction and one or more link groups. Optional `details`
+groups sit under its introduction. External links can use `target: _blank`.
+
+The three mission links currently share the existing `/missions` landing page.
+Give them their individual destinations here as those pages are built.
+
+The header renders the existing `LogoAnimation` component. Its visual behavior is
+implemented separately in `GraphiteHeader.tsx` and `GraphiteHeader.module.css`.

@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { getContent, getCollection } from "@/lib/content";
-import type { HomePageData, ProductData } from "@/lib/content-types";
+import type { HomePageData, HomePrototypeData, BlogPostData } from "@/lib/content-types";
 import { mapSeoToMetadata } from "@/lib/mapSeoToMetadata";
-import Architecture from "@/components/sections/Architecture";
-import DeploySection from "@/components/sections/Deploy";
 import HomeHero from "@/components/sections/HomeHero";
-import Method from "@/components/sections/Method";
-import Partners from "@/components/sections/Partners";
-import CardSection from "@/components/sections/CardSection";
-import ProductHighlightSection from "@/components/sections/ProductsHighlightSection";
-import type { ProductHighlightProps } from "@/components/sections/ProductHighlight";
+import HomeMission from "@/components/sections/HomeMission";
+import HomeFeatureRow from "@/components/sections/HomeFeatureRow";
+import HomeClosing from "@/components/sections/HomeClosing";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getContent<HomePageData>("pages/home");
@@ -22,69 +18,22 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [homeData, productEntries] = await Promise.all([
+  const [homeData, postEntries, prototypeData] = await Promise.all([
     getContent<HomePageData>("pages/home"),
-    getCollection<ProductData>("products"),
+    getCollection<BlogPostData>("blog"),
+    getContent<HomePrototypeData>("pages/home-prototype"),
   ]);
-
-  // Sort by sortOrder and build highlight items
-  const sortedProducts = productEntries.sort(
-    (a, b) => (a.frontmatter.sortOrder ?? 99) - (b.frontmatter.sortOrder ?? 99)
-  );
-
-  const productHighlightItems: ProductHighlightProps[] = sortedProducts
-    .filter((p) => p.frontmatter.productSymbolUrl)
-    .map((p) => ({
-      eyebrow: p.frontmatter.highlight?.eyebrow || p.frontmatter.name,
-      subTitle: p.frontmatter.highlight?.subTitle || "",
-      productSymbol: p.frontmatter.productSymbolUrl || "",
-      title: p.frontmatter.highlight?.title || "",
-      href: p.slug || "",
-      leadParagraph: p.frontmatter.highlight?.leadParagraph || "",
-      showcaseSrc: p.frontmatter.highlight?.showcaseSrc || "",
-    }));
+  const latestPost = postEntries
+    .filter(post => new Date(post.frontmatter.publishedAt).getTime() <= Date.now())
+    .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime())[0];
 
   return (
     <>
-      <HomeHero
-        title={homeData?.hero?.title || ""}
-        videoSrc={homeData?.hero?.videoSrc || ""}
-        videoSrcMobile={homeData?.hero?.videoSrcMobile || ""}
-      />
-
-      <Method
-        eyebrow={homeData?.method?.eyebrow}
-        title={homeData?.method?.title || ""}
-        leadParagraph={homeData?.method?.leadParagraph || ""}
-      />
-
-      <Partners
-        eyebrow={homeData?.partners?.eyebrow}
-        logos={homeData?.partners?.logos || []}
-      />
-
-      {productHighlightItems.length > 0 && (
-        <ProductHighlightSection items={productHighlightItems} />
-      )}
-
-      <Architecture
-        eyebrow={homeData?.architecture?.eyebrow}
-        title={homeData?.architecture?.title || ""}
-        items={homeData?.architecture?.items || []}
-      />
-
-      <DeploySection
-        eyebrow={homeData?.deploy?.eyebrow}
-        title={homeData?.deploy?.title || ""}
-        leadParagraph={homeData?.deploy?.leadParagraph || ""}
-        videoSrc={homeData?.deploy?.videoSrc || ""}
-        items={homeData?.deploy?.items || []}
-        deployCTATitle={homeData?.deploy?.deployCTATitle}
-        deployCTAButtonText={homeData?.deploy?.deployCTAButtonText}
-        deployCTALink={homeData?.deploy?.deployCTALink}
-      />
-
-      <CardSection cards={homeData?.cards || []} />
+      <HomeHero {...prototypeData.hero} videoSrc={homeData?.hero?.videoSrc || ""} videoSrcMobile={homeData?.hero?.videoSrcMobile || ""} />
+      <HomeMission {...prototypeData.mission} />
+      <HomeFeatureRow cards={prototypeData.featureCards} />
+      <HomeFeatureRow cards={prototypeData.operationCards} columns={3} />
+      <HomeClosing careers={prototypeData.careers} news={prototypeData.news} post={latestPost} />
     </>
   );
 }

@@ -23,6 +23,9 @@
   --site--gutter: 5em;
   --site--column-count: 12;
 
+  /* Shared by the prototype header, its spacer, and the homepage hero. */
+  --graphite-bar-height: clamp(64px, 5vw, 76px);
+
   /* BASIC DETAILS */
   --radius--main: 0.3125rem;
   --radius--round: 100vw;
@@ -215,6 +218,7 @@
 /* Mobile Landscape */
 @media screen and (max-width: 767px) {
   :root {
+    --graphite-bar-height: 72px;
     --size-container-ideal: 550; /* screen-size in design - no px */
     --size-container-min: 480px;
     --size-container-max: 767px;
@@ -603,3 +607,5 @@
   /*text-wrap: balance;*/
   display: flow-root;
 }
+
+:root { --prototype-label-size: 18px; }

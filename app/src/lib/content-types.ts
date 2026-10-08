@@ -15,6 +15,29 @@ export interface CardData {
   target?: "_self" | "_blank";
 }
 
+export interface HomeFeatureCardData {
+  id: string;
+  label: string;
+  href: string;
+  copy: string;
+  backgroundImage?: string;
+  videoSrc?: string;
+}
+
+export interface HomePrototypeData {
+  hero: { title: string };
+  featureCards: HomeFeatureCardData[];
+  operationCards: HomeFeatureCardData[];
+  careers: { label: string; title: string; copy: string; href: string; linkLabel: string; image: string; imageAlt: string };
+  news: { title: string; allLabel: string; href: string };
+  mission: {
+    label: string;
+    href: string;
+    backgroundImage: string;
+    copy: string;
+  };
+}
+
 // Home Page
 export interface HomePageData {
   title?: string;
