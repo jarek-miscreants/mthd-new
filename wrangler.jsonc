@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mthd-new",
+  "compatibility_date": "2026-10-01",
+  // Static Next.js export (app/out) served as Workers static assets.
+  "assets": {
+    "directory": "./app/out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

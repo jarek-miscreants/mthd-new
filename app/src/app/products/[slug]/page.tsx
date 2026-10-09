@@ -41,11 +41,16 @@ export async function generateMetadata({
  */
 const BESPOKE_PRODUCT_SLUGS = ["reaper", "bastion"];
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const slugs = getCollectionSlugs("products");
-  return slugs
+  const params = slugs
     .filter((slug) => !BESPOKE_PRODUCT_SLUGS.includes(slug))
     .map((slug) => ({ slug }));
+  // Static export rejects an empty list; while every product is bespoke,
+  // emit one placeholder that resolves to notFound().
+  return params.length ? params : [{ slug: "__none" }];
 }
 
 interface ProductPageProps {
