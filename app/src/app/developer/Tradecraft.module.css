@@ -1,0 +1,67 @@
+.sections { background: #080808; color: #fff; }
+.section { max-width: 1280px; margin: auto; padding: 96px 40px; }
+.eyebrow { margin-bottom: 24px; }
+.heading { font-size: clamp(32px, 3.4vw, 52px); line-height: 1.12; font-weight: 400; letter-spacing: -.035em; }
+.tabs { display: flex; gap: 32px; margin-top: 40px; border-bottom: 1px solid #333; }
+.tabs button { padding: 18px 16px; color: #999; font-size: 21px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tabs button:hover { color: #fff; }
+.tabs button[aria-selected="true"] { color: #fff; border-color: #fff; background: #1c1d1e; }
+.tabs button:focus-visible { outline: 2px solid #aaa; outline-offset: 4px; }
+.panel { margin-top: 24px; border: 1px solid #303030; border-radius: 8px; overflow: hidden; background: #101010; }
+.panelHeading { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; border-bottom: 1px solid #303030; }
+.panelHeading h3 { font-size: 18px; font-weight: 400; }
+.preview { color: #888; font-family: var(--font--secondary-family); font-size: 11px; white-space: nowrap; }
+.workbench { display: grid; grid-template-columns: 1.35fr 1fr; min-height: 330px; }
+.editor { border-right: 1px solid #303030; }
+.paneLabel { font-family: var(--font--secondary-family); font-size: 12px; padding: 18px 24px; color: #aaa; border-bottom: 1px solid #242424; }
+.codePlaceholder { padding: 28px 24px; }
+.comment { color: #888; font: 12px var(--font--secondary-family); margin-bottom: 24px; }
+.codeLine { display: flex; align-items: center; gap: 24px; margin: 16px 0; }
+.codeLine span { color: #555; font: 11px var(--font--secondary-family); }
+.codeLine i { display: block; height: 6px; background: #303030; border-radius: 2px; }
+.loop { padding: 20px 24px; }
+.loop li { display: flex; align-items: center; gap: 20px; font: 14px var(--font--secondary-family); padding: 17px 0; border-bottom: 1px solid #242424; }
+.loop li span { color: #666; font-size: 11px; }
+.loop i { width: 6px; height: 6px; border: 1px solid #777; border-radius: 50%; margin-left: auto; }
+.equip { text-align: center; border-top: 1px solid #222; }
+.diagram { position: relative; max-width: 1000px; margin: 40px auto 0; }
+.diagram svg { width: 100%; height: auto; }
+.orbit { fill: none; stroke: #202020; }
+.connection { fill: none; stroke: #383838; }
+.flow { fill: none; stroke: #bbb; stroke-width: 1.5; stroke-dasharray: 8 420; animation: inward 8s linear infinite; }
+@keyframes inward { from { stroke-dashoffset: 428; } to { stroke-dashoffset: 0; } }
+.node { fill: #111; stroke: #3b3b3b; }
+.nodeLabel { fill: #ccc; font: 14px var(--font--secondary-family); }
+.core { fill: #080808; stroke: #555; }
+.center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.logo { width: 140px; height: 28px; position: relative; font-size: 14px; }
+.center > span { font: 10px var(--font--secondary-family); color: #999; text-transform: uppercase; letter-spacing: .08em; }
+@media (max-width: 600px) {
+  .section { padding: 64px 20px; }
+  .tabs { gap: 0; justify-content: space-between; }
+  .panelHeading { align-items: flex-start; flex-direction: column; padding: 20px; }
+  .workbench { grid-template-columns: 1fr; }
+  .editor { border-right: 0; border-bottom: 1px solid #303030; }
+  .diagram { margin-inline: -14px; }
+  .logo { width: 62px; height: 13px; font-size: 6px; }
+  .center { gap: 4px; }
+  .center > span { font-size: 5px; letter-spacing: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .flow { animation: none; } }
+
+.workflows { border-top: 1px solid #222; }
+
+@media(max-width:600px) { .tabs button { font-size: 17px; padding: 16px 10px; } }
+
+.toolsPanel { margin-top: 24px; }
+
+.description { max-width: 1040px; margin-top: 24px; font-size: 18px; line-height: 1.7; color: #a7adaf; }
+@media(max-width:600px) { .description { font-size: 16px; } }
+
+.tabs { overflow-x: auto; }
+.tabs button { flex-shrink: 0; }
+
+.sections { overflow: clip; }
+.tradecraftHeading { font-size: clamp(42px, 5.4vw, 80px); line-height: 1.06; }
+.tabs { margin-top: 160px; }
+.equipDescription { max-width: 850px; margin-inline: auto; position: relative; z-index: 1; }

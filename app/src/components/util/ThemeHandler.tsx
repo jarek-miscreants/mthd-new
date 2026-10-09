@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-const DARK_THEME_PATHS = ["/products"];
+const DARK_THEME_PATHS = ["/products", "/developer"];
 
 export default function ThemeHandler() {
   const pathname = usePathname();
