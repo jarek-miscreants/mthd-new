@@ -50,7 +50,7 @@ export default function MissionArchitecture() {
     <div className={styles.apiConnection}><span className={styles.verticalLine} aria-hidden="true" /><span>Method Public API</span><span className={styles.verticalLine} aria-hidden="true" /></div>
     <section className={`${styles.boundary} ${styles.method}`} aria-labelledby="architecture-method-title">
       <h3 id="architecture-method-title" className={styles.methodLabel}>Method</h3>
-      <div className={styles.methodHeader}><Logo title="Method" className={styles.methodLogo} /><p>Mission system</p></div>
+      <div className={styles.methodHeader}><Logo title="Method" className={styles.methodLogo} /><p>Mission System</p></div>
       <section className={styles.group} aria-labelledby="agent-systems-title">
         <h4 id="agent-systems-title">Agent systems</h4>
         <div className={styles.threeNodes}>
